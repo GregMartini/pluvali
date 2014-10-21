@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My First Web Page</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>This is my first page.</h1>
+	
+	<br>
+	
+	<nav id="main_nav">
+		<ul>
+			<li><a href="/tutorials/">Tutorials</a></li>
+			<li><a href="/reference/">Reference</a></li>
+			<li><a href="/articles/">Articles</a></li>
+			<li><a href="/about/">About us</a></li>
+		</ul>
+	</nav>
+	
+	<br>
+	
+	<iframe id="video" width="420" height="315"
+		src="http://www.youtube.com/embed/mEcPBq7zxto">
+	</iframe>
+
+	<style>
+		#video {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	</style>
+	
+	<br>
+	
+	
+	<h2>What this is</h2>
+	<p>A simple page put together using HTML</p>
+	
+	<h1>Some random glossary thing</h1>
+	<dl>
+		<dt>HTML</dt>
+		<dd>Abbreviation for HyperText Markup Language - a language used to make web pages.</dd>
+
+		<dt>Dog</dt>
+		<dd>Any carnivorous animal belonging to the family Canidae.</dd>
+		<dd>The domesticated sub-species of the family Canidae, Canis lupus familiaris.</dd>
+
+		<dt>Moo juice</dt>
+		<dt>Cat beer</dt>
+		<dt>Milk</dt>
+		<dd>A white liquid produced by cows and used for human consumption.</dd>
+	</dl>
+	
+	<h2>Why this is</h2>
+	<p>To learn HTML</p>
+	
+	<h3>Author contact details</h3>
+	<address>
+		<ul>
+			<li>0123-456-7890</li>
+			<li>author_dude@noplaceinteresting.com</li>
+			<li>http://www.noplaceinteresting.com/contactme/</li>
+		</ul>
+	</address>
+	
+	<h2>Test Link Page</h2>
+	<p><a href="linktest.html">Link Page</a></p>
+	
+	<img src="http://www.htmldog.com/badge1.gif" width="120" height="90" alt="HTML Dog">
+
+	
+	
+	<table>
+		<tr>
+			<td>Row 1, cell 1</td>
+			<td>Row 1, cell 2</td>
+			<td>Row 1, cell 3</td>
+		</tr>
+		<tr>
+			<td>Row 2, cell 1</td>
+			<td>Row 2, cell 2</td>
+			<td>Row 2, cell 3</td>
+		</tr>
+		<tr>
+			<td>Row 3, cell 1</td>
+			<td>Row 3, cell 2</td>
+			<td>Row 3, cell 3</td>
+		</tr>
+		<tr>
+			<td>Row 4, cell 1</td>
+			<td>Row 4, cell 2</td>
+			<td>Row 4, cell 3</td>
+		</tr>
+	</table>
+	
+	<br>
+	
+	<table>
+		<caption>Locust mating habits</caption>
+		
+		<colgroup>
+			<col>
+			<col span="2" class="alternative">
+		</colgroup>
+    
+		<tr>
+			<td>This</td>
+			<td>That</td>
+			<td>The other</td>
+		</tr>
+    
+		<tr>
+			<td>Ladybird</td>
+			<td>Locust</td>
+			<td>Lunch</td>
+		</tr>
+	</table>
+	
+	<br>
+	
+	<table id="difftab">
+		<tr>
+			<th>Column 1 heading</th>
+			<th>Column 2 heading</th>
+			<th>Column 3 heading</th>
+		</tr>
+		
+		<tr>
+			<td>Row 2, cell 1</td>
+			<td colspan="2">Row 2, cell 2, also spanning Row 2, cell 3</td>
+		</tr>
+		
+		<tr>
+			<td rowspan="2">Row 3, cell 1, also spanning Row 4, cell 1</td>
+			<td>Row 3, cell 2</td>
+			<td>Row 3, cell 3</td>
+		</tr>
+    
+		<tr>
+			<td>Row 4, cell 2</td>
+			<td>Row 4, cell 3</td>
+		</tr>
+	</table>
+	
+	<style>
+		#difftab {
+			background-color: 
+			green; color: white; 
+		}
+	</style>
+	
+	<textarea rows="8" cols="100">A big load of text</textarea>
+	
+	<p id="jelly">Wobble wobble wobble.</p>
+	<style>
+		#jelly { background-color: red; }
+	</style>
+	
+	<p style="background-color: blue; color: yellow;">Yellow text on a blue background.</p>
+	
+	<p>Do you like pie?</p>
+	<div>yes <input type="radio" name="pie" value="yes" checked="checked" /></div>
+	<div>no <input type="radio" name="pie" value="no" /></div>
+	<div>Your name: <input type="text" name="name" /></div>
+	
+	<br>
+	
+	<p>Select country</p>
+	<select name="country">
+		<optgroup label="Africa">
+			<option value="gam">Gambia</option>
+			<option value="mad">Madagascar</option>
+			<option value="nam">Namibia</option>
+		</optgroup>
+    
+		<optgroup label="Europe">
+			<option value="fra">France</option>
+			<option value="rus">Russia</option>
+			<option value="uk">UK</option>
+		</optgroup>
+    
+		<optgroup label="North America">
+			<option value="can">Canada</option>
+			<option value="mex">Mexico</option>
+			<option value="usa">USA</option>
+		</optgroup>
+	</select>
+	
+	<br>
+	
+	<form action="somescript.php" method="post">
+	
+		<fieldset>
+			<legend>Name</legend>
+			<p>First name<input name="firstName"></p>
+			<p>Last name<input name="lastName"></p>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Address</legend>
+				<p>Address <textarea name="address"></textarea></p>
+				<p>Postal code <input name="postcode"></p>
+		</fieldset>
+
+		<p>Name:</p>
+		<p><input name="name" value="Your name"></p>
+
+		<p>Comments: </p>
+		<p><textarea rows="10" cols="20" name="comments">Your comments</textarea></p>
+
+		<p>Are you:</p>
+		<p><input type="radio" name="areyou" value="male"> Male</p>
+		<p><input type="radio" name="areyou" value="female"> Female</p>
+		<p><input type="radio" name="areyou" value="hermaphrodite"> An hermaphrodite</p>
+		<p><input type="radio" name="areyou" value="asexual" checked> Asexual</p>
+
+		<p><input type="submit"></p>
+
+	</form>
+	
+	<ul>
+		<li><a href="here.html" tabindex="1">Here</a></li>
+		<li><a href="there.html" tabindex="3">There</a></li>
+		<li><a href="limbo.html" tabindex="2">Limbo</a></li>
+	</ul>
+	
+	<p>I'm really bad at writing link text. <a href="inept.html" title="Why I'm rubbish at writing link text: An explanation and an apology.">Click here</a> to find out more.</p>
+
+	
+</body>
+</html>
