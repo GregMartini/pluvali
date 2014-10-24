@@ -1,0 +1,9 @@
+{% if scenario_list %}
+    <ul>
+    {% for scenario in scenario_list %}
+        <li><a href="/CopingGame/{{ scenario.sceneID }}/">{{ scenario.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No scenarios are available.</p>
+{% endif %}
