@@ -27,17 +27,107 @@ h2 {
 	text-align: center;
 }
 
+/* Style of the "Categories" bar */
+h3 {
+	text-align: center;
+	text-decoration: underline;
+	margin: 0;
+	padding: 0;
+	font-size: 25px;
+}
+
 /* Style of the user table at the top of the page */
 #usertable {
-	background-color: ffc;
+	background-color: #ffc;
 	border: 1px solid black;
 }
 
 /* Style of the "background colors" table */
 #bgcolors {
-	background-color: ffc;
+	background-color: #ffc;
 	font-size: 25px;
 	border-collapse:separate; 
 	border-spacing:1em;
+}
+
+#categories {    
+	width: 15%;
+	float: left;
+	display: inline;
+	margin: 0;
+	padding: 0;
+	margin-right: 10px;
+	background-color: #6d1d1c;
+	color: #ffc;
+	vertical-align: top;
+}
+
+ul {
+	list-style-type: none;
+	font-size: 20px;
+	margin: 0;
+	padding: 10px;
+}
+
+li {
+	text-align: center;
+	padding: 5px;
+}
+
+/*li:hover {
+	background-color: #000;
+}*/
+
+a {
+	text-decoration: none;
+	color: #ffc;
+}
+
+a:link {
+	text-decoration: none;
+	color: #ffc;
+}
+
+a:visited {
+	text-decoration: none;
+}
+
+/* Everything right of the categories menu */
+#main {
+	width: 85%;
+	padding: 0;
+	display: inline;
+	margin: auto auto;
+	vertical-align: top;
+}
+
+/* Center the purchase table */
+#inner {
+	margin-right: 15%;
+}
+
+.catbutton {
+	border: 1px solid #ffc;
+	background: #6d1d1c;
+	padding: 7px 14px;
+	color: white;
+	font-size: 20px;
+	font-family: Georgia, serif;
+	text-decoration: none;
+	vertical-align: middle;
+}
+
+.catbutton:hover {
+	background: #ffc;
+	color: #000000;
+}
+
+.catbutton:active {
+	background: #ffc;
+}
+
+.catbutton:focus {
+	background: #ffc;
+	color: #000000;
 }
 

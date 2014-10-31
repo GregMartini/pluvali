@@ -5,16 +5,17 @@
 <html>
 <head>
 
-	<!-- Title the page and link the style sheet -->
+	<!-- Title the page and link the style sheet and javascript -->
 	<title>Store Page</title>
 	<link rel="stylesheet" href="style_store_page.css">
+	<script type="text/javascript" src="store_page.js"></script>
 	
 </head>
 
 <body>
 
 	<!-- A link to ddrc's website in a new tab by using their logo -->
-	<a href="http://www.ddrcco.com/" target="_blank"><img src="logo.jpg" alt="ddrcco.com" width="225" height="106.5"></a>
+	<img src="logo.jpg" alt="ddrcco.com" width="225" height="106.5">
 
 	<!-- Table that has the user avatar, user name, and their tokens -->
 	<table id="usertable" align="right">
@@ -30,48 +31,60 @@
 	
 	<br>
 
-	<!-- What is the current scenario and problem -->
 	<h1>Welcome to the Store</h1>
-	<h2>Click on the "Purchase" button to buy the item to its left.<h2>
+	
+	<div id="categories">
+		<h3>CATEGORIES</h3>
+		<ul>
+			<li><button class="catbutton" id="bgc" onclick="chkbtn(this)">Background Colors</button></li>
+			<li><button class="catbutton" id="tc" onclick="chkbtn(this)">Text Colors</button></li>
+			<li><button class="catbutton" id="up" onclick="chkbtn(this)">User Pictures</button></li>
+		</ul>
+	</div>
+	
+	<div id="main">
+		<div id="inner">
+			<h2>Click on the "Purchase" button to buy the item to its left.<h2>
 
-	<table id="bgcolors" align="center">
-		<col width="400">
+			<table id="bgcolors" align="center">
+				<col width="400">
 		
-		<tr>
-			<td colspan="3">Background Colors - 25 Tokens Each</td>
-		</tr>
+				<tr>
+					<td colspan="3">Background Colors - 25 Tokens Each</td>
+				</tr>
 		
-		<tr>
-			<td bgcolor="red"></td>
-			<td>Red</td>
-			<td><button type="button">Purchase</button></td>
-		</tr>
+				<tr>
+					<td bgcolor="red"></td>
+					<td>Red</td>
+					<td><button type="button">Purchase</button></td>
+				</tr>
 		
-		<tr>
-			<td bgcolor="blue"></td>
-			<td>Blue</td>
-			<td><button type="button">Purchase</button></td>
-		</tr>
+				<tr>
+					<td bgcolor="blue"></td>
+					<td>Blue</td>
+					<td><button type="button">Purchase</button></td>
+				</tr>
 		
-		<tr>
-			<td bgcolor="green"></td>
-			<td>Green</td>
-			<td><button type="button">Purchase</button></td>
-		</tr>
+				<tr>
+					<td bgcolor="green"></td>
+					<td>Green</td>
+					<td><button type="button">Purchase</button></td>
+				</tr>
 		
-		<tr>
-			<td bgcolor="yellow"></td>
-			<td>Yellow</td>
-			<td><button type="button">Purchase</button></td>
-		</tr>
+				<tr>
+					<td bgcolor="yellow"></td>
+					<td>Yellow</td>
+					<td><button type="button">Purchase</button></td>
+				</tr>
 		
-		<tr>
-			<td bgcolor="gray"></td>
-			<td>Gray</td>
-			<td><button type="button">Purchase</button></td>
-		</tr>
-
-	</table>
+				<tr>
+					<td bgcolor="gray"></td>
+					<td>Gray</td>
+					<td><button type="button">Purchase</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 	
 </body>
 </html>
