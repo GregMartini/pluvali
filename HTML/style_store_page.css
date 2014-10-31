@@ -27,7 +27,7 @@ h2 {
 	text-align: center;
 }
 
-/* Style of the "Categories" bar */
+/* Style of the "categories" title */
 h3 {
 	text-align: center;
 	text-decoration: underline;
@@ -46,10 +46,30 @@ h3 {
 #bgcolors {
 	background-color: #ffc;
 	font-size: 25px;
-	border-collapse:separate; 
-	border-spacing:1em;
+	border-collapse: separate; 
+	border-spacing: 1em;
+	display: none;
 }
 
+/* style of the "text colors" table */
+#textcolors {
+	background-color: #ffc;
+	font-size: 25px;
+	border-collapse: separate;
+	border-spacing: 1em;
+	display: none;
+}
+
+/* style of the "text colors" table */
+#userpics {
+	background-color: #ffc;
+	font-size: 25px;
+	border-collapse: separate;
+	border-spacing: 1em;
+	display: none;
+}
+
+/* Style of the categories bar */
 #categories {    
 	width: 15%;
 	float: left;
@@ -120,10 +140,6 @@ a:visited {
 .catbutton:hover {
 	background: #ffc;
 	color: #000000;
-}
-
-.catbutton:active {
-	background: #ffc;
 }
 
 .catbutton:focus {
