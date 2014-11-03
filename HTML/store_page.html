@@ -36,9 +36,9 @@
 	<div id="categories">
 		<h3>CATEGORIES</h3>
 		<ul>
-			<li><button class="catbutton" id="bgc" onclick="chkbtn(this)">Background Colors</button></li>
-			<li><button class="catbutton" id="tc" onclick="chkbtn(this)">Text Colors</button></li>
-			<li><button class="catbutton" id="up" onclick="chkbtn(this)">User Pictures</button></li>
+			<li><button class="catbutton" id="bgc" onclick="chkbtn(this, bgcolors)" onmouseover="overbtn(this)" onmouseout="outbtn(this)">Background Colors</button></li>
+			<li><button class="catbutton" id="tc" onclick="chkbtn(this, textcolors)" onmouseover="overbtn(this)" onmouseout="outbtn(this)">Text Colors</button></li>
+			<li><button class="catbutton" id="up" onclick="chkbtn(this, userpics)" onmouseover="overbtn(this)" onmouseout="outbtn(this)">User Pictures</button></li>
 		</ul>
 	</div>
 	
@@ -46,7 +46,7 @@
 		<div id="inner">
 			<h2>Click on the "Purchase" button to buy the item to its left.<h2>
 
-			<table id="bgcolors" align="center">
+			<table class="cattable" id="bgcolors" align="center">
 				<col width="400">
 		
 				<tr>
@@ -83,6 +83,19 @@
 					<td><button type="button">Purchase</button></td>
 				</tr>
 			</table>
+			
+			<table class="cattable" id="textcolors" align="center">
+				<tr>
+					<td> text colors </td>
+				</tr>
+			</table>
+			
+			<table class="cattable" id="userpics" align="center">
+				<tr>
+					<td> user pics </td>
+				</tr>
+			</table>
+			
 		</div>
 	</div>
 	
