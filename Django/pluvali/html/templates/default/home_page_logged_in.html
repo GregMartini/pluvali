@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<!-- A prototype home page that you go to once logged in - Steve -->
+
+<html>
+<head>
+	<!-- The title of the page and a link to the style sheet -->
+	<title>Home Page</title>
+	<link rel="stylesheet" href="style_home_page.css">
+
+</head>
+
+<body>
+
+	<!-- A link to ddrc's website in a new tab by using their logo -->
+	<a href="http://www.ddrcco.com/" target="_blank"><img src="logo.jpg" alt="ddrcco.com" width="225" height="106.5"></a>
+
+	<!-- Table that has the user avatar, user name, and their tokens -->
+	<table id="usertable" align="right">
+		<tr>
+			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
+			<td>USERNAME</td>
+		</tr>
+		
+		<tr>
+			<td>TOKENS</td>
+		</tr>
+	</table>
+	
+	<br>
+
+	<!-- The Header -->
+	<h1>Welcome to the Coping Skills Game!</h1>
+
+	<h2>Welcome! You can now play the game, or go to the store</h2>
+	<table id="gamebutton" align="center">
+		<tr>
+			<!-- Change the href to go to the game page, not DDRC's website -->
+			<td><a href="http://www.ddrcco.com/" target="_blank"><button type="button"><button style="background-color:white;width=700;height=700">Play the game</button></td>
+		</tr>
+	</table>
+	
+	<!-- Here is some general information about the game -->
+	<br><br><br>
+	<p style ="text-align:center;color:#306565">General Information: <br>This game is a fun way to learn how to cope with difficult situations encountered in everyday life</p>
+	
+	<br>
+	<a href="http://www.ddrcco.com">Here is a link to the help page</a>
+
+	<p style ="text-align:center;color:#4c3365;font-size:200%">Click or tap the button below to the store</p>
+	<table id="storebutton" align="center">
+		<tr>
+			<!-- Change the href to go to the store page, not DDRC's website -->
+			<td><a href="http://www.ddrcco.com/" target="_blank"><button type="button"><button style="background-color:#082847;color:white;width=700;height=700">Go to the Store</button></td>
+		</tr>
+	</table>
+
+	<!-- Administrator stuff should only appear if logged-in user is also an admin -->
+	<br>
+	<p style ="color:red">Click on link below for Administrator Tools: (NOTE:This option will only be shown if user logged in is an administrator)<br></p>
+	<a href="http://www.ddrcco.com">Administrator Options</a>
+
+ </body>
+
+ </html> 
