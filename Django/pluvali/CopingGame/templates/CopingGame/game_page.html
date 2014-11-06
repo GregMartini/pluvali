@@ -53,9 +53,11 @@
 		</tr>
 		
 		<tr id="techniques">
-			<td>Walk Outside</td>
-			<td>Listen To Music</td>
-			<td>Read A Book</td>
+			{% for prob in scene.problems.all %}
+			{% for sol in problems.solutions.all %}
+				<td>{{sol.solution}}</td>
+			{%endfor%}
+			{%endfor%}
 		</tr>
 		
 		<tr>

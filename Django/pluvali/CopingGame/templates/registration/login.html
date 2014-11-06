@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<!-- A prototype login page - Steve -->
+
+<html>
+<head>
+
+<!-- Might want to clean this up, and just use a separate .css file -->
+<style type="text/css">
+	h1 {color:#6d1d1c;}
+</style>
+
+	<!-- A link to ddrc's website in a new tab by using their logo MAYBE NOT WANTED HERE???-Steve -->
+	<a href="http://www.ddrcco.com/" target="_blank"><img src="logo.jpg" alt="ddrcco.com" width="225" height="106.5"></a>
+
+	<!-- The title of the page and a link to the logged-in home page -->
+	<h1 style="text-align:center;";>Coping Skills Game</h1>
+	<link rel="stylesheet" href="style_login_page.css">
+</head>
+<body>
+
+
+	<!-- The instructions and the fields for logging in -->
+ 	<h2 style="text-align:center"; color:"#4a6530";>Type in your user-name and password to log in.</h2>
+	
+	<!-- If no user -->
+	{% if form.errors %}
+		<p> Your username and/or password didn't match. Please try again.</p>
+	{% endif %}
+	
+  	<form action="/login/" method="post">
+	{% csrf_token %}
+	<table border="0" cellspacing="15" width="345" align="center">
+		<tr>
+			<td width="100">User-name:</td>
+			<td><input type="text" class="text-box" value="{{ username }}" placeholder="User-name"/></td>
+		</tr>
+		<tr>
+			<td class="align-left">Password:</td>
+			<td><input type="password" class="text-box" value="" placeholder="Password"/></td>
+		</tr>
+		<input type="submit" value ="login"/>
+	</form>
+	
+ 	</body>
+
+</body>
+
+</html> 
