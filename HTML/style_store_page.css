@@ -44,7 +44,6 @@ h3 {
 
 /* Style of the "background colors" table */
 #bgcolors {
-	background-color: #ffc;
 	font-size: 25px;
 	border-collapse: separate; 
 	border-spacing: 1em;
@@ -53,7 +52,6 @@ h3 {
 
 /* style of the "text colors" table */
 #textcolors {
-	background-color: #ffc;
 	font-size: 25px;
 	border-collapse: separate;
 	border-spacing: 1em;
@@ -62,7 +60,14 @@ h3 {
 
 /* style of the "text colors" table */
 #userpics {
-	background-color: #ffc;
+	font-size: 25px;
+	border-collapse: separate;
+	border-spacing: 1em;
+	display: none;
+}
+
+/* style of the "themes" table */
+#themes {
 	font-size: 25px;
 	border-collapse: separate;
 	border-spacing: 1em;
@@ -135,6 +140,7 @@ a:visited {
 	font-family: Georgia, serif;
 	text-decoration: none;
 	vertical-align: middle;
+	width:  100%;
 }
 
 .catbutton:hover {
