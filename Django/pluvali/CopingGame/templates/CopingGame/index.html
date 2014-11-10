@@ -20,38 +20,36 @@
 	<table id="usertable" align="right">
 		<tr>
 			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
-			<td>{% if user.is_authenticated %} {{ user.get_username }}{% else %} Not currently logged in, please log in.{% endif %}</td>
-			
-		</tr>
-		
+			<td>
+			{% if user.is_authenticated %}
+				{{ user.get_username }}
+				
+			{% else %}
+				Not currently logged in, please log in.
+			{% endif %}</td>		
+		</tr>		
 		<tr>
 			<td></td>
 		</tr>
 	</table>
 	
 	<br>
-
+	
 	<!-- The Header -->
 	<h1>Welcome to the Coping Skills Game!</h1>
 	<h2>
-	{% if user.is_authenticated %}
-		Thanks for logging in!
-	{% else %}
-		You must log in to play the game.
-	</h2>
-	<!-- incorrect username/password -->
-	{% if error %}
-		<p> Error: {{ error }}</p>
-	{% endif %}
 	
-	{% endif %} <!-- end if: not logged in -->
+	</h2>	
 	
 	<!-- Here is some general information about the game -->
 	<br><br><br>
+	
 	<p style ="text-align:center;color:#306565">General Information: <br>This game is a fun way to learn how to cope with difficult situations encountered in everyday life.</p>
 	
 	<br>
-	<a href="http://www.ddrcco.com">Here is a link to the help page</a>
+	<li><a href="/CopingGame/scenarios/">Play A Scenario.</a></li>
+	<li><a href="/CopingGame/store/">Visit Store.</a></li>
+	<li><a href="/CopingGame/help/">Help Page.</a></li>
 
 	<p style ="text-align:center;color:#4c3365;font-size:200%">Sign in to play the game and be able go to the store!</p>
 
