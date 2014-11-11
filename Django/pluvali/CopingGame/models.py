@@ -16,21 +16,22 @@ class User(models.Model):
 	def __str__(self):
 		return self.userName
 		
-class Problems(models.Model):
-	#scenario = models.ForeignKey('Scenario')
-	#media = FileField(upload_to=get_image_path, blank=True, null=True)
-	problem = models.CharField(max_length=225, default="The Problem.")
-	solutions = models.ManyToManyField('Solutions')
-	def __str__(self):
-		return self.problem
-	
 class Solutions(models.Model):
 	#problems = models.ForeignKey(Problems)
 	#media = FileField(upload_to=get_image_path, blank=True, null=True)
 	solution = models.CharField(max_length=300, default="Solution")
 	def __str__(self):
 		return self.solution
-	
+
+class Problems(models.Model):
+	#scenario = models.ForeignKey('Scenario')
+	#media = FileField(upload_to=get_image_path, blank=True, null=True)
+	problem = models.CharField(max_length=225, default="The Problem.")
+	solutions = models.ManyToManyField(Solutions)
+	def __str__(self):
+		return self.problem
+	pass
+		
 class Scenario(models.Model):
 	sceneID = models.AutoField(primary_key=True)
 	title = models.CharField(max_length=15, default="Scenario Title")

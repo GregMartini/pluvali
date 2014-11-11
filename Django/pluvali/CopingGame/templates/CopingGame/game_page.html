@@ -19,12 +19,17 @@
 	<!-- Table that has the user avatar, user name, and their tokens -->
 	<table id="usertable" align="right">
 		<tr>
+			<!-- user picture -->
 			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
-			<td>USERNAME</td>
-		</tr>
-		
-		<tr>
-			<td>TOKENS</td>
+			<td>
+			{% if user.is_authenticated %}
+				<!-- user information -->
+				<li>{{ user.get_username }}</li>
+				<li>Tokens: {{ user.get_points }}</li>
+				<li><a href="/logout/">Logout</li>
+			{% else %}
+				Not currently logged in, please log in.
+			{% endif %}</td>
 		</tr>
 	</table>
 	
@@ -32,9 +37,9 @@
 
 	<!-- What is the current scenario and problem -->
 	<h1>Scenario - {{ scene.title }}</h1>
-	<h2>Problem - {% for prob in scene.problems.all %}
-		<li>{{prob.problem}}</li>
-		{%endfor%}</h2>
+	<h2>Problem - {% for prob in problems.all %}
+		{{ prob.problem }}
+		{% endfor %}
 	
 	<!-- Image representing the problem -->
 	<img id="problempic" src="http://i.dailymail.co.uk/i/pix/2008/06/18/article-1027467-01A8590600000578-467_468x289.jpg" width="500" height="300">
@@ -53,11 +58,9 @@
 		</tr>
 		
 		<tr id="techniques">
-			{% for prob in scene.problems.all %}
-			{% for sol in problems.solutions.all %}
-				<td>{{sol.solution}}</td>
-			{%endfor%}
-			{%endfor%}
+		{% for sol in problems.solutions.all %}
+			<td>{{sol.solution}}</td>
+		{%endfor%}
 		</tr>
 		
 		<tr>
