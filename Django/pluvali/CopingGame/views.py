@@ -39,8 +39,4 @@ def store(request):
 	context = {'items_list':items_list}
 	return render(request, 'CopingGame/store_page.html', context)
 
-#link to log user out
-def logout(request):
-	request.session.items = []
-	request.session.modified = True
-	logout(request)
+#User registration
