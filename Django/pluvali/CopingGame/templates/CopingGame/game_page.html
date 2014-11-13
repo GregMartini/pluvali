@@ -1,20 +1,21 @@
-<!-- A prototype game page - Tim -->
-
 <!DOCTYPE html>
 
+<!-- A prototype game page - Tim -->
+
+{% load staticfiles %}
 <html>
 <head>
 
 	<!-- Title the page and link the style sheet -->
 	<title>Game Page</title>
-	<link rel="stylesheet" type="text/css" href="% static % 'CopingGame/style_game_page.css' %" />
+	<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_game_page.css' %}" />
 	
 </head>
 
 <body>
 
-	<!-- A link to ddrc's website in a new tab by using their logo -->
-	<a href="http://www.ddrcco.com/" target="_blank"><img src="logo.jpg" alt="ddrcco.com" width="225" height="106.5"></a>
+	<!-- A picture of DDRC's logo -->
+	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
 
 	<!-- Table that has the user avatar, user name, and their tokens -->
 	<table id="usertable" align="right">

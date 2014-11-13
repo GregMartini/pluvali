@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 
-<!-- A prototype login page - Steve -->
+<!-- A prototype login page -->
+
+{% load staticfiles %}
 
 <html>
 <head>
 
-<!-- Might want to clean this up, and just use a separate .css file -->
+<!-- Possibly change to put in its own css file -->
 <style type="text/css">
 	h1 {color:#6d1d1c;}
 </style>
 
-	<!-- A link to ddrc's website in a new tab by using their logo MAYBE NOT WANTED HERE???-Steve -->
-	<a href="http://www.ddrcco.com/" target="_blank"><img src="logo.jpg" alt="ddrcco.com" width="225" height="106.5"></a>
+	<!-- A picture of DDRC's logo -->
+	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
 
 	<!-- The title of the page and a link to the logged-in home page -->
 	<h1 style="text-align:center;";>Coping Skills Game</h1>
