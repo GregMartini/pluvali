@@ -1,0 +1,21 @@
+/* CSS style sheet for the prototype home page - Steve */
+
+/* Style of the background and margins */
+body {
+    background-color: #ededed;
+    margin: 20px;
+    padding: 0;
+}
+
+/* Style of the "coping skills game" bar */
+h1 {
+    color: #ffc;
+    background-color: #6d1d1c;
+    font-size: 40px;
+    margin: 0;
+    margin-bottom: 7px;
+    padding: 4px;
+    font-style: bold;
+    text-align: center;
+    letter-spacing: 8px;
+}
