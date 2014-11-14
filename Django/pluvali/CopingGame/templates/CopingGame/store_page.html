@@ -1,34 +1,46 @@
 <!-- A prototype store page - Tim -->
 
-<!DOCTYPE html>
+{% load staticfiles %}
 
 <html>
 <head>
 
 	<!-- Title the page and link the style sheet and javascript -->
 	<title>Store Page</title>
-	<link rel="stylesheet" href="style_store_page.css">
-	<script type="text/javascript" src="store_page.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_store_page.css' %}">
+	<script type="text/javascript" src="{% static 'CopingGame/store_page.js' %}"></script>
 	
 </head>
 
 <body>
 
 	<!-- A link to ddrc's website in a new tab by using their logo -->
-	<img src="logo.jpg" alt="ddrcco.com" width="225" height="106.5">
+	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
 
 	<!-- Table that has the user avatar, user name, and their tokens -->
 	<table id="usertable" align="right">
 		<tr>
-			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90"></td>
-			<td>USERNAME</td>
-		</tr>
-		
+			<!-- user picture -->
+			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
+			<td>
+			{% if user.is_authenticated %}
+				<!-- user information -->
+				<li>{{ user.get_username }}</li>
+				<li>Tokens: {{ user.get_points }}</li>
+				<li><a href="/logout/">Logout</li>
+			{% else %}
+				Not currently logged in, please log in.
+			{% endif %}</td>		
+		</tr>		
 		<tr>
-			<td>TOKENS</td>
+			<td></td>
 		</tr>
 	</table>
 	
+	<br><br>
+	<FORM align="center">
+		<INPUT Type="BUTTON" VALUE="Back to Index Page" style="height:5%; width:10%" ONCLICK="window.location.href='/CopingGame/'"> 
+	</FORM>
 	<br>
 
 	<h1>Welcome to the Store</h1>
@@ -36,11 +48,11 @@
 	<!-- Category button's on the left -->
 	<div id="categories">
 		<h3>CATEGORIES</h3>
-		<ul>
-			<li><button class="catbutton" id="bgc"    onclick="chkbtn(this, bgcolors)"   onmouseover="overbtn(this)" onmouseout="outbtn(this)">Background Colors</button></li>
-			<li><button class="catbutton" id="tc"     onclick="chkbtn(this, textcolors)" onmouseover="overbtn(this)" onmouseout="outbtn(this)">Text Colors</button></li>
-			<li><button class="catbutton" id="up"     onclick="chkbtn(this, userpics)"   onmouseover="overbtn(this)" onmouseout="outbtn(this)">User Pictures</button></li>
-			<li><button class="catbutton" id="theme"  onclick="chkbtn(this, themes)"     onmouseover="overbtn(this)" onmouseout="outbtn(this)">Themes</button></li>
+		<ul id="catul">
+			<li id="catli"><button class="catbutton" id="bgc"    onclick="chkbtn(this, bgcolors)"   onmouseover="overbtn(this)" onmouseout="outbtn(this)">Background Colors</button></li>
+			<li id="catli"><button class="catbutton" id="tc"     onclick="chkbtn(this, textcolors)" onmouseover="overbtn(this)" onmouseout="outbtn(this)">Text Colors</button></li>
+			<li id="catli"><button class="catbutton" id="up"     onclick="chkbtn(this, userpics)"   onmouseover="overbtn(this)" onmouseout="outbtn(this)">User Pictures</button></li>
+			<li id="catli"><button class="catbutton" id="theme"  onclick="chkbtn(this, themes)"     onmouseover="overbtn(this)" onmouseout="outbtn(this)">Themes</button></li>
 		</ul>
 	</div>
 	
@@ -55,7 +67,7 @@
 				<col width="250">
 				
 				<tr>
-					<td colspan="3">Background Colors - 25 Tokens Each</td>
+					<td colspan="3" style="text-decoration:underline">Background Colors - 25 Tokens Each</td>
 				</tr>
 				
 				
@@ -94,7 +106,7 @@
 			<table class="cattable" id="textcolors" align="center">
 		
 				<tr>
-					<td colspan="3">Text Colors - 25 Tokens Each</td>
+					<td colspan="3" style="text-decoration:underline">Text Colors - 25 Tokens Each</td>
 				</tr>
 		
 				<tr>
@@ -132,7 +144,7 @@
 			<table class="cattable" id="userpics" align="center">
 		
 				<tr>
-					<td colspan="2">User Pictures - 50 Tokens Each</td>
+					<td colspan="2" style="text-decoration:underline">User Pictures - 50 Tokens Each</td>
 				</tr>
 		
 				<tr>
@@ -155,7 +167,7 @@
 			<table class="cattable" id="themes" align="center">
 		
 				<tr>
-					<td colspan="2">Themes - 50 Tokens Each</td>
+					<td colspan="2" style="text-decoration:underline">Themes - 50 Tokens Each</td>
 				</tr>
 		
 				<tr>

@@ -2,7 +2,7 @@
 
 /* Style of the background and margins */
 body {
-    background-color: #ffc;
+    background-color: #ededed;
     margin: 20px;
     padding: 0;
 }
@@ -38,7 +38,7 @@ h3 {
 
 /* Style of the user table at the top of the page */
 #usertable {
-	background-color: #ffc;
+	background-color: #ededed;
 	border: 1px solid black;
 }
 
@@ -48,6 +48,8 @@ h3 {
 	border-collapse: separate; 
 	border-spacing: 1em;
 	display: none;
+	text-align: center;
+	font-weight: bold;
 }
 
 /* style of the "text colors" table */
@@ -56,6 +58,8 @@ h3 {
 	border-collapse: separate;
 	border-spacing: 1em;
 	display: none;
+	text-align: center;
+	font-weight: bold;
 }
 
 /* style of the "text colors" table */
@@ -64,6 +68,8 @@ h3 {
 	border-collapse: separate;
 	border-spacing: 1em;
 	display: none;
+	text-align: center;
+	font-weight: bold;
 }
 
 /* style of the "themes" table */
@@ -72,6 +78,8 @@ h3 {
 	border-collapse: separate;
 	border-spacing: 1em;
 	display: none;
+	text-align: center;
+	font-weight: bold;
 }
 
 /* Style of the categories bar */
@@ -87,35 +95,18 @@ h3 {
 	vertical-align: top;
 }
 
-ul {
+#catul {
 	list-style-type: none;
 	font-size: 20px;
 	margin: 0;
 	padding: 10px;
 }
 
-li {
+#catli {
 	text-align: center;
 	padding: 5px;
 }
 
-/*li:hover {
-	background-color: #000;
-}*/
-
-a {
-	text-decoration: none;
-	color: #ffc;
-}
-
-a:link {
-	text-decoration: none;
-	color: #ffc;
-}
-
-a:visited {
-	text-decoration: none;
-}
 
 /* Everything right of the categories menu */
 #main {
@@ -136,7 +127,7 @@ a:visited {
 	background: #6d1d1c;
 	padding: 7px 14px;
 	color: white;
-	font-size: 20px;
+	font-size: 100%; /*20px;*/
 	font-family: Georgia, serif;
 	text-decoration: none;
 	vertical-align: middle;
