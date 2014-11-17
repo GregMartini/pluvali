@@ -16,7 +16,7 @@
 	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
 
 	<!-- The title of the page and a link to the logged-in home page -->
-	<h1 style="text-align:center;";>Coping Skills Game</h1>
+	<h1 style="text-align:center;";>Create an account</h1>
 	<link rel="stylesheet" href="style_login_page.css">
 </head>
 <body>
@@ -30,23 +30,14 @@
 		<p> Your username and/or password didn't match. Please try again.</p>
 	{% endif %}
 	
-  	<form action="{% url 'django.contrib.auth.views.login' %}" method="post">
+  	<form action="" method="post">
+	{{ form.as_p }}
 	{% csrf_token %}
-	<table border="0" cellspacing="15" width="345" align="center">
-		<tr>
-			<td width="100">{{ form.username.label_tag }}</td>
-			<td>{{ form.username }}</td>
-		</tr>
-		<tr>
-			<td class="align-left">{{ form.password.label_tag }}</td>
-			<td>{{ form.password }}</td>
-		</tr>
-		<tr><td><input type="submit" value ="login" align="center" /></td></tr>
-		<tr><td><input type="hidden" name ="next" value="{{next}}" /></td></tr>
-		<tr><td><a href="/register/">Create New Account!</a></td></tr>
-	</table>
+	<input type="submit" value ="Create the account" align="center" />
 	</form>
 
+	<br>
+	<li><a href="/login/">Back to login.</a></li>
+	
 </body>
-
 </html> 

@@ -39,4 +39,23 @@ def store(request):
 	context = {'items_list':items_list}
 	return render(request, 'CopingGame/store_page.html', context)
 
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponseRedirect
+from CopingGame.forms import RegistrationForm
+
 #User registration
+def register(request):
+	if request.method == 'POST':
+		#form = UserCreationForm(request.POST)
+		form = RegistrationForm(request.POST)
+		if form.is_valid():
+			new_user = form.save()
+			new_user = authenticate(username=request.POST['username'], password=request.POST['password1'])
+			return HttpResponseRedirect("/CopingGame/")
+		else:
+			return render(request, 'registration/register.html', {'form': form,})
+	else:
+		form = UserCreationForm()
+		return render(request, "registration/register.html", {'form': form,})
+	
