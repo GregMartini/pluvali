@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<!-- A prototype login page -->
+
+{% load staticfiles %}
+
+<html>
+<head>
+
+<!-- Possibly change to put in its own css file -->
+<style type="text/css">
+	h1 {color:#6d1d1c;}
+</style>
+
+	<!-- A picture of DDRC's logo -->
+	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
+
+	<!-- The title of the page and a link to the logged-in home page -->
+	<h1 style="text-align:center;";>Create an account</h1>
+	<link rel="stylesheet" href="style_login_page.css">
+</head>
+<body>
+
+
+	<!-- The instructions and the fields for logging in -->
+ 	<h2 style="text-align:center"; color:"#4a6530";>Type in your username and password to log in.</h2>
+	
+	<!-- If no user -->
+	{% if form.errors %}
+		<p> Your username and/or password didn't match. Please try again.</p>
+	{% endif %}
+	
+  	<form action="" method="post">
+	{{ form.as_p }}
+	{% csrf_token %}
+	<input type="submit" value ="Create the account" align="center" />
+	</form>
+
+	<br>
+	<li><a href="/login/">Back to login.</a></li>
+	
+</body>
+</html> 
