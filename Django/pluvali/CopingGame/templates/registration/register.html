@@ -32,6 +32,8 @@
 	
   	<form action="" method="post">
 	{{ form.as_p }}
+	<p style="color:#4c3365;">Email:<input type="text" name="email"></p>
+  	
 	{% csrf_token %}
 	<input type="submit" value ="Create the account" align="center" />
 	</form>

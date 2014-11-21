@@ -20,13 +20,12 @@
 	<!-- Table that has the user avatar, user name, and their tokens -->
 	<table id="usertable" align="right">
 		<tr>
-			<!-- user picture -->
 			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
 			<td>
 			{% if user.is_authenticated %}
 				<!-- user information -->
 				<li>{{ user.get_username }}</li>
-				<li>Tokens: {{ Player.get_points }}</li>
+				<li>Tokens: {{ player.points }}</li>
 				<li><a href="/logout/">Logout</li>
 			{% else %}
 				Not currently logged in, please log in.
