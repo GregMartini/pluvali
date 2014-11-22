@@ -5,6 +5,10 @@
 <html>
 <link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
 <body>
+
+	<!-- A picture of DDRC's logo -->
+	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
+	
 	<!-- Table that will have the user profile once logged in -->
 	<table id="usertable" align="right">
 		<tr>
@@ -26,7 +30,7 @@
 	<br>
 	
 	<!-- The Header -->
-	<h1>CONGRADULATIONS!</h1>
+	<h1>CONGRATULATIONS!</h1>
 	<br>
 	<li>You completed the scenario and solved all the problems!</li>
 	<li>You've earned a total of {{player.points}}.</li>
