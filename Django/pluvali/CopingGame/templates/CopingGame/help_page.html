@@ -3,6 +3,7 @@
 <!-- Quick page by Greg -->
 {% load staticfiles %}
 <html>
+<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
 <body>
 	<!-- Table that will have the user profile once logged in -->
 	<table id="usertable" align="right">
@@ -27,7 +28,12 @@
 	<!-- The Header -->
 	<h1>How to play</h1>
 	<br>
-	<li>Once logged in, click the "Play a Scenario" link to choose from the available scenarios.</li>
-	
+	<li>Once logged in, click the "Play a Scenario" to choose from the available scenarios.</li>
+	<li>Select the scenario you wish to play and then chose a solution to each problem.</li>
+	<li>Solving each problem rewards a token, which you may use to redeem prizes!</li>
+	<li>From the homepage, you may also visit the store.</li>
+	<li>Once inside, select from a category and then chose the item you want to buy it!</li>
+	<br>
+	<li><a href="/CopingGame/">Back to the homepage.</a></li>
  </body>
  </html>  

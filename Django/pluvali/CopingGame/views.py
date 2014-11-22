@@ -30,7 +30,9 @@ def help(request):
 @login_required(login_url='/login')
 def scenario_index(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
-	scenario_list = Scenario.objects.order_by('title')
+	scenario_list = Scenario.objects.order_by('title').distinct()
+	player.stage = 0
+	player.save()
 	context = {'scenario_list': scenario_list, 'player':player}
 	return render(request, 'CopingGame/scenario_index.html', context)
 	
@@ -39,13 +41,42 @@ def scenario_index(request):
 def game(request, sceneID):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
 	scene = get_object_or_404(Scenario, pk = sceneID)
-	problems = scene.problems
-	solutions = scene.solutions
+	max_stage = scene.problems.count()
+	stage1 = scene.problems.all()[0]
+	if(max_stage >= 2):
+		stage2 = scene.problems.all()[1]
+	if(max_stage >= 3):
+		stage3 = scene.problems.all()[2]
+	if(max_stage >= 4):
+		stage4 = scene.problems.all()[3]
+	if(max_stage >= 5):
+		stage5 = scene.problems.all()[4]
+	if(max_stage >= 1):
+		context = {'scene':scene, 'player':player, 'stage1':stage1}
+	if(max_stage >= 2):
+		context = {'scene':scene, 'player':player, 'stage1':stage1,'stage2':stage2}
+	if(max_stage >= 3):
+		context = {'scene':scene, 'player':player, 'stage1':stage1,'stage2':stage2,'stage3':stage3}
+	if(max_stage >= 4):
+		context = {'scene':scene, 'player':player, 'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4}
+	if(max_stage >= 5):
+		context = {'scene':scene, 'player':player, 'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4,'stage5':stage5}
 	if request.method == 'POST':
 		player.points += 1
+		player.stage += 1
 		player.save()
-	context = {'scene':scene, 'problems':problems, 'solutions':solutions, 'player':player}	
+		if(player.stage == max_stage):
+			return render(request, 'CopingGame/victory_page.html')
+	
 	return render(request, 'CopingGame/game_page.html', context)
+
+@login_required(login_url='/login')
+def victory(request):
+	player = Player.objects.get(user=User.objects.get(username=request.user))
+	player.stage = 0
+	player.save()
+	context = {'player':player}
+	return render(request, 'CopingGame/victory_page.html', context)
 
 @login_required(login_url='/login')
 def store(request):

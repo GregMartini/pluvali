@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 
-<!-- Another prototype home page - Steve -->
+<!-- Quick page by Greg -->
 {% load staticfiles %}
 <html>
 <link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
 <body>
-
 	<!-- Table that will have the user profile once logged in -->
-
 	<table id="usertable" align="right">
 		<tr>
 			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
@@ -19,31 +17,21 @@
 				<li><a href="/logout/">Logout</li>
 			{% else %}
 				Not currently logged in, please log in.
-			{% endif %}</td>
+			{% endif %}</td>	
 		</tr>
 		<tr>
 			<td></td>
 		</tr>
 	</table>
-	
 	<br>
-
-	<!-- The Header -->
-	<h1>Please choose the scenario you want to play!</h1>
 	
-	{% if scenario_list %}
-		<ul>
-		{% for scenario in scenario_list %}
-			<li><a href="/CopingGame/{{ scenario.sceneID }}/">{{ scenario.title }}</a></li>
-		{% endfor %}
-		</ul>
-		{% else %}
-			<p>No scenarios are available.</p>
-		{% endif %}
-		<br>
-		<br>
+	<!-- The Header -->
+	<h1>CONGRADULATIONS!</h1>
+	<br>
+	<li>You completed the scenario and solved all the problems!</li>
+	<li>You've earned a total of {{player.points}}.</li>
+	<br>
+	<li><a href="/CopingGame/scenarios/">Back to scenario index.</a></li>
 	<li><a href="/CopingGame/">Back to the homepage.</a></li>
-
  </body>
-
  </html>  

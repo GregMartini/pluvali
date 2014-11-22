@@ -7,5 +7,6 @@ urlpatterns = [
 	url(r'^help/', views.help, name='help'), #help page
 	url(r'^scenarios/', views.scenario_index, name='scenarios'), #scenario index
 	url(r'^(?P<sceneID>\d+)/$', views.game, name='game'), #play game page
+	url(r'^victory/', views.victory, name='victory'),
 	url(r'^store/', views.store, name='store'),
 ]
