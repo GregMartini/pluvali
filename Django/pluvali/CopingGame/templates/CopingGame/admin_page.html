@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<!-- Another prototype home page - Steve -->
+{% load staticfiles %}
+<html>
+<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
+<body>
+{% if player_list %}
+{% for player in player_list %}
+{{ player.user }}
+{{ player.email }}
+{{ player.points }}
+{{ player.fav_bg }}
+{{ player.fav_text }}
+{{ player.stage }}
+<br/>
+{% endfor %}
+{% else %}
+No players are available.
+
+{% endif %} 
+</body>
+
+ </html>  

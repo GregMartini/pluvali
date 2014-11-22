@@ -9,4 +9,5 @@ urlpatterns = [
 	url(r'^(?P<sceneID>\d+)/$', views.game, name='game'), #play game page
 	url(r'^victory/', views.victory, name='victory'),
 	url(r'^store/', views.store, name='store'),
+	url(r'^admin_page/', views.admin_page, name='admin_page/'),
 ]

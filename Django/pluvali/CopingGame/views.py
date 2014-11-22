@@ -36,6 +36,13 @@ def scenario_index(request):
 	context = {'scenario_list': scenario_list, 'player':player}
 	return render(request, 'CopingGame/scenario_index.html', context)
 	
+#link for admin page
+@login_required(login_url='/login')
+def admin_page(request):
+	player_list = Player.objects.order_by('user').distinct()
+	context = {'player_list':player_list}
+	return render(request, 'CopingGame/admin_page.html', context)
+
 #link for game page
 @login_required(login_url='/login')
 def game(request, sceneID):
