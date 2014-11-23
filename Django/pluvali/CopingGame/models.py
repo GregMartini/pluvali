@@ -3,6 +3,9 @@ from django.db import models
 from django.contrib.auth.models import User
 import global_defs as defs
 
+#NOTE ImageField requires Pillow
+# run from pluvali dir to install>> pip install pillow  
+
 def get_image_path(intstance, filename):
 	return os.path.join('users', str(instance.id),filename)
 	
