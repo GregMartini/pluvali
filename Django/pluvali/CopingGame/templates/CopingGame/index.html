@@ -10,14 +10,14 @@
 
 </head>
 
-<body>
+<body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 
 	<!-- A picture of DDRC's logo -->
 	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
 
 	<!-- Table that has the user's profile when logged in -->
 
-	<table id="usertable" align="right">
+	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 		<tr>
 			<!-- user picture -->
 			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
@@ -26,7 +26,7 @@
 				<!-- user information -->
 				<li>{{ user.get_username }}</li>
 				<li>Tokens: {{ player.points }}</li>
-				<li><a href="/logout/">Logout</li>
+				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
 			{% else %}
 				Not currently logged in, please log in.
 			{% endif %}</td>		
@@ -47,14 +47,16 @@
 	<!-- Here is some general information about the game -->
 	<br><br><br>
 	
-	<p style ="text-align:center;color:#306565">General Information: <br>This game is a fun way to learn how to cope with difficult situations encountered in everyday life.</p>
+	<!--<p style ="text-align:center;color:#306565">General Information: <br>This game is a fun way to learn how to cope with difficult situations encountered in everyday life.</p> -->
+	<p style ="text-align:center;color:{{ player.fav_text }}">General Information: <br>This game is a fun way to learn how to cope with difficult situations encountered in everyday life.</p>
 	
 	<br>
-	<li><a href="/CopingGame/scenarios/">Play A Scenario.</a></li>
-	<li><a href="/CopingGame/store/">Visit Store.</a></li>
-	<li><a href="/CopingGame/help/">Help Page.</a></li>
+	<li><a href="/CopingGame/scenarios/" style="color:{{ player.fav_text }}">Play A Scenario.</a></li>
+	<li><a href="/CopingGame/store/" style="color:{{ player.fav_text }}">Visit Store.</a></li>
+	<li><a href="/CopingGame/help/" style="color:{{ player.fav_text }}">Help Page.</a></li>
 
-	<p style ="text-align:center;color:#4c3365;font-size:200%">You are now able to play the game and go to the store!</p>
+	<!--<p style ="text-align:center;color:#4c3365;font-size:200%">You are now able to play the game and go to the store!</p> -->
+	<p style ="text-align:center;color:{{ player.fav_text }};font-size:200%">You are now able to play the game and go to the store!</p>
 
  </body>
 

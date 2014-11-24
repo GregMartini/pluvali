@@ -4,14 +4,14 @@
 {% load staticfiles %}
 <html>
 <link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
-<body>
+<body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 
 	<!-- A picture of DDRC's logo -->
 	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
 	
 	<!-- Table that will have the user profile once logged in -->
 
-	<table id="usertable" align="right">
+	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 		<tr>
 			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
 			<td>
@@ -19,7 +19,7 @@
 				<!-- user information -->
 				<li>{{ user.get_username }}</li>
 				<li>Tokens: {{ player.points }}</li>
-				<li><a href="/logout/">Logout</li>
+				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
 			{% else %}
 				Not currently logged in, please log in.
 			{% endif %}</td>
@@ -37,7 +37,7 @@
 	{% if scenario_list %}
 		<ul>
 		{% for scenario in scenario_list %}
-			<li><a href="/CopingGame/{{ scenario.sceneID }}/">{{ scenario.title }}</a></li>
+			<li><a href="/CopingGame/{{ scenario.sceneID }}/" style="color:{{ player.fav_text }}">{{ scenario.title }}</a></li>
 		{% endfor %}
 		</ul>
 		{% else %}
@@ -45,7 +45,7 @@
 		{% endif %}
 		<br>
 		<br>
-	<li><a href="/CopingGame/">Back to the homepage.</a></li>
+	<li><a href="/CopingGame/" style="color:{{ player.fav_text }}">Back to the homepage.</a></li>
 
  </body>
 

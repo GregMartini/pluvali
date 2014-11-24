@@ -42,18 +42,8 @@ h3 {
 	border: 1px solid black;
 }
 
-/* Style of the "background colors" table */
-#bgcolors {
-	font-size: 25px;
-	border-collapse: separate; 
-	border-spacing: 1em;
-	display: none;
-	text-align: center;
-	font-weight: bold;
-}
-
-/* style of the "text colors" table */
-#textcolors {
+/* style of the "themes" table */
+#themes {
 	font-size: 25px;
 	border-collapse: separate;
 	border-spacing: 1em;
@@ -64,16 +54,6 @@ h3 {
 
 /* style of the "text colors" table */
 #userpics {
-	font-size: 25px;
-	border-collapse: separate;
-	border-spacing: 1em;
-	display: none;
-	text-align: center;
-	font-weight: bold;
-}
-
-/* style of the "themes" table */
-#themes {
 	font-size: 25px;
 	border-collapse: separate;
 	border-spacing: 1em;

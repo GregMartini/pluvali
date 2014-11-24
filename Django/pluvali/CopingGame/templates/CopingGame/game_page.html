@@ -12,13 +12,13 @@
 	
 </head>
 
-<body>
+<body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 
 	<!-- A picture of DDRC's logo -->
 	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
 
 	<!-- Table that has the user avatar, user name, and their tokens -->
-	<table id="usertable" align="right">
+	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 		<tr>
 			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
 			<td>
@@ -26,7 +26,7 @@
 				<!-- user information -->
 				<li>{{ user.get_username }}</li>
 				<li>Tokens: {{ player.points }}</li>
-				<li><a href="/logout/">Logout</li>
+				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
 			{% else %}
 				Not currently logged in, please log in.
 			{% endif %}</td>
@@ -120,9 +120,9 @@
 			{% endfor %}
 		{% endif %}
 		-->
-			<td><img src="http://img2.timeinc.net/health/images/gallery/living/walking-workout-400.jpg" width="300" height="300">
-			<td><img src="http://www.picgifs.com/clip-art/activities/listening-to-music/clip-art-listening-to-music-294478.jpg" width="300" height="300">
-			<td><img src="http://southjerusalem.com/wp-content/uploads/2008/11/boy_reading_book.gif" width="300" height="300">
+			<td><img src="http://img2.timeinc.net/health/images/gallery/living/walking-workout-400.jpg" width="65%" height="65%">
+			<td><img src="http://www.picgifs.com/clip-art/activities/listening-to-music/clip-art-listening-to-music-294478.jpg" width="65%" height="65%">
+			<td><img src="http://southjerusalem.com/wp-content/uploads/2008/11/boy_reading_book.gif" width="65%" height="65%">
 		</tr>
 		
 		<tr>

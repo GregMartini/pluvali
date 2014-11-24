@@ -14,8 +14,8 @@ class Player(models.Model):
 	email = models.CharField(max_length=30)
 	points = models.IntegerField(default=0)
 	#avatarPic = models.ImageField(upload_to=get_image_path, blank=True, null=True)
-	fav_bg = models.IntegerField(default=defs.BG_WHITE)
-	fav_text = models.IntegerField(default=defs.TEXT_BLACK)
+	fav_bg = models.CharField(max_length=30, default='#ededed') #models.IntegerField(default=defs.BG_WHITE)
+	fav_text = models.CharField(max_length=30, default='black') #models.IntegerField(default=defs.TEXT_BLACK)
 	stage = models.IntegerField(default=0) #used for iterating through scenarios
 	def __str__(self):
 		return self.user.username
