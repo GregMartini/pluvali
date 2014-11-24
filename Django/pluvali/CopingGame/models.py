@@ -17,6 +17,8 @@ class Player(models.Model):
 	fav_bg = models.CharField(max_length=30, default='#ededed') #models.IntegerField(default=defs.BG_WHITE)
 	fav_text = models.CharField(max_length=30, default='black') #models.IntegerField(default=defs.TEXT_BLACK)
 	stage = models.IntegerField(default=0) #used for iterating through scenarios
+	def passw (self):
+		return self.user.password
 	def __str__(self):
 		return self.user.username
 	pass
