@@ -6,19 +6,27 @@
 <link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
 <body>
 {% if player_list %}
+<table>
+<tr>
 {% for player in player_list %}
-{{ player.user }}
-{{ player.email }}
-{{ player.points }}
-{{ player.fav_bg }}
-{{ player.fav_text }}
-{{ player.stage }}
-<br/>
+<td>
+{{ player }} <br/>
+{{ player.passw }} <br/>
+{{ player.email|default:"No email" }} <br/>
+{{ player.points }} <br/>
+{{ player.fav_bg }} <br/>
+{{ player.fav_text }} <br/>
+{{ player.stage }} <br/>
+<b>TODO: Add form to edit fields</b>
+</td>
 {% endfor %}
+</tr>
+</table>
 {% else %}
 No players are available.
 
 {% endif %} 
+
 </body>
 
  </html>  
