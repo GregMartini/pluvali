@@ -46,15 +46,15 @@
 	
 	<!-- Image representing the problem -->
 	{% if player.stage == 0 %}
-		<img id="problempic" src="{{stage1.picureP.url}}" width="500" height="300">
+		<img id="problempic" src="{{stage1.picureP.url}}" width="400" height="200">
 	{% elif player.stage == 1 %}
-		<img id="problempic" src="{{stage2.picureP.url}}" width="500" height="300">
+		<img id="problempic" src="{{stage2.picureP.url}}" width="400" height="200">
 	{% elif player.stage == 2 %}
-		<img id="problempic" src="{{stage3.picureP.url}}" width="500" height="300">
+		<img id="problempic" src="{{stage3.picureP.url}}" width="400" height="200">
 	{% elif player.stage == 3 %}
-		<img id="problempic" src="{{stage4.picureP.url}}" width="500" height="300">
+		<img id="problempic" src="{{stage4.picureP.url}}" width="400" height="200">
 	{% elif player.stage == 4 %}
-		<img id="problempic" src="{{stage5.picureP.url}}" width="500" height="300">
+		<img id="problempic" src="{{stage5.picureP.url}}" width="400" height="200">
 	{% endif %}
 <!-- 	<img id="problempic" src="http://i.dailymail.co.uk/i/pix/2008/06/18/article-1027467-01A8590600000578-467_468x289.jpg" width="500" height="300">
 	
@@ -97,40 +97,59 @@
 		</tr>
 		
 		<tr>
-			<!--
+			
 		{% if player.stage == 0 %}
 			{% for sol in stage1.solutions.all %}
-				<td><img id="problempic" src="{{sol.picureS.url}}" width="300" height="300"></td>
+				<td><img id="problempic" src="{{sol.picureS.url}}" width="65" height="65"></td>
 			{% endfor %}
 		{% elif player.stage == 1 %}
 			{% for sol in stage2.solutions.all %}
-				<td><img id="problempic" src="{{sol.picureS.url}}" width="300" height="300"></td>
+				<td><img id="problempic" src="{{sol.picureS.url}}" width="65" height="65"></td>
 			{% endfor %}
 		{% elif player.stage == 2 %}
 			{% for sol in stage3.solutions.all %}
-				<td><img id="problempic" src="{{sol.picureS.url}}" width="300" height="300"></td>
+				<td><img id="problempic" src="{{sol.picureS.url}}" width="65" height="65"></td>
 			{% endfor %}
 		{% elif player.stage == 3 %}
 			{% for sol in stage4.solutions.all %}
-				<td><img id="problempic" src="{{sol.picureS.url}}" width="300" height="300"></td>
+				<td><img id="problempic" src="{{sol.picureS.url}}" width="65" height="65"></td>
 			{% endfor %}
 		{% elif player.stage == 4 %}
 			{% for sol in stage5.solutions.all %}
-				<td><img id="problempic" src="{{sol.picureS.url}}" width="300" height="300"></td>
+				<td><img id="problempic" src="{{sol.picureS.url}}" width="65" height="65"></td>
 			{% endfor %}
 		{% endif %}
-		-->
-			<td><img src="http://img2.timeinc.net/health/images/gallery/living/walking-workout-400.jpg" width="65%" height="65%">
+		
+		<!--	<td><img src="http://img2.timeinc.net/health/images/gallery/living/walking-workout-400.jpg" width="65%" height="65%">
 			<td><img src="http://www.picgifs.com/clip-art/activities/listening-to-music/clip-art-listening-to-music-294478.jpg" width="65%" height="65%">
-			<td><img src="http://southjerusalem.com/wp-content/uploads/2008/11/boy_reading_book.gif" width="65%" height="65%">
+			<td><img src="http://southjerusalem.com/wp-content/uploads/2008/11/boy_reading_book.gif" width="65%" height="65%"> -->
 		</tr>
 		
 		<tr>
 			<form action="" method="post">
 			{% csrf_token %}
-			<td><button type="submit">Select</button></td>
-			<td><button type="submit">Select</button></td>
-			<td><button type="submit">Select</button></td>
+			{% if player.stage == 0 %}
+				{% for s in stage1.solutions.all %}
+					<td><button type="submit">Select</button></td>
+				{% endfor %}
+			{% elif player.stage == 1 %}
+				{% for s in stage2.solutions.all %}
+					<td><button type="submit">Select</button></td>
+				{% endfor %}
+			{% elif player.stage == 2 %}
+				{% for s in stage3.solutions.all %}
+					<td><button type="submit">Select</button></td>
+				{% endfor %}
+			{% elif player.stage == 3 %}
+				{% for s in stage4.solutions.all %}
+					<td><button type="submit">Select</button></td>
+				{% endfor %}
+			{% elif player.stage == 4 %}
+				{% for s in stage5.solutions.all %}
+					<td><button type="submit">Select</button></td>
+				{% endfor %}
+			{% endif %}
+			
 			</form>
 		</tr>
 	</table>
