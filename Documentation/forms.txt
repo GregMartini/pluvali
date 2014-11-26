@@ -1,0 +1,4 @@
+I accidently clicked enter before I could comment on this last push.
+The forms folder was serving no purpose, all the forms go in one file, forms.py
+just define like you would a model. The one I have is from an example to upload file and save to the database,
+but its not working...
