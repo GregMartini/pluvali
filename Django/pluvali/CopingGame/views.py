@@ -5,8 +5,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.core.urlresolvers import reverse_lazy
 from django.core.context_processors import csrf
 from django import forms
-from django.contrib.auth.forms import UserCreationForm #wont need here if registrationForm is overridden
-from CopingGame.forms import RegistrationForm #might not need if cant override UserCreationForm
+from django.contrib.auth.forms import UserCreationForm 
+from CopingGame.forms import UploadProblemPicForm
 
 from CopingGame.models import Player, Scenario, Problems, Solutions, Store
 from django.contrib.auth.models import User
@@ -127,3 +127,30 @@ def register(request):
 		form = UserCreationForm()
 		return render(request, "registration/register.html", {'form': form,})
 		
+
+def handle_uploaded_file(file):
+#	filename = file.name
+#	path = settings.MEDIA_ROOT
+	with open('media/name.jpg', 'wb+') as destination:
+		for chunk in file.chunks():
+			destination.write(chunk)
+	destination.close()
+
+def upload_problem_pic(request, problem_id):
+	problem = get_object_or_404(Problems, pk=problem_id)
+	if request.method =='POST':
+		form = UploadProblemPicForm(request.POST, request.FILES)
+		if form.is_valid():
+			handle_uploaded_file(request.FILES['file'])
+			problem.pictureP.save(request.FILES['file'].name, content, save=True)
+			#instance = Problems.pictureP(file_field=request.FILES['file'])
+			#instance = Problems.problem(file_field=request.POST['problem']
+			
+			form.save()
+			return HttpResponseRedirect('/index/')
+		else:
+			return render(request, 'CopingGame/upload_pic.html', {'form': form,})
+	else:
+		form = UploadProblemPicForm()
+		return render(request, 'CopingGame/upload_pic.html', {'problem':problem, 'form':form})
+	

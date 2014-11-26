@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html>
+
+{{problem}}
+
+	<!-- Improper form entry -->
+	{% if form.errors %}
+		<p> {{form.errors}}</p>
+	{% endif %}
+
+<form action="" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+	
+	<p><label for="{{form.UploadProblemPicForm.pictureP }}">The image </label>
+		<input id="form.UploadProblemPicForm.pictureP" type="file" class="" name="image"></p>
+	<input type="submit" value="Submit" />
+</form>
+
+</html>
