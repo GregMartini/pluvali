@@ -45,6 +45,7 @@
 				  {% endif %}
 	
 	<!-- Image representing the problem -->
+<!-- WILL NEED FOR FINAL PRODUCT, needs pictures in the DB first	
 	{% if player.stage == 0 %}
 		<img id="problempic" src="{{stage1.picureP.url}}" width="400" height="200">
 	{% elif player.stage == 1 %}
@@ -56,9 +57,14 @@
 	{% elif player.stage == 4 %}
 		<img id="problempic" src="{{stage5.picureP.url}}" width="400" height="200">
 	{% endif %}
-<!-- 	<img id="problempic" src="http://i.dailymail.co.uk/i/pix/2008/06/18/article-1027467-01A8590600000578-467_468x289.jpg" width="500" height="300">
-	
-	<br><br><br>
+	-->
+<!-- temp fix for prototype  -->	
+ 	{% if player.stage == 0 %}
+		<img src="{% static 'CopingGame/images/television1.jpg' %}" width="500" height="300">
+	{% elif player.stage == 1 %}
+		<img src="{% static 'CopingGame/images/tvshow.png' %}" width="500" height="300">
+	{% endif %}
+	<br>
 	
 	<!-- Table containing the coping choices and their associated images -->
 	<table id="coping" align="center">
@@ -97,7 +103,7 @@
 		</tr>
 		
 		<tr>
-			
+	<!-- WILL NEED FOR FINAL PRODUCT, needs pictures in the DB first		
 		{% if player.stage == 0 %}
 			{% for sol in stage1.solutions.all %}
 				<td><img id="problempic" src="{{sol.picureS.url}}" width="65" height="65"></td>
@@ -119,10 +125,16 @@
 				<td><img id="problempic" src="{{sol.picureS.url}}" width="65" height="65"></td>
 			{% endfor %}
 		{% endif %}
+	-->	{% if player.stage == 0 %}
+			<td><img src="{% static 'CopingGame/images/walk.jpg' %}" width="250" height="250"></td>
+			<td><img src="{% static 'CopingGame/images/music.jpg' %}" width="250" height="250"></td>
+			<td><img src="{% static 'CopingGame/images/read.gif' %}" width="250" height="250"></td>
+		{% elif player.stage == 1 %}
+			<td><img src="{% static 'CopingGame/images/walk.jpg' %}" width="250" height="250"></td>
+			<td><img src="{% static 'CopingGame/images/breath.jpg' %}" width="250" height="250"></td>
+			<td><img src="{% static 'CopingGame/images/tv.jpg' %}" width="250" height="250"></td>
+		{% endif %}
 		
-		<!--	<td><img src="http://img2.timeinc.net/health/images/gallery/living/walking-workout-400.jpg" width="65%" height="65%">
-			<td><img src="http://www.picgifs.com/clip-art/activities/listening-to-music/clip-art-listening-to-music-294478.jpg" width="65%" height="65%">
-			<td><img src="http://southjerusalem.com/wp-content/uploads/2008/11/boy_reading_book.gif" width="65%" height="65%"> -->
 		</tr>
 		
 		<tr>
