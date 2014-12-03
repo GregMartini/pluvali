@@ -73,7 +73,7 @@ def game(request, sceneID):
 		player.stage += 1
 		player.save()
 		if(player.stage == max_stage):
-			return render(request, 'CopingGame/victory_page.html')
+			return render(request, 'CopingGame/victory_page.html', {'player':player})
 	
 	return render(request, 'CopingGame/game_page.html', context)
 
