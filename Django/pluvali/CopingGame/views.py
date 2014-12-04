@@ -7,6 +7,7 @@ from django.core.context_processors import csrf
 from django import forms
 from django.contrib.auth.forms import UserCreationForm 
 from CopingGame.forms import UploadProblemPicForm
+import random
 
 from CopingGame.models import Player, Scenario, Problems, Solutions, Store
 from django.contrib.auth.models import User
@@ -58,6 +59,8 @@ def game(request, sceneID):
 		stage4 = scene.problems.all()[3]
 	if(max_stage >= 5):
 		stage5 = scene.problems.all()[4]
+	if(player.stage > max_stage):
+		player.stage = 0
 	if(max_stage >= 1):
 		context = {'scene':scene, 'player':player, 'stage1':stage1}
 	if(max_stage >= 2):
@@ -69,7 +72,7 @@ def game(request, sceneID):
 	if(max_stage >= 5):
 		context = {'scene':scene, 'player':player, 'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4,'stage5':stage5}
 	if request.method == 'POST':
-		player.points += 1
+		player.points += random.randint(2,5)
 		player.stage += 1
 		player.save()
 		if(player.stage == max_stage):
