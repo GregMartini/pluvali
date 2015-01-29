@@ -1,7 +1,7 @@
-from django.conf.urls import include, url
-from django.contrib import admin
 import CopingGame
-
+from django.conf.urls import include, url, patterns
+from django.contrib import admin
+from django.conf import settings
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
@@ -12,3 +12,8 @@ urlpatterns = [
 	url(r'^register/$', CopingGame.views.register, name='register'),	
 	url(r'^$', RedirectView.as_view(url='CopingGame/', permanent=False), name='index'),
 ]
+
+if settings.DEBUG:
+	urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT}))

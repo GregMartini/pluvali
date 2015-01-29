@@ -2,6 +2,9 @@ import os
 from django.db import models
 from django.contrib.auth.models import User
 import global_defs as defs
+from django.core.files.storage import FileSystemStorage
+
+fs = FileSystemStorage(location='/media/photos')
 
 #NOTE ImageField requires Pillow
 # run from pluvali dir to install>> pip install pillow  
@@ -24,7 +27,7 @@ class Player(models.Model):
 	pass
 		
 class Solutions(models.Model):
-	pictureS = models.ImageField(upload_to='/media/solutions/', blank=True, null=True)
+	pictureS = models.ImageField(upload_to='solutions/', blank=True, null=True)
 	solution = models.CharField(max_length=300, default="Solution")
 	def __str__(self):
 		return self.solution
@@ -34,7 +37,7 @@ def upload_path_handler(instance, filename):
 	return filename
 	
 class Problems(models.Model):
-	pictureP = models.ImageField(upload_to=upload_path_handler, blank=True, null=True)
+	pictureP = models.ImageField(upload_to='problems/', null=True)
 	problem = models.CharField(max_length=225, default="The Problem.")
 	solutions = models.ManyToManyField(Solutions)
 	def __str__(self):

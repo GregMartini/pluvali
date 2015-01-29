@@ -43,27 +43,22 @@
 				  {% elif player.stage == 3 %}{{ stage4 }}
 				  {% elif player.stage == 4 %}{{ stage5 }}
 				  {% endif %}</h2>
-	
+				  
 	<!-- Image representing the problem -->
-<!-- WILL NEED FOR FINAL PRODUCT, needs pictures in the DB first	
+
+<!-- Problem's picture -->
 	{% if player.stage == 0 %}
-		<img id="problempic" src="{{stage1.picureP.url}}" width="400" height="200">
+		<img id="problempic" src="{{stage1.pictureP.url}}" width="400" height="200"/>
 	{% elif player.stage == 1 %}
-		<img id="problempic" src="{{stage2.picureP.url}}" width="400" height="200">
+		<img id="problempic" src="{{stage2.pictureP.url}}" width="400" height="200"/>
 	{% elif player.stage == 2 %}
-		<img id="problempic" src="{{stage3.picureP.url}}" width="400" height="200">
+		<img id="problempic" src="{{stage3.pictureP.url}}" width="400" height="200"/>
 	{% elif player.stage == 3 %}
-		<img id="problempic" src="{{stage4.picureP.url}}" width="400" height="200">
+		<img id="problempic" src="{{stage4.pictureP.url}}" width="400" height="200"/>
 	{% elif player.stage == 4 %}
-		<img id="problempic" src="{{stage5.picureP.url}}" width="400" height="200">
+		<img id="problempic" src="{{stage5.pictureP.url}}" width="400" height="200"/>
 	{% endif %}
-	-->
-<!-- temp fix for prototype  -->	
- 	{% if player.stage == 0 %}
-		<center><img src="{% static 'CopingGame/images/television1.jpg' %}" width="500" height="300" ></center>
-	{% elif player.stage == 1 %}
-		<center><img src="{% static 'CopingGame/images/tvshow.png' %}" width="500" height="300" ></center>
-	{% endif %}
+
 	<br>
 	
 	<!-- Table containing the coping choices and their associated images -->
@@ -103,36 +98,27 @@
 		</tr>
 		
 		<tr>
-	<!-- WILL NEED FOR FINAL PRODUCT, needs pictures in the DB first		
+	<!-- Solution's picture -->		
 		{% if player.stage == 0 %}
 			{% for sol in stage1.solutions.all %}
-				<td><img id="problempic" src="{{sol.picureS.url}}" width="65" height="65"></td>
+				<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
 			{% endfor %}
 		{% elif player.stage == 1 %}
 			{% for sol in stage2.solutions.all %}
-				<td><img id="problempic" src="{{sol.picureS.url}}" width="65" height="65"></td>
+				<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
 			{% endfor %}
 		{% elif player.stage == 2 %}
 			{% for sol in stage3.solutions.all %}
-				<td><img id="problempic" src="{{sol.picureS.url}}" width="65" height="65"></td>
+				<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
 			{% endfor %}
 		{% elif player.stage == 3 %}
 			{% for sol in stage4.solutions.all %}
-				<td><img id="problempic" src="{{sol.picureS.url}}" width="65" height="65"></td>
+				<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
 			{% endfor %}
 		{% elif player.stage == 4 %}
 			{% for sol in stage5.solutions.all %}
-				<td><img id="problempic" src="{{sol.picureS.url}}" width="65" height="65"></td>
+				<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
 			{% endfor %}
-		{% endif %}
-	-->	{% if player.stage == 0 %}
-			<td><img src="{% static 'CopingGame/images/walk.jpg' %}" width="250" height="250"></td>
-			<td><img src="{% static 'CopingGame/images/music.jpg' %}" width="250" height="250"></td>
-			<td><img src="{% static 'CopingGame/images/read.gif' %}" width="250" height="250"></td>
-		{% elif player.stage == 1 %}
-			<td><img src="{% static 'CopingGame/images/walk.jpg' %}" width="250" height="250"></td>
-			<td><img src="{% static 'CopingGame/images/breath.jpg' %}" width="250" height="250"></td>
-			<td><img src="{% static 'CopingGame/images/tv.jpg' %}" width="250" height="250"></td>
 		{% endif %}
 		
 		</tr>

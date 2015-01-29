@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('CopingGame', '0004_auto_20141123_1538'),
+        ('CopingGame', '0003_auto_20150128_1943'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='problems',
             name='pictureP',
-            field=models.ImageField(null=True, blank=True, upload_to='/media/problems/'),
+            field=models.ImageField(upload_to='problems', null=True),
         ),
     ]
