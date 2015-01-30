@@ -1,4 +1,0 @@
-pluvali
-=======
-
-Coping skills game
