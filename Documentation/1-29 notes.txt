@@ -1,0 +1,17 @@
+Things to implement or fix:
+
+1) Back button problems (doesn't show tokens properly, errors if done while playing game)
+
+2) Store page purchases (redirecting to same page, maybe a confirmation before buying)
+
+3) Delete a USER also deletes a PLAYER
+
+4) Uniform wording across pages (tokens/points, index/homepage)
+
+5) Scenario editor
+
+6) User profile page (delete/restart account, edit picture)
+
+7) Pop-up videos that must be watched before selecting an answer (maybe)
+
+8) Text-to-Speech (maybe)

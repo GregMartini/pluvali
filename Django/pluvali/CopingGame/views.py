@@ -131,14 +131,6 @@ def register(request):
 		return render(request, "registration/register.html", {'form': form,})
 		
 
-def handle_uploaded_file(file):
-#	filename = file.name
-#	path = settings.MEDIA_ROOT
-	with open('media/name.jpg', 'wb+') as destination:
-		for chunk in file.chunks():
-			destination.write(chunk)
-	destination.close()
-
 def upload_problem_pic(request, problem_id):
 	problem = get_object_or_404(Problems, pk=problem_id)
 	if request.method =='POST':

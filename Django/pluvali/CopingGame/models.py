@@ -13,7 +13,7 @@ def get_image_path(intstance, filename):
 	return os.path.join('users', str(instance.id),filename)
 	
 class Player(models.Model):
-	user = models.OneToOneField(User)
+	user = models.ForeignKey(User)
 	email = models.CharField(max_length=30)
 	points = models.IntegerField(default=0)
 	#avatarPic = models.ImageField(upload_to=get_image_path, blank=True, null=True)
@@ -42,43 +42,6 @@ class Problems(models.Model):
 	solutions = models.ManyToManyField(Solutions)
 	def __str__(self):
 		return self.problem
-
-#	def save(self, *args, **kwargs):
-#		self_pk = self.pk
-#		problem_id = self.problem_id
-#		problem_id_str = str(problem_id)
-#		
-#		new_file = generate_image_name_hash()
-#		new_file_main = new_file + '.jpg'
-#		new_file_root_path = settings.PROBLEMS_UPLOAD_PATH + '/' + problem_id_str + '/' +new_file_main
-#		
-#		if self.pictureP:
-#			self.pictureP.name = settings.PROBLEMS_UPLOAD_PATH + '/' + problem_id_str + '/' +new_file_main
-#			
-##			super(Problems, self).save(*args, **kwargs)
-	#	
-	#	if self.pictureP and self_pk:
-	#		old_img = Picture.objects.get(pk=self.pk)
-	#		old_img_instance = old_img.pictureP
-	#		
-	#	if self.pictureP:
-	#		if self_pk:
-	#			pictureP = old_img_instance
-	#		else:
-	#			pictureP = self.pictureP
-	#	
-	#	super(Problems, self).save(*args, **kwargs)
-		
-		#if in form
-	#	if self.pictureP:
-	#		tmp_file = Image.open(self.pictureP.path)
-	#		if tmp_file.mode != 'RGB':
-	#			tmp_file = tmp_file.convert('RGB')
-	#		
-	#		image = Image.open(self.pictureP.path)
-	#		if pictureP.mode != 'RGB':
-	#			pictureP = pictureP.convert('RGB')
-	#		pictureP.save(new_file_root_path, 'JPEG', quality=100)
 	pass
 	
 class Scenario(models.Model):
