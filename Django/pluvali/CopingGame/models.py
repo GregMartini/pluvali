@@ -15,7 +15,7 @@ def get_image_path(intstance, filename):
 class Player(models.Model):
 	user = models.ForeignKey(User)
 	email = models.CharField(max_length=30)
-	points = models.IntegerField(default=0)
+	tokens = models.IntegerField(default=0)
 	#avatarPic = models.ImageField(upload_to=get_image_path, blank=True, null=True)
 	fav_bg = models.CharField(max_length=30, default='#ededed')
 	fav_text = models.CharField(max_length=30, default='black')

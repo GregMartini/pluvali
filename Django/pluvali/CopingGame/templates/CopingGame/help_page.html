@@ -17,7 +17,7 @@
 			{% if user.is_authenticated %}
 				<!-- user information -->
 				<li>{{ user.get_username }}</li>
-				<li>Tokens: {{ player.points }}</li>
+				<li>Tokens: {{ player.tokens }}</li>
 				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
 			{% else %}
 				Not currently logged in, please log in.

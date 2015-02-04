@@ -50,29 +50,29 @@ def game(request, sceneID):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
 	scene = get_object_or_404(Scenario, pk = sceneID)
 	max_stage = scene.problems.count()
-	stage1 = scene.problems.all()[0]
+	stage0 = scene.problems.all()[0]
 	if(max_stage >= 2):
-		stage2 = scene.problems.all()[1]
+		stage1 = scene.problems.all()[1]
 	if(max_stage >= 3):
-		stage3 = scene.problems.all()[2]
+		stage2 = scene.problems.all()[2]
 	if(max_stage >= 4):
-		stage4 = scene.problems.all()[3]
+		stage3 = scene.problems.all()[3]
 	if(max_stage >= 5):
-		stage5 = scene.problems.all()[4]
+		stage4 = scene.problems.all()[4]
 	if(player.stage > max_stage):
 		player.stage = 0
 	if(max_stage >= 1):
-		context = {'scene':scene, 'player':player, 'stage1':stage1}
+		context = {'scene':scene, 'player':player, 'stage0':stage0}
 	if(max_stage >= 2):
-		context = {'scene':scene, 'player':player, 'stage1':stage1,'stage2':stage2}
+		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1}
 	if(max_stage >= 3):
-		context = {'scene':scene, 'player':player, 'stage1':stage1,'stage2':stage2,'stage3':stage3}
+		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2}
 	if(max_stage >= 4):
-		context = {'scene':scene, 'player':player, 'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4}
+		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3}
 	if(max_stage >= 5):
-		context = {'scene':scene, 'player':player, 'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4,'stage5':stage5}
+		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4}
 	if request.method == 'POST':
-		player.points += random.randint(2,5)
+		player.tokens += random.randint(2,5)
 		player.stage += 1
 		player.save()
 		if(player.stage == max_stage):
@@ -94,8 +94,8 @@ def store(request):
 	items_list = Store.objects.order_by('itemName')
 	context = {'items_list':items_list, 'player':player}
 	if request.method == 'POST':
-		#if player.points >= 50:  uncomment next two lines for final version
-			#player.points -= 50
+		#if player.tokens >= 50:  uncomment next two lines for final version
+			#player.tokens -= 50
 			if 'bluewhite' in request.POST:  #for testing that themes can at least be switched and saved
 				player.fav_bg = 'blue'		 #will be implemented in user defaults page next semester
 				player.fav_text = 'white'

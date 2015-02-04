@@ -24,7 +24,7 @@
 			{% if user.is_authenticated %}
 				<!-- user information -->
 				<li>{{ user.get_username }}</li>
-				<li>Tokens: {{ player.points }}</li>
+				<li>Tokens: {{ player.tokens }}</li>
 				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
 			{% else %}
 				Not currently logged in, please log in.
@@ -37,7 +37,7 @@
 	
 	<br><br>
 	<FORM align="center">
-		<INPUT Type="BUTTON" VALUE="Back to Index Page" style="height:5%; width:10%" ONCLICK="window.location.href='/CopingGame/'"> 
+		<INPUT Type="BUTTON" VALUE="Back to Homepage" style="height:5%; width:10%" ONCLICK="window.location.href='/CopingGame/'"> 
 	</FORM>
 	<br>
 
