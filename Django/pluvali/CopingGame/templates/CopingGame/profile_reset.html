@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<!-- Quick page by Greg -->
+{% load staticfiles %}
+<html>
+<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
+<body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+
+	<!-- A picture of DDRC's logo -->
+	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
+	
+	<!-- Table that will have the user profile once logged in -->
+	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+		<tr>
+			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
+			<td>
+			{% if user.is_authenticated %}
+				<!-- user information -->
+				<li>{{ user.get_username }}</li>
+				<li>Tokens: {{ player.tokens }}</li>
+				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
+			{% else %}
+				Not currently logged in, please log in.
+			{% endif %}</td>	
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+	<br>
+	
+	<!-- The Header -->
+	<h1>Are you sure you want to RESET or DELETE your account?</h1>
+	<br>
+	<table>
+	<tr>	
+	<form action="" method="post">
+			{% csrf_token %}
+		<td>This will remove all tokens and previous purchases.
+		<button type="reset_account">Clicking here will RESET your account.</button></td>
+		<td>This will permanently delete all of your account.
+		<button type="delete_account">Clicking here will DELETE your account.</button></td>
+	</form>
+	</tr>
+	</table>
+	
+	<br>
+	<!-- RETURN LINKS -->
+	<li><a href="/CopingGame/profile/" style="color:{{ player.fav_text }}">Back to your profile page.</a></li>
+	<li><a href="/CopingGame/" style="color:{{ player.fav_text }}">Back to the homepage.</a></li>
+ </body>
+ </html>  

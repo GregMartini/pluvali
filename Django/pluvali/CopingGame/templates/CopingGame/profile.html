@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<!-- Quick page by Greg -->
+{% load staticfiles %}
+<html>
+<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
+<body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+
+	<!-- A picture of DDRC's logo -->
+	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
+	
+	<!-- Table that will have the user profile once logged in -->
+	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+		<tr>
+			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
+			<td>
+			{% if user.is_authenticated %}
+				<!-- user information -->
+				<li>{{ user.get_username }}</li>
+				<li>Tokens: {{ player.tokens }}</li>
+				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
+				<br>
+				<li><a href="/CopingGame/profile_reset/" style="color:{{ player.fav_text }}">RESET or DELETE account</li>
+			{% else %}
+				Not currently logged in, please log in.
+			{% endif %}</td>	
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+	<br>
+	
+	<!-- The Header -->
+	<h1>{{ user.get_username }}'s Profile</h1>
+	<br>
+	
+	<!-- UPLOAD PICTURE -->
+	<li>Change your profile picture here:
+	<form action="" method="post">
+			{% csrf_token %}
+			<button type="submit">Upload</button></li>
+	<br>
+	<!-- PLAYER TOKENS -->
+	<li>You've earned a total of {{ player.tokens }} tokens!</li>
+	<br>
+	<!-- PLAYER PURCHASES -->
+	<li>Here is a list of your total purchases:</li>
+	{% if purchase_list %}
+		{% for purchase in purchase_list %}
+		<li>{{ purchase.Store.itemName }}: {{ purchase.Store.itemDesc }}</li>
+		<li><a href="/CopingGame/store/" style="color:{{ player.fav_text }}">Visit Store.</a></li>
+		{% endfor %}
+	{% else %}
+		<p>You haven't purchased any items yet.</p>
+		<p><a href="/CopingGame/store/" style="color:{{ player.fav_text }}">Visit Store.</a></p>
+	{% endif %}	
+	<br>
+	<!-- RETURN HOME -->
+	<li><a href="/CopingGame/" style="color:{{ player.fav_text }}">Back to the homepage.</a></li>
+ </body>
+ </html>  
