@@ -4,19 +4,15 @@ from django.contrib.auth.models import User
 import global_defs as defs
 from django.core.files.storage import FileSystemStorage
 
-fs = FileSystemStorage(location='/media/photos')
-
 #NOTE ImageField requires Pillow
 # run from pluvali dir to install>> pip install pillow  
 
-def get_image_path(intstance, filename):
-	return os.path.join('users', str(instance.id),filename)
 	
 class Player(models.Model):
-	user = models.ForeignKey(User)
+	user = models.OneToOneField(User)
 	email = models.CharField(max_length=30)
 	tokens = models.IntegerField(default=0)
-	#avatarPic = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+	#avatarPic = models.ImageField(upload_to='userPic/', blank=True, null=True)
 	fav_bg = models.CharField(max_length=30, default='#ededed')
 	fav_text = models.CharField(max_length=30, default='black')
 	stage = models.IntegerField(default=0) #used for iterating through scenarios
@@ -29,8 +25,10 @@ class Player(models.Model):
 class Solutions(models.Model):
 	pictureS = models.ImageField(upload_to='solutions/', blank=True, null=True)
 	solution = models.CharField(max_length=300, default="Solution")
+	verbose_name_plural = 'Solutions'
 	def __str__(self):
 		return self.solution
+	
 	pass
 
 def upload_path_handler(instance, filename):
@@ -42,6 +40,7 @@ class Problems(models.Model):
 	solutions = models.ManyToManyField(Solutions)
 	def __str__(self):
 		return self.problem
+	verbose_name_plural = 'Problems'
 	pass
 	
 class Scenario(models.Model):
@@ -59,11 +58,13 @@ class Store(models.Model):
 	itemDesc = models.CharField(max_length=50, default="Item Description")
 	def __str__(self):
 		return self.itemName
+	verbose_name_plural = 'StoreItems'
 
 class Purchases(models.Model):
 	player = models.ForeignKey(Player)
 	itemFKey = models.ForeignKey(Store)
 	def __str__(self):
 		return self.itemFKey.itemName
+	verbose_name_plural = 'Purchases'
 		
 		

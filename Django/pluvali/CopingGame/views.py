@@ -135,7 +135,6 @@ def register(request):
 def profile(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
 	purchase_list = Purchases.objects.filter(player=player)
-	#items = Store.objects.get(Store=purchase_list)
 	context = {'player':player, 'purchase_list':purchase_list}#, 'items':items}
 	if request.method == 'POST':
 		#player.avatarPic = 
@@ -143,19 +142,6 @@ def profile(request):
 	else:
 		return render(request, "CopingGame/profile.html", context)
 
-#User delete or reset profile
-def profile_reset(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
-	context = {'player':player, }
-	if 'reset_account' in 'POST':
-		player.tokens = 0
-		purchase_list.delete()
-		return HttpResponseRedirect("CopingGame/profile.html/", context)
-	elif 'delete_account' in 'POST':
-		#
-		return HttpResponseRedirect("/login/", context)
-	else:
-		return render(request, "CopingGame/profile_reset.html", context)
 
 #def upload_problem_pic(request, problem_id):
 #	problem = get_object_or_404(Problems, pk=problem_id)
