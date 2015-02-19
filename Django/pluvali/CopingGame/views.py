@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.core.context_processors import csrf
 from django import forms
 from django.contrib.auth.forms import UserCreationForm 
-from CopingGame.forms import UploadProblemPicForm
+from CopingGame.forms import PlayerProfileForm
 import random
 
 from CopingGame.models import Player, Scenario, Problems, Solutions, Store, Purchases
@@ -135,29 +135,17 @@ def register(request):
 def profile(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
 	purchase_list = Purchases.objects.filter(player=player)
-	context = {'player':player, 'purchase_list':purchase_list}#, 'items':items}
+	context = {'player':player, 'purchase_list':purchase_list}
 	if request.method == 'POST':
-		#player.avatarPic = 
+		#Attempt to grab raw data from form information
+		profileForm = PlayerProfileForm(data=request.POST)
+		if 'avatarPic' in request.Files:
+			player.avatarPic = request.FILES['avatarPic']
+			player.save()
+			context = {'player':player, 'purchase_list':purchase_list, 'profileForm':profileForm}
 		return HttpResponseRedirect("CopingGame/profile.html/", context)
 	else:
+		profileForm = PlayerProfileForm()
+		context = {'player':player, 'purchase_list':purchase_list, 'profileForm':profileForm}
 		return render(request, "CopingGame/profile.html", context)
 
-
-#def upload_problem_pic(request, problem_id):
-#	problem = get_object_or_404(Problems, pk=problem_id)
-#	if request.method =='POST':
-#		form = UploadProblemPicForm(request.POST, request.FILES)
-#		if form.is_valid():
-#			handle_uploaded_file(request.FILES['file'])
-#			problem.pictureP.save(request.FILES['file'].name, content, save=True)
-#			#instance = Problems.pictureP(file_field=request.FILES['file'])
-#			#instance = Problems.problem(file_field=request.POST['problem']
-#			
-#			form.save()
-#			return HttpResponseRedirect('/index/')
-#		else:
-#			return render(request, 'CopingGame/upload_pic.html', {'form': form,})
-#	else:
-#		form = UploadProblemPicForm()
-#		return render(request, 'CopingGame/upload_pic.html', {'problem':problem, 'form':form})
-	

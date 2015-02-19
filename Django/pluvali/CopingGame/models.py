@@ -12,7 +12,7 @@ class Player(models.Model):
 	user = models.OneToOneField(User)
 	email = models.CharField(max_length=30)
 	tokens = models.IntegerField(default=0)
-	#avatarPic = models.ImageField(upload_to='userPic/', blank=True, null=True)
+	avatarPic = models.ImageField(upload_to='userPic/', blank=True, null=True)
 	fav_bg = models.CharField(max_length=30, default='#ededed')
 	fav_text = models.CharField(max_length=30, default='black')
 	stage = models.IntegerField(default=0) #used for iterating through scenarios
