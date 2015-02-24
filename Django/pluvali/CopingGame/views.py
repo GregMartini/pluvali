@@ -20,6 +20,28 @@ def index(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
 	context = {'player':player}
 	return render(request, 'CopingGame/index.html', context)
+	
+#MOCK HOMEPAGES
+@login_required(login_url='/login')
+def index1(request):
+	player = Player.objects.get(user=User.objects.get(username=request.user))
+	context = {'player':player}
+	return render(request, 'CopingGame/index1.html', context)
+
+@login_required(login_url='/login')
+def index2(request):
+	player = Player.objects.get(user=User.objects.get(username=request.user))
+	context = {'player':player}
+	return render(request, 'CopingGame/index2.html', context)
+
+@login_required(login_url='/login')
+def index3(request):
+	player = Player.objects.get(user=User.objects.get(username=request.user))
+	context = {'player':player}
+	return render(request, 'CopingGame/index3.html', context)
+
+
+#END MOCH HOMEPAGES
 
 #link for help page
 def help(request):
@@ -138,7 +160,8 @@ def profile(request):
 	context = {'player':player, 'purchase_list':purchase_list}
 	if request.method == 'POST':
 		#Attempt to grab raw data from form information
-		profileForm = PlayerProfileForm(data=request.POST)
+		a = request.POST
+		profileForm = PlayerProfileForm(request.POST, request.FILES)#(data=request.POST)
 		if 'avatarPic' in request.Files:
 			player.avatarPic = request.FILES['avatarPic']
 			player.save()

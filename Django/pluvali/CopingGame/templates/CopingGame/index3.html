@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<!-- Another prototype home page -->
+{% load staticfiles %}
+<html>
+<head>
+	<!-- The title of the page and a link to the style sheet -->
+	<title>Home Page</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
+
+</head>
+
+<body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+
+	<!-- A picture of DDRC's logo -->
+	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
+
+	<!-- Table that has the user's profile when logged in -->
+
+	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+		<tr>
+			<!-- user picture -->
+			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
+			<td>
+			{% if user.is_authenticated %}
+				<!-- user information -->
+				<li>{{ user.get_username }}</li>
+				<li>Tokens: {{ player.tokens }}</li>
+				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
+			{% else %}
+				Not currently logged in, please log in.
+			{% endif %}</td>		
+		</tr>		
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+	
+	<br>
+	
+	<!-- The Header -->
+	<h1>Welcome to the Coping Skills Game!</h1>	
+	
+	<br><br><br>
+	<p style ="text-align:center;color:{{ player.fav_text }}">General Information: <br>This game is a fun way to learn how to cope with difficult situations encountered in everyday life.</p>
+	<br>
+	
+	<table id="userOptions" style="width:100%" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+	<tr>
+		<td>
+		</td>
+		<td>
+		<!-- The button to go to the list of scenarios -->
+		<a href="/CopingGame/scenarios/">
+			<img src="{% static 'CopingGame/images/play2.jpg' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+		</a> 
+		<= Press this button to see the list of scenarios to play.
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<!-- The button to go to the profile page -->
+		<a href="/CopingGame/profile/">
+			<img src="{% static 'CopingGame/images/profile2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+		</a> 
+		<= Press this button to view your profile.
+		</td>
+		<td>
+		</td>
+		<td>
+		<!-- The button to go to the store page -->
+		<a href="/CopingGame/store/">
+			<img src="{% static 'CopingGame/images/store1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+		</a> 
+		<= Press this button to go to the store.
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+		<!-- The button to go to the help page -->
+		<a href="/CopingGame/help/">
+			<img src="{% static 'CopingGame/images/help4.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+		</a> 
+		<= Press this button to go to the help page.
+		</td>
+		<td>
+		</td>
+	</tr>
+	</table>
+	<br>
+	
+	<p style ="text-align:center;color:{{ player.fav_text }};font-size:200%">You are now able to play the game and go to the store!</p>
+
+ </body>
+
+ </html>  
