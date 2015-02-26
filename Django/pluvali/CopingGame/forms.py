@@ -1,9 +1,9 @@
 from django import forms
-from django.core import validators
-from CopingGame.models import Problems
+from django.contrib.auth.models import User
+#from django.core import validators
+from CopingGame.models import Player
 
-class UploadProblemPicForm(forms.ModelForm):
-	class Meta:
-		model = Problems
-		fields = ('pictureP',)
-	
+class PlayerProfileForm(forms.ModelForm):
+		class Meta:
+			model = Player
+			fields = ('avatarPic',)

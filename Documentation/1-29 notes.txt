@@ -4,14 +4,24 @@ Things to implement or fix:
 
 2) Store page purchases (redirecting to same page, maybe a confirmation before buying)
 
-3) Delete a USER also deletes a PLAYER
-
-4) Uniform wording across pages (tokens/points, index/homepage)
-
 5) Scenario editor
 
-6) User profile page (delete/restart account, edit picture)
+	6) User profile page (edit picture) (started not finished)
 
-7) Pop-up videos that must be watched before selecting an answer (maybe)
+7) Pop-up videos that must be watched before selecting an answer
 
-8) Text-to-Speech (maybe)
+8) Text-to-Speech (if easy)
+
+9) Format tables pages into tables for easier viewing.
+
+10) Store button color purchases
+
+	11) Button links, not text links (started not finished)
+
+12) Player groups so admins can easily link scenarios to players (default group should be able to handle this, might need additional setup)
+
+FINISHED:
+
+	3) Delete a USER also deletes a PLAYER
+
+	4) Uniform wording across pages (tokens/points, index/homepage)

@@ -10,7 +10,10 @@ urlpatterns = [
 	url(r'^victory/', views.victory, name='victory'),
 	url(r'^store/', views.store, name='store'),
 	url(r'^admin_page/', views.admin_page, name='admin_page/'),
-	#url(r'^(?P<problem_id>\d+)/upload/$', views.upload_problem_pic, name='upload_problem_pic'),
 	url(r'^profile/', views.profile, name='profile'),
-	url(r'^profile_reset/', views.profile_reset, name='profile_reset'),
+	
+	#mock homepages
+	url(r'^h1', views.index1, name='index1'), #homepage
+	url(r'^h2', views.index2, name='index2'), #homepage
+	url(r'^h3', views.index3, name='index3'), #homepage
 ]
