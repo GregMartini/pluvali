@@ -151,7 +151,7 @@ def register(request):
 	else:
 		form = UserCreationForm()
 		return render(request, "registration/register.html", {'form': form,})
-		
+
 #User profile
 @login_required(login_url='/login')
 def profile(request):
@@ -159,14 +159,12 @@ def profile(request):
 	purchase_list = Purchases.objects.filter(player=player)
 	context = {'player':player, 'purchase_list':purchase_list}
 	if request.method == 'POST':
-		#Attempt to grab raw data from form information
-		a = request.POST
-		profileForm = PlayerProfileForm(request.POST, request.FILES)#(data=request.POST)
-		if 'avatarPic' in request.Files:
-			player.avatarPic = request.FILES['avatarPic']
+		profileForm = PlayerProfileForm(request.POST, request.FILES)
+		if profileForm.is_valid():
+			picture=request.FILES['avatarPic']
+			player.avatarPic=picture
 			player.save()
-			context = {'player':player, 'purchase_list':purchase_list, 'profileForm':profileForm}
-		return HttpResponseRedirect("CopingGame/profile.html/", context)
+			return redirect('/')
 	else:
 		profileForm = PlayerProfileForm()
 		context = {'player':player, 'purchase_list':purchase_list, 'profileForm':profileForm}
