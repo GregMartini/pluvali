@@ -12,15 +12,13 @@
 	<!-- Table that will have the user profile once logged in -->
 	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 		<tr>
-			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
+			<td rowspan="2" colspan="2"><img src="{{ player.avatarPic }}" width="120" height="90"></td>
 			<td>
 			{% if user.is_authenticated %}
 				<!-- user information -->
 				<li>{{ user.get_username }}</li>
 				<li>Tokens: {{ player.tokens }}</li>
 				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
-				<br>
-				<li><a href="/CopingGame/profile_reset/" style="color:{{ player.fav_text }}">RESET or DELETE account</li>
 			{% else %}
 				Not currently logged in, please log in.
 			{% endif %}</td>	
@@ -41,7 +39,7 @@
 		{% csrf_token %}
 		
 		{{ profileForm.as_p }}
-		<input type="submit" name="submit" value="Upload" />
+		<input type="submit" value="Upload" />
 	</form>
 	<br>
 	<!-- PLAYER TOKENS -->
@@ -51,9 +49,9 @@
 	<li>Here is a list of your total purchases:</li>
 	{% if purchase_list %}
 		{% for purchase in purchase_list %}
-		<li>{{ purchase.Store.itemName }}: {{ purchase.Store.itemDesc }}</li>
-		<br>
+		<li>[{{ purchase.itemFKey.category }}] {{ purchase.itemFKey.itemName }}: {{ purchase.itemFKey.itemDesc }}</li>
 		{% endfor %}
+		<br>
 	{% else %}
 		<p>You haven't purchased any items yet.</p>
 	{% endif %}
