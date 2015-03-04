@@ -12,7 +12,7 @@
 	<!-- Table that will have the user profile once logged in -->
 	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 		<tr>
-			<td rowspan="2" colspan="2"><img src="http://www.clipartbest.com/cliparts/dir/La9/dirLa9ri9.jpeg" width="120" height="90" alt="HTML Dog"></td>
+			<td rowspan="2" colspan="2"><img id="avatarPic" src="{{ player.avatarPic.url }}" width="120" height="90"></td>
 			<td>
 			{% if user.is_authenticated %}
 				<!-- user information -->
