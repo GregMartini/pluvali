@@ -42,7 +42,7 @@ class Problems(models.Model):
 	
 class Scenario(models.Model):
 	sceneID = models.AutoField(primary_key=True)
-	title = models.CharField(max_length=15, default="Scenario Title")
+	title = models.CharField(max_length=35, default="Scenario Title")
 	description = models.CharField(max_length=250, default="Scenatio Decription")
 	problems = models.ManyToManyField(Problems)
 	player_list = models.ManyToManyField(Player)

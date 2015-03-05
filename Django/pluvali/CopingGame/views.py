@@ -53,7 +53,7 @@ def help(request):
 @login_required(login_url='/login')
 def scenario_index(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
-	scenario_list = Scenario.objects.order_by('title').distinct()
+	scenario_list = Scenario.objects.filter(player_list=request.user).distinct()
 	player.stage = 0
 	player.save()
 	context = {'scenario_list': scenario_list, 'player':player}
