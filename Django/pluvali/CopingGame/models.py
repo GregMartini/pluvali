@@ -12,7 +12,7 @@ class Player(models.Model):
 	user = models.OneToOneField(User)
 	email = models.CharField(max_length=30)
 	tokens = models.IntegerField(default=0)
-	avatarPic = models.ImageField(upload_to='userPic/', blank=True, null=True)
+	avatarPic = models.ImageField(upload_to='userPic/', default='userPic/default-user.png')
 	fav_bg = models.CharField(max_length=30, default='#ededed')
 	fav_text = models.CharField(max_length=30, default='black')
 	stage = models.IntegerField(default=0) #used for iterating through scenarios
@@ -30,9 +30,6 @@ class Solutions(models.Model):
 		return self.solution
 	
 	pass
-
-def upload_path_handler(instance, filename):
-	return filename
 	
 class Problems(models.Model):
 	pictureP = models.ImageField(upload_to='problems/', null=True)
@@ -48,6 +45,7 @@ class Scenario(models.Model):
 	title = models.CharField(max_length=15, default="Scenario Title")
 	description = models.CharField(max_length=250, default="Scenatio Decription")
 	problems = models.ManyToManyField(Problems)
+	player_list = models.ManyToManyField(Player)
 	def __str__(self):
 		return self.title
 
@@ -67,4 +65,5 @@ class Purchases(models.Model):
 		return self.itemFKey.itemName
 	verbose_name_plural = 'Purchases'
 		
-		
+def upload_path_handler(self):
+	return
