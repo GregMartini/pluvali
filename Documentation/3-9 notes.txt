@@ -1,0 +1,18 @@
+Home page - links centered vertically.  Make buttons
+highlighted when moused over.  Text by the "store"
+button should be default font.
+
+Store/profile page - coin button to buy, paint brush 
+button to apply, give option to change font (profile
+page only)
+
+Game page - have a pop up after every one saying you
+earned a token
+
+Congratulations - have a "thumbs up" image (or something
+similar) on the page
+
+general - center text, buttons, etc on pages where
+possible on pages if nothing will be on the left or
+right of them.  DDRC moved to a footer in bottom left.  
+Center user information as header of each page
