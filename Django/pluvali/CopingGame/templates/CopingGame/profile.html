@@ -5,10 +5,8 @@
 <html>
 <link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+<font size="6">
 
-	<!-- A picture of DDRC's logo -->
-	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
-	
 	<!-- Table that will have the user profile once logged in -->
 	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 		<tr>
@@ -68,5 +66,8 @@
 	</a> 
 	<= Press this button to go back to the Homepage.
 	<br>
+	<!-- A picture of DDRC's logo -->
+	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
+	
  </body>
  </html>  

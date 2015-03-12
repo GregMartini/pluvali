@@ -13,9 +13,7 @@
 </head>
 
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
-
-	<!-- A picture of DDRC's logo -->
-	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
+<font size="6">
 
 	<!-- Table that has the user avatar, user name, and their tokens -->
 	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
@@ -151,6 +149,9 @@
 			</form>
 		</tr>
 	</table>
+	
+	<!-- A picture of DDRC's logo -->
+	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
 	
 </body>
 </html>

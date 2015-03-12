@@ -5,9 +5,7 @@
 <html>
 <link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
-
-	<!-- A picture of DDRC's logo -->
-	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
+<font size="6">
 	
 	<!-- Table that will have the user profile once logged in -->
 
@@ -34,25 +32,31 @@
 	<!-- The Header -->
 	<h1>Please choose the scenario you want to play!</h1>
 	
+	<center>
 	{% if scenario_list %}
 		<ul>
 		{% for scenario in scenario_list %}
-			<li><a href="/CopingGame/{{ scenario.sceneID }}/" style="color:{{ player.fav_text }}">{{ scenario.title }}</a></li>
+			<li><a href="/CopingGame/{{ scenario.sceneID }}/">
+				<img src="{% static 'CopingGame/images/play2.jpg' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+				{{ scenario.title }}
+			</a></li>
 		{% endfor %}
 		</ul>
 		{% else %}
 			<p>No scenarios are available.</p>
 		{% endif %}
 		<br>
-		<br>
-		<br><br>
+		
 	<!-- The button to return to the home page -->
+	<p>Press this button to go back to the Homepage.</p>
 	<a href="/CopingGame/">
 		<img src="{% static 'CopingGame/images/home1.jpg' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
 	</a> 
-	<= Press this button to go back to the Homepage.
 	<br>
-
- </body>
+	</center>
+	
+	<!-- A picture of DDRC's logo -->
+	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
+</body>
 
  </html>  

@@ -20,28 +20,6 @@ def index(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
 	context = {'player':player}
 	return render(request, 'CopingGame/index.html', context)
-	
-#MOCK HOMEPAGES
-@login_required(login_url='/login')
-def index1(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
-	context = {'player':player}
-	return render(request, 'CopingGame/index1.html', context)
-
-@login_required(login_url='/login')
-def index2(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
-	context = {'player':player}
-	return render(request, 'CopingGame/index2.html', context)
-
-@login_required(login_url='/login')
-def index3(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
-	context = {'player':player}
-	return render(request, 'CopingGame/index3.html', context)
-
-
-#END MOCH HOMEPAGES
 
 #link for help page
 def help(request):

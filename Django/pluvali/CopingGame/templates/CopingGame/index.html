@@ -10,10 +10,8 @@
 
 </head>
 
-<body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
-
-	<!-- A picture of DDRC's logo -->
-	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
+<body align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+<font size="6">
 
 	<!-- Table that has the user's profile when logged in -->
 
@@ -40,46 +38,44 @@
 	
 	<!-- The Header -->
 	<h1>Welcome to the Coping Skills Game!</h1>
-	<h2>
 	
-	</h2>	
-	
-	<!-- Here is some general information about the game -->
-	<br><br><br>
-	
-	<!--<p style ="text-align:center;color:#306565">General Information: <br>This game is a fun way to learn how to cope with difficult situations encountered in everyday life.</p> -->
 	<p style ="text-align:center;color:{{ player.fav_text }}">General Information: <br>This game is a fun way to learn how to cope with difficult situations encountered in everyday life.</p>
 	
-	<br>
-		<br><br>
+	<br><br>
+	
 	<!-- The button to go to the list of scenarios -->
+	<center>
+	<p align="center">Press this button to see the list of scenarios to play.</p>
 	<a href="/CopingGame/scenarios/">
 		<img src="{% static 'CopingGame/images/play2.jpg' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
-	</a> 
-	<font size="4"><= Press this button to see the list of scenarios to play.
+		</a> 
 	<br>
 	<!-- The button to go to the profile page -->
+	<p align="center">Press this button to view your profile.</p>
 	<a href="/CopingGame/profile/">
 		<img src="{% static 'CopingGame/images/profile2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
-	</a> 
-	<font size="5"><= Press this button to view your profile.
+		</a> 
 	<br>	
 	<!-- The button to go to the store page -->
+	<p align="center">Press this button to go to the store.</p>
 	<a href="/CopingGame/store/">
 		<img src="{% static 'CopingGame/images/store1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
-	</a> 
-	<font size="6"><= Press this button to go to the store.
+		</a> 
 	<br>	
 	<!-- The button to go to the help page -->
+	<p align="center">Press this button to go to the help page.</p>
 	<a href="/CopingGame/help/">
 		<img src="{% static 'CopingGame/images/help4.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
-	</a> 
-	<font size="7"><= Press this button to go to the help page.
+		</a>
+	</center>
 	<br>
 
 	<!--<p style ="text-align:center;color:#4c3365;font-size:200%">You are now able to play the game and go to the store!</p> -->
 	<p style ="text-align:center;color:{{ player.fav_text }};font-size:200%">You are now able to play the game and go to the store!</p>
 
+	<!-- A picture of DDRC's logo -->
+	<img src="{% static 'CopingGame/images/logo.jpg' %}" alt="ddrcco.com" width="225" height="106.5"></a>
+	
  </body>
 
  </html>  
