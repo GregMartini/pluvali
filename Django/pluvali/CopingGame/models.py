@@ -54,6 +54,9 @@ class Store(models.Model):
 	category = models.CharField(max_length=20, default="Themes")
 	itemName = models.CharField(max_length=15, default="ItemName")
 	itemDesc = models.CharField(max_length=50, default="Item Description")
+	itemPicture = models.ImageField(upload_to='store/', blank=True, null=True)
+	value1 = models.CharField(max_length=10, blank=True)
+	value2 = models.CharField(max_length=10, blank=True)
 	def __str__(self):
 		return self.itemName
 	verbose_name_plural = 'StoreItems'

@@ -37,7 +37,7 @@
 		{% csrf_token %}
 		
 		{{ profileForm.as_p }}
-		<input type="submit" value="Upload" />
+		<input type="submit" value="Upload" name="upload"/>
 	</form>
 	<br>
 	<!-- PLAYER TOKENS -->
@@ -45,14 +45,23 @@
 	<br>
 	<!-- PLAYER PURCHASES -->
 	<li>Here is a list of your total purchases:</li>
+	
+	<form action="" method="post">
+	{% csrf_token %}
+	
 	{% if purchase_list %}
 		{% for purchase in purchase_list %}
-		<li>[{{ purchase.itemFKey.category }}] {{ purchase.itemFKey.itemName }}: {{ purchase.itemFKey.itemDesc }}</li>
+			{% if purchase.itemFKey.category == "Themes" %}
+				<li bgcolor="{{ purchase.itemFKey.value1 }}" style="color:{{ purchase.itemFKey.value2 }}"><button name="change" type="submit">Select</button>[{{ purchase.itemFKey.category }}] {{ purchase.itemFKey.itemName }}: {{ purchase.itemFKey.itemDesc }}</li>
+			{% else %}
+				<li><button name="change" type="sumbit">Select</button>[{{ purchase.itemFKey.category }}] {{ purchase.itemFKey.itemPicture.url }}
+			{% endif %}
 		{% endfor %}
 		<br>
 	{% else %}
 		<p>You haven't purchased any items yet.</p>
 	{% endif %}
+	</form>
 	<!-- The button to go to the store page -->
 		<a href="/CopingGame/store">
 		<img src="{% static 'CopingGame/images/store1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">

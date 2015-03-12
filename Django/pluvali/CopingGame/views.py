@@ -137,12 +137,20 @@ def profile(request):
 	purchase_list = Purchases.objects.filter(player=player)
 	context = {'player':player, 'purchase_list':purchase_list}
 	if request.method == 'POST':
-		profileForm = PlayerProfileForm(request.POST, request.FILES)
-		if profileForm.is_valid():
-			picture=request.FILES['avatarPic']
-			player.avatarPic=picture
-			player.save()
-			return redirect('/')
+		if 'upload' in request.POST:
+			profileForm = PlayerProfileForm(request.POST, request.FILES)
+			if profileForm.is_valid():
+				picture=request.FILES['avatarPic']
+				player.avatarPic=picture
+				player.save()
+				return redirect('/')
+		elif 'change' in request.POST:
+			#if 'theme' in category:
+			#	player.fav_bg = 
+			#	player.fav_text = 
+			#elif 'picture' in category:
+			#	player.avatarPic = 
+			return render(request, "CopingGame/profile.html", context)
 	else:
 		profileForm = PlayerProfileForm()
 		context = {'player':player, 'purchase_list':purchase_list, 'profileForm':profileForm}
