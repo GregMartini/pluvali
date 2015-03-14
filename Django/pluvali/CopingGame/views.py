@@ -119,7 +119,9 @@ def store_themes(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
 	items_list = Store.objects.order_by('itemName')
 	purchase_list = Purchases.objects.filter(player=player)
-	context = {'items_list':items_list, 'player':player, 'purchase_list':purchase_list}
+	theme_list = purchase_list.filter(itemFKey__category='Themes')
+	theme_names = theme_list.values('itemFKey__itemName').distinct()
+	context = {'items_list':items_list, 'player':player, 'purchase_list':purchase_list, 'theme_list':theme_list, 'theme_names':theme_names}
 	if request.method == 'POST':
 		#if player.tokens >= 50:  uncomment next two lines for final version
 			#player.tokens -= 50

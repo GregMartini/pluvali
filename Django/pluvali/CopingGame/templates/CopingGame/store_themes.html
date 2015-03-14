@@ -38,6 +38,8 @@
 			</table>
 		</tr>
 		
+		</br>
+		
 		<!-- Page banner -->
 		<tr>
 			<h1>Welcome to the Store</h1>
@@ -46,11 +48,28 @@
 		<!-- Links to Home, Help, and Profile pages -->
 		<tr>
 			<div id="links" align="center">
+			<table style="width:100%">
+				<col style="width:33%">
+				<col style="width:33%">
+				<col style="width:33%">
 			<!-- The button to return to the home page -->
-			<a href="/CopingGame/" style="text-decoration: none">
-				<img src="{% static 'CopingGame/images/home1.jpg' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
-			</a> 
-			<= Press this button to go back to the Homepage.
+			<tr align="center">
+				<td align="center"><a href="/CopingGame/" style="text-decoration: none">
+				<img src="{% static 'CopingGame/images/home1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+				</a></td>
+				<td align="center"><a href="/CopingGame/profile/" style="text-decoration: none">
+				<img src="{% static 'CopingGame/images/profile2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+				</a></td>
+				<td align="center"><a href="/CopingGame/help/" style="text-decoration: none">
+				<img src="{% static 'CopingGame/images/help5.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+				</a></td>
+			</tr>
+			<tr>
+				<td align="center">Home Page</td>
+				<td align="center">Profile Page</td>
+				<td align="center">Help Page</td>
+			</tr>
+			</table>
 			</div>
 		</tr>
 		
@@ -94,6 +113,24 @@
 										<td style="color:{{ player.fav_text }}">Found</td>
 									{% endif %}
 									
+									{% if item.itemName in theme_list.itemFKey__itemName %}
+										<td style="color:{{ player.fav_text }}">Found</td>
+									{% endif %}
+									
+									{% if item in theme_list %}
+										<td style="color:{{ player.fav_text }}">Found</td>
+									{% endif %}
+									
+									{% if item.itemName in theme_list %}
+										<td style="color:{{ player.fav_text }}">Found</td>
+									{% endif %}
+																		
+									{% if item.itemName in theme_names %}
+										<td style="color:{{ player.fav_text }}">Found</td>
+									{% endif %}
+									
+									<td style="color:{{ player.fav_text }}">{{ item }}</td>
+									
 									<!-- Check the players purchases -->
 									{% for purchase in purchase_list %}
 										{% if purchase.itemFKey.category == "Themes" %}
@@ -121,12 +158,38 @@
 								</tr>
 							{% endif %}
 						{% endfor %}
-
 					</table>			
 				</div>
 			</div>
 		</tr>
+		
+		<tr>
+			<!-- A picture of DDRC's logo -->
+			<div align="center">
+			<img src="{% static 'CopingGame/images/logo1.png' %}" alt="ddrcco.com" width="225" height="106.5">
+			</div>
+		</tr>
 	</table>
+	
+						{% for item in theme_list %}
+							<div style = "color:{{ player.fav_text }}">{{ item.itemFKey.itemName }}</div></br>
+						{% endfor %}
+						</br>
+						{% for item in theme_list %}
+							<div style = "color:{{ player.fav_text }}">{{ item }}</div></br>
+						{% endfor %}
+						</br>
+						{% for item in theme_list %}
+							<div style = "color:{{ player.fav_text }}">{{ item.itemFKey }}</div></br>
+						{% endfor %}
+						</br>
+						{% for item in purchase_list %}
+							<div style = "color:{{ player.fav_text }}">{{ item.itemFKey.itemName }}</div></br>
+						{% endfor %}
+						</br>
+						{% for item in theme_names %}
+							<div style = "color:{{ player.fav_text }}">{{ item }}</div></br>
+						{% endfor %}
 
 </body>
 </html>
