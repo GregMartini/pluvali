@@ -113,7 +113,60 @@ def store(request):
 				player.fav_text = 'black'
 			player.save()
 	return render(request, 'CopingGame/store_page.html', context)
+	
+@login_required(login_url='/login')
+def store_themes(request):
+	player = Player.objects.get(user=User.objects.get(username=request.user))
+	items_list = Store.objects.order_by('itemName')
+	purchase_list = Purchases.objects.filter(player=player)
+	context = {'items_list':items_list, 'player':player, 'purchase_list':purchase_list}
+	if request.method == 'POST':
+		#if player.tokens >= 50:  uncomment next two lines for final version
+			#player.tokens -= 50
+			if 'bluewhite' in request.POST:  #for testing that themes can at least be switched and saved
+				player.fav_bg = 'blue'		 #will be implemented in user defaults page next semester
+				player.fav_text = 'white'
+			if 'firebrickcornsilk' in request.POST:
+				player.fav_bg = 'firebrick'
+				player.fav_text = 'cornsilk'
+			if 'yellowpurple' in request.POST:
+				player.fav_bg = 'yellow'
+				player.fav_text = 'purple'
+			if 'blackorange' in request.POST:
+				player.fav_bg = 'black'
+				player.fav_text = 'orange'
+			if 'defaultblack' in request.POST:
+				player.fav_bg = '#ededed'
+				player.fav_text = 'black'
+			player.save()
+	return render(request, 'CopingGame/store_themes.html', context)
 
+#@login_required(login_url='/login')
+#def store_user_pictures(request):
+#	player = Player.objects.get(user=User.objects.get(username=request.user))
+#	items_list = Store.objects.order_by('itemName')
+#	context = {'items_list':items_list, 'player':player}
+#	if request.method == 'POST':
+#		#if player.tokens >= 50:  uncomment next two lines for final version
+#			#player.tokens -= 50
+#			if 'bluewhite' in request.POST:  #for testing that themes can at least be switched and saved
+#				player.fav_bg = 'blue'		 #will be implemented in user defaults page next semester
+#				player.fav_text = 'white'
+#			if 'firebrickcornsilk' in request.POST:
+#				player.fav_bg = 'firebrick'
+#				player.fav_text = 'cornsilk'
+#			if 'yellowpurple' in request.POST:
+#				player.fav_bg = 'yellow'
+#				player.fav_text = 'purple'
+#			if 'blackorange' in request.POST:
+#				player.fav_bg = 'black'
+#				player.fav_text = 'orange'
+#			if 'defaultblack' in request.POST:
+#				player.fav_bg = '#ededed'
+#				player.fav_text = 'black'
+#			player.save()
+#	return render(request, 'CopingGame/store_themes.html', context)
+	
 #User registration
 def register(request):
 	if request.method == 'POST':
