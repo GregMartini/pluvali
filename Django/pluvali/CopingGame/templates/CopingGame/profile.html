@@ -60,7 +60,7 @@
 			{% if purchase.itemFKey.category == "Themes" %}
 				<!-- Button to switch theme, and display a preview of the theme next to the button -->
 				<tr>
-					<td align="center"><button name="theme" type="submit" value="{{ purchase.itemFKey.value1 }};color:{{ purchase.itemFKey.value2 }}">Use Theme</button></td>
+					<td align="center"><button name="theme" type="submit" value="{{ purchase.itemFKey.itemName }}">Use Theme</button></td>
 					<td style="background-color:{{ purchase.itemFKey.value1 }}; color:{{ purchase.itemFKey.value2 }}">{{ purchase.itemFKey.itemDesc }}</td>
 				</tr>
 			{% endif %}

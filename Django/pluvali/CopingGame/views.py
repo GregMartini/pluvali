@@ -123,23 +123,16 @@ def store_themes(request):
 	theme_names = theme_list.values('itemFKey__itemName').distinct()
 	context = {'items_list':items_list, 'player':player, 'purchase_list':purchase_list, 'theme_list':theme_list, 'theme_names':theme_names}
 	if request.method == 'POST':
-		#if player.tokens >= 50:  uncomment next two lines for final version
-			#player.tokens -= 50
-			if 'bluewhite' in request.POST:  #for testing that themes can at least be switched and saved
-				player.fav_bg = 'blue'		 #will be implemented in user defaults page next semester
-				player.fav_text = 'white'
-			if 'firebrickcornsilk' in request.POST:
-				player.fav_bg = 'firebrick'
-				player.fav_text = 'cornsilk'
-			if 'yellowpurple' in request.POST:
-				player.fav_bg = 'yellow'
-				player.fav_text = 'purple'
-			if 'blackorange' in request.POST:
-				player.fav_bg = 'black'
-				player.fav_text = 'orange'
-			if 'defaultblack' in request.POST:
-				player.fav_bg = '#ededed'
-				player.fav_text = 'black'
+		if 'change' in request.POST:
+			theme = Store.objects.get(itemName=request.POST.get("change","")) #Get the specific theme
+			player.fav_bg = theme.value1 #Set background color to the themes background color
+			player.fav_text = theme.value2 #Set the text color to the themes text color
+			player.save()
+		if 'buy' in request.POST:
+			player.tokens -= 50 #Deduct the players token total
+			theme = Store.objects.get(itemName=request.POST.get("buy","")) #Get the specific theme the user wishes to buy
+			player.fav_bg = theme.value1 #Set background color to the themes background color
+			player.fav_text = theme.value2 #Set the text color to the themes text color
 			player.save()
 	return render(request, 'CopingGame/store_themes.html', context)
 
@@ -200,8 +193,9 @@ def profile(request):
 				player.save()
 				return redirect('/')
 		elif 'theme' in request.POST:
-			player.fav_bg = request.POST.get("theme", "") #Change background color to the first parameter of "value"
-			player.fav_text = request.POST.get("theme", "color") #Change text color to the parameter named "color" in value
+			theme = Store.objects.get(itemName=request.POST.get("theme","")) #Get the specific theme
+			player.fav_bg = theme.value1 #Set background color to the themes background color
+			player.fav_text = theme.value2 #Set the text color to the themes text color
 			player.save()
 		elif 'picture' in request.POST:
 			player.avatarPic = request.POST.get("picture", "") #Change user picture to the selected one

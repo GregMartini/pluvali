@@ -105,6 +105,7 @@
 									<!-- Have a preview of the theme in the left column -->
 									<td bgcolor="{{ item.value1 }}" style="color:{{ item.value2 }}">PREVIEW</td>
 									
+									<!-- TEST CODE PART 1 -->
 									{% if item.itemName in purchase_list %}
 										<td style="color:{{ player.fav_text }}">Found</td>
 									{% endif %}
@@ -130,6 +131,7 @@
 									{% endif %}
 									
 									<td style="color:{{ player.fav_text }}">{{ item }}</td>
+									<!-- END OF TEST CODE PART 1 -->
 									
 									<!-- Check the players purchases -->
 									{% for purchase in purchase_list %}
@@ -137,6 +139,11 @@
 											<!-- See if they already own the item -->
 											{% if purchase.itemFKey.itemName == item.itemName %}
 												<td style="color:{{ player.fav_text }}">Already own.</td>
+												<!-- Display apply button -->
+												<form action="" method="post">
+													{% csrf_token %}
+													<td><button type="submit" name="change" value="{{ item.itemName }}">Apply</button></td>
+												</form>
 											{% endif %}
 										{% endif %}
 											
@@ -147,7 +154,7 @@
 												<!-- Display purchase button -->
 												<form action="" method="post">
 													{% csrf_token %}
-													<td><button type="submit" value="{{ item.itemName }}">Purchase</button></td>
+													<td><button type="submit" name="buy" value="{{ item.itemName }}">Purchase</button></td>
 												</form>
 											<!-- If they don't have enough tokens, say they don't -->
 											{% else %}
@@ -170,7 +177,7 @@
 			</div>
 		</tr>
 	</table>
-	
+						<!-- TEST CODE PART 2 -->
 						{% for item in theme_list %}
 							<div style = "color:{{ player.fav_text }}">{{ item.itemFKey.itemName }}</div></br>
 						{% endfor %}
@@ -190,6 +197,7 @@
 						{% for item in theme_names %}
 							<div style = "color:{{ player.fav_text }}">{{ item }}</div></br>
 						{% endfor %}
+						<!-- END OF TEST CODE PART 2 -->
 
 </body>
 </html>
