@@ -32,7 +32,7 @@
 	<br>
 	
 	<!-- UPLOAD PICTURE -->
-	<li>Change your profile picture here:
+	Change your profile picture here:
 	<form id="profilePicture' action="/CopingGame/profile/" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 		
@@ -41,32 +41,52 @@
 	</form>
 	<br>
 	<!-- PLAYER TOKENS -->
-	<li>You've earned a total of {{ player.tokens }} tokens!</li>
-	<br>
+	You've earned a total of {{ player.tokens }} tokens!
+	</br></br>
 	<!-- PLAYER PURCHASES -->
-	<li>Here is a list of your total purchases:</li>
+	Here is a list of your total purchases:
 		
 	<form action="" method="post">
 	{% csrf_token %}
 	
 	{% if purchase_list %}
-		Themes Owned:
-		</br>
+		<table align="center">
+		
+		<!-- Themes the player owns -->
+		<tr>
+			<td colspan="2" align="left">Themes Owned:</td>
+		<tr>
 		{% for purchase in purchase_list %}
 			{% if purchase.itemFKey.category == "Themes" %}
-				<li style="background-color:{{ purchase.itemFKey.value1 }}; color:{{ purchase.itemFKey.value2 }}"><button name="theme" type="submit" value="{{ purchase.itemFKey.value1 }};color:{{ purchase.itemFKey.value2 }}">Select</button>[{{ purchase.itemFKey.category }}] {{ purchase.itemFKey.itemName }}: {{ purchase.itemFKey.itemDesc }}</li>
+				<!-- Button to switch theme, and display a preview of the theme next to the button -->
+				<tr>
+					<td align="center"><button name="theme" type="submit" value="{{ purchase.itemFKey.value1 }};color:{{ purchase.itemFKey.value2 }}">Use Theme</button></td>
+					<td style="background-color:{{ purchase.itemFKey.value1 }}; color:{{ purchase.itemFKey.value2 }}">{{ purchase.itemFKey.itemDesc }}</td>
+				</tr>
 			{% endif %}
 		{% endfor %}
 		
-		</br></br>
-		Pictures Owned:
-		</br>
+		<!-- Blank row between themes and pictures -->
+		<tr height="30px">
+		</tr>
+		
+		<!-- Pictures the player owns -->
+		<tr>
+			<td colspan="2" align="left">Pictures Owned:</td>
+		</tr>
 		{% for purchase in purchase_list %}
 			{% if purchase.itemFKey.category == "Pictures" %}
-				<li><button name="picture" type="sumbit">Select</button>[{{ purchase.itemFKey.category }}] {{ purchase.itemFKey.itemPicture.url }}
+				<!-- Button to switch picture, and display the picture they own next to the button -->
+				<tr>
+					<td align="center"><button name="picture" type="submit" value="{{ purchase.itemFKey.itemPicture.url }}">Use Picture</button></td>
+					<td><img src="{{ purchase.itemFKey.itemPicture.url }}" style="width:100px;height:100px;border:0"></td>
+				</tr>
 			{% endif %}
 		{% endfor %}
+		</table>
+
 		<br>
+	<!-- Should never display since the player will have default background and default user picture from the start -->
 	{% else %}
 		<p>You haven't purchased any items yet.</p>
 	{% endif %}

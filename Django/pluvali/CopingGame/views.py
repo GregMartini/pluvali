@@ -203,8 +203,9 @@ def profile(request):
 			player.fav_bg = request.POST.get("theme", "") #Change background color to the first parameter of "value"
 			player.fav_text = request.POST.get("theme", "color") #Change text color to the parameter named "color" in value
 			player.save()
-			#elif 'picture' in category:
-			#	player.avatarPic = 
+		elif 'picture' in request.POST:
+			player.avatarPic = request.POST.get("picture", "") #Change user picture to the selected one
+			player.save()
 		return render(request, "CopingGame/profile.html", context)
 	else:
 		profileForm = PlayerProfileForm()
