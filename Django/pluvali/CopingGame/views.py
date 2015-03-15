@@ -199,13 +199,13 @@ def profile(request):
 				player.avatarPic=picture
 				player.save()
 				return redirect('/')
-		elif 'change' in request.POST:
-			#if 'theme' in category:
-			#	player.fav_bg = 
-			#	player.fav_text = 
+		elif 'theme' in request.POST:
+			player.fav_bg = request.POST.get("theme", "") #Change background color to the first parameter of "value"
+			player.fav_text = request.POST.get("theme", "color") #Change text color to the parameter named "color" in value
+			player.save()
 			#elif 'picture' in category:
 			#	player.avatarPic = 
-			return render(request, "CopingGame/profile.html", context)
+		return render(request, "CopingGame/profile.html", context)
 	else:
 		profileForm = PlayerProfileForm()
 		context = {'player':player, 'purchase_list':purchase_list, 'profileForm':profileForm}

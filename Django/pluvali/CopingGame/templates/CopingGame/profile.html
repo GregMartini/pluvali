@@ -50,17 +50,29 @@
 	{% csrf_token %}
 	
 	{% if purchase_list %}
+		Themes Owned:
+		</br>
 		{% for purchase in purchase_list %}
 			{% if purchase.itemFKey.category == "Themes" %}
-				<li bgcolor="{{ purchase.itemFKey.value1 }}" style="color:{{ purchase.itemFKey.value2 }}"><button name="change" type="submit">Select</button>[{{ purchase.itemFKey.category }}] {{ purchase.itemFKey.itemName }}: {{ purchase.itemFKey.itemDesc }}</li>
-			{% else %}
-				<li><button name="change" type="sumbit">Select</button>[{{ purchase.itemFKey.category }}] {{ purchase.itemFKey.itemPicture.url }}
+				<li style="background-color:{{ purchase.itemFKey.value1 }}; color:{{ purchase.itemFKey.value2 }}"><button name="theme" type="submit" value="{{ purchase.itemFKey.value1 }};color:{{ purchase.itemFKey.value2 }}">Select</button>[{{ purchase.itemFKey.category }}] {{ purchase.itemFKey.itemName }}: {{ purchase.itemFKey.itemDesc }}</li>
+			{% endif %}
+		{% endfor %}
+		
+		</br></br>
+		Pictures Owned:
+		</br>
+		{% for purchase in purchase_list %}
+			{% if purchase.itemFKey.category == "Pictures" %}
+				<li><button name="picture" type="sumbit">Select</button>[{{ purchase.itemFKey.category }}] {{ purchase.itemFKey.itemPicture.url }}
 			{% endif %}
 		{% endfor %}
 		<br>
 	{% else %}
 		<p>You haven't purchased any items yet.</p>
 	{% endif %}
+	
+	</br>
+	
 	</form>
 	<!-- The button to go to the store page -->
 		<a href="/CopingGame/store">
