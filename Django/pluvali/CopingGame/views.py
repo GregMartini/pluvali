@@ -117,7 +117,7 @@ def store(request):
 @login_required(login_url='/login')
 def store_themes(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
-	items_list = Store.objects.order_by('itemName')
+	items_list = Store.objects.filter(category='Themes').distinct()
 	purchase_list = Purchases.objects.filter(player=player)
 	theme_list = purchase_list.filter(itemFKey__category='Themes')
 	theme_names = theme_list.values('itemFKey__itemName').distinct()
