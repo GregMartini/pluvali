@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<!-- Store page for themes by Tim -->
+<!-- Store page for user pictures by Tim -->
 {% load staticfiles %}
 
 <html>
 <head>
 	<!-- Title the page and link the style sheet -->
-	<title>Store Themes Page</title>
+	<title>Store User Pictures Page</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_store_page.css' %}">
 <head>
 
@@ -79,36 +79,36 @@
 			<div id="categories">
 				<div style="text-decoration: underline" align="center">CATEGORIES</div>
 					<ul id="catul">
-					<li id="catli"><button class="current" id="theme">Themes</button></li>
-					<li id="catli"><a href="/CopingGame/store_user_pictures/"><button class="other" id="up">User Pictures</button></a></li>
+					<li id="catli"><a href="/CopingGame/store_themes"><button class="other" id="theme">Themes</button></a></li>
+					<li id="catli"><button class="current" id="up">User Pictures</button></li>
 				</ul>
 			</div>
 	
 			<!-- Main portion of the page that displays purchase options -->
 			<div id="main">
 				<div id="inner">
-					<h2 style="color:{{ player.fav_text }}">Click on the "Purchase" button to buy the theme to its left.</h2>
-					<h2 style="color:{{ player.fav_text }}">Click on the "Apply" button to use the theme you own to its left.</h2>
+					<h2 style="color:{{ player.fav_text }}">Click on the "Purchase" button to buy the picture to its left.</h2>
+					<h2 style="color:{{ player.fav_text }}">Click on the "Apply" button to use the picture you own to its left.</h2>
 
 					<!-- Themes table -->
 					<table class="cattable" id="themes" align="center">
 						<tr>
-							<td colspan="2" style="text-decoration:underline;color:{{ player.fav_text }}">Themes - 50 Tokens Each</td>
+							<td colspan="2" style="text-decoration:underline;color:{{ player.fav_text }}">User Pictures - 50 Tokens Each</td>
 						</tr>
 				
-						<!-- Make list of all themes -->
-						{% for theme in theme_list %}
-							<!-- Make a row for each theme -->
+						<!-- Make list of all pictures -->
+						{% for picture in picture_list %}
+							<!-- Make a row for each picture -->
 							<tr>
-								<!-- Have a preview of the theme in the left column -->
-								<td bgcolor="{{ theme.itemFKey.value1 }}" style="color:{{ theme.itemFKey.value2 }}">PREVIEW</td>
+								<!-- Have a preview of the picture in the left column -->
+								<td><img src="{{ picture.itemFKey.itemPicture.url }}" style="width:100px;height:100px;border:0"></td>
 								
-								<!-- See if the player owns the theme -->
-								{% if theme.owned == True %}
-									<!-- Display apply button since they own the theme-->
+								<!-- See if the player owns the picture -->
+								{% if picture.owned == True %}
+									<!-- Display apply button since they own the picture-->
 									<form action="" method="post">
 										{% csrf_token %}
-										<td><button type="submit" name="change" value="{{ theme.itemFKey.itemName }}">Apply</button></td>
+										<td><button type="submit" name="change" value="{{ picture.itemFKey.itemName }}">Apply</button></td>
 									</form>
 											
 								<!-- If this is reached, then they don't own the item -->
@@ -118,7 +118,7 @@
 										<!-- Display purchase button -->
 										<form action="" method="post">
 											{% csrf_token %}
-											<td><button type="submit" name="buy" value="{{ theme.itemFKey.itemName }}">Purchase</button></td>
+											<td><button type="submit" name="buy" value="{{ picture.itemFKey.itemName }}">Purchase</button></td>
 										</form>
 								
 									<!-- If they don't have enough tokens, say they don't -->

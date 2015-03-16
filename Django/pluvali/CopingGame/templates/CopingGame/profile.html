@@ -4,7 +4,6 @@
 {% load staticfiles %}
 <html>
 <head>
-	<title>{{ user.get_username }}'s Profile Page</title>
 	<script>
 	{% if messages %}
 		{% for message in messages %}
@@ -31,7 +30,7 @@
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 <font size="{{ player.text_size }}">
 	<table id="page" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
-		<tr>
+	<tr>
 			<!-- Table that has the user avatar, user name, and their tokens -->
 			<table id="usertable" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 				<tr>
@@ -53,23 +52,25 @@
 				</tr>
 			</table>
 		</tr>
+		
 		<br>
+		<tr>
+			<!-- The Header -->
+			<h1>{{ user.get_username }}'s Profile</h1>
+		</tr>
+		
 		<tr>
 			<div id="links" align="center">
 			<table style="width:100%">
-				<col style="width:25%">
-				<col style="width:25%">
-				<col style="width:25%">
-				<col style="width:25%">
+				<col style="width:33%">
+				<col style="width:33%">
+				<col style="width:33%">
 			<!-- The button to return to the home page -->
 			<tr align="center">
-				<td align="center"><a href="/CopingGame/scenarios/" style="text-decoration: none">
-				<img src="{% static 'CopingGame/images/play2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
-				</a></td>
 				<td align="center"><a href="/CopingGame/" style="text-decoration: none">
 				<img src="{% static 'CopingGame/images/home1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
 				</a></td>
-				<td align="center"><a href="/CopingGame/store/" style="text-decoration: none">
+				<td align="center"><a href="/CopingGame/store_themes/" style="text-decoration: none">
 				<img src="{% static 'CopingGame/images/store4.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
 				</a></td>
 				<td align="center"><a href="/CopingGame/help/" style="text-decoration: none">
@@ -77,7 +78,6 @@
 				</a></td>
 			</tr>
 			<tr>
-				<td align="center">Play a Scenario</td>
 				<td align="center">Home Page</td>
 				<td align="center">Store Page</td>
 				<td align="center">Help Page</td>
@@ -85,15 +85,11 @@
 			</table>
 			</div>
 		</tr>
-		<tr>
-			<!-- The Header -->
-			<h1>{{ user.get_username }}'s Profile</h1>
-		</tr>
+		
 		<tr>
 			<!-- PLAYER TOKENS -->
 			<td align="center">You've earned a total of {{ player.tokens }} tokens!</td>
 		</tr>
-		<br>
 		<tr>
 			<td align="left"><!-- UPLOAD PICTURE -->
 				Change your profile picture here:
