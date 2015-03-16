@@ -87,52 +87,80 @@ def victory(request):
 	player.save()
 	context = {'player':player}
 	return render(request, 'CopingGame/victory_page.html', context)
+
+@login_required(login_url='/login')
+def store(request):
+	player = Player.objects.get(user=User.objects.get(username=request.user))
+	items_list = Store.objects.order_by('itemName')
+	context = {'items_list':items_list, 'player':player}
+	if request.method == 'POST':
+		#if player.tokens >= 50:  uncomment next two lines for final version
+			#player.tokens -= 50
+			if 'bluewhite' in request.POST:  #for testing that themes can at least be switched and saved
+				player.fav_bg = 'blue'		 #will be implemented in user defaults page next semester
+				player.fav_text = 'white'
+			if 'firebrickcornsilk' in request.POST:
+				player.fav_bg = 'firebrick'
+				player.fav_text = 'cornsilk'
+			if 'yellowpurple' in request.POST:
+				player.fav_bg = 'yellow'
+				player.fav_text = 'purple'
+			if 'blackorange' in request.POST:
+				player.fav_bg = 'black'
+				player.fav_text = 'orange'
+			if 'defaultblack' in request.POST:
+				player.fav_bg = '#ededed'
+				player.fav_text = 'black'
+			player.save()
+	return render(request, 'CopingGame/store_page.html', context)
 	
-#Store themes section
 @login_required(login_url='/login')
 def store_themes(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
+	items_list = Store.objects.filter(category='Themes').distinct()
 	purchase_list = Purchases.objects.filter(player=player)
 	theme_list = purchase_list.filter(itemFKey__category='Themes')
 	theme_names = theme_list.values('itemFKey__itemName').distinct()
-	context = {'player':player, 'purchase_list':purchase_list, 'theme_list':theme_list, 'theme_names':theme_names}
+	context = {'items_list':items_list, 'player':player, 'purchase_list':purchase_list, 'theme_list':theme_list, 'theme_names':theme_names}
 	if request.method == 'POST':
 		if 'change' in request.POST:
-			theme = Store.objects.get(itemName=request.POST.get("change","")) #Get the specific theme from store items
+			theme = Store.objects.get(itemName=request.POST.get("change","")) #Get the specific theme
 			player.fav_bg = theme.value1 #Set background color to the themes background color
 			player.fav_text = theme.value2 #Set the text color to the themes text color
-			player.save() #Save the player settings
+			player.save()
 		if 'buy' in request.POST:
 			player.tokens -= 50 #Deduct the players token total
-			theme = purchase_list.get(itemFKey__itemName=request.POST.get("buy","")) #Get the specific theme the user wishes to buy
-			theme.owned = True #Say that the player now owns the theme
-			theme.save() #Save the theme purchase
-			player.fav_bg = theme.itemFKey.value1 #Set background color to the themes background color
-			player.fav_text = theme.itemFKey.value2 #Set the text color to the themes text color
-			player.save() #Save the player settings
+			theme = Store.objects.get(itemName=request.POST.get("buy","")) #Get the specific theme the user wishes to buy
+			player.fav_bg = theme.value1 #Set background color to the themes background color
+			player.fav_text = theme.value2 #Set the text color to the themes text color
+			player.save()
 	return render(request, 'CopingGame/store_themes.html', context)
 
-#Store user pictures section
-@login_required(login_url='/login')
-def store_user_pictures(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
-	purchase_list = Purchases.objects.filter(player=player)
-	picture_list = purchase_list.filter(itemFKey__category='Pictures')
-	picture_names = picture_list.values('itemFKey__itemName').distinct()
-	context = {'player':player, 'purchase_list':purchase_list, 'picture_list':picture_list, 'picture_names':picture_names}
-	if request.method == 'POST':
-		if 'change' in request.POST:
-			picture = Store.objects.get(itemName=request.POST.get("change","")) #Get the specific picture from store items
-			player.avatarPic = picture.itemPicture.url #Change the users picture
-			player.save() #Save the player settings
-		if 'buy' in request.POST:
-			player.tokens -= 50 #Deduct the players token total
-			picture = purchase_list.get(itemFKey__itemName=request.POST.get("buy","")) #Get the specific picture the user wishes to buy
-			picture.owned = True #Say that the player now owns the picture
-			picture.save() #Save the theme purchase
-			player.avatarPic = picture.itemFKey.itemPicture.url #Change the users picture to the purchased one
-			player.save() #Save the player settings
-	return render(request, 'CopingGame/store_user_pictures.html', context)
+#@login_required(login_url='/login')
+#def store_user_pictures(request):
+#	player = Player.objects.get(user=User.objects.get(username=request.user))
+#	items_list = Store.objects.order_by('itemName')
+#	context = {'items_list':items_list, 'player':player}
+#	if request.method == 'POST':
+#		#if player.tokens >= 50:  uncomment next two lines for final version
+#			#player.tokens -= 50
+#			if 'bluewhite' in request.POST:  #for testing that themes can at least be switched and saved
+#				player.fav_bg = 'blue'		 #will be implemented in user defaults page next semester
+#				player.fav_text = 'white'
+#			if 'firebrickcornsilk' in request.POST:
+#				player.fav_bg = 'firebrick'
+#				player.fav_text = 'cornsilk'
+#			if 'yellowpurple' in request.POST:
+#				player.fav_bg = 'yellow'
+#				player.fav_text = 'purple'
+#			if 'blackorange' in request.POST:
+#				player.fav_bg = 'black'
+#				player.fav_text = 'orange'
+#			if 'defaultblack' in request.POST:
+#				player.fav_bg = '#ededed'
+#				player.fav_text = 'black'
+#			player.save()
+#	return render(request, 'CopingGame/store_themes.html', context)
 	
 #User registration
 def register(request):

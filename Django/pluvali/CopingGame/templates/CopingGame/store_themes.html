@@ -11,7 +11,7 @@
 <head>
 
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}"> <!-- Load players theme for page -->
-<font size="{{ player.text_size }}">
+<font size="6">
 
 	<!-- Page in a table so it can scale to any screen without much issue -->
 	<table id="page" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
@@ -52,7 +52,7 @@
 				<col style="width:33%">
 				<col style="width:33%">
 				<col style="width:33%">
-			<!-- The buttons go to the home page, profile page, or help page -->
+			<!-- The button to return to the home page -->
 			<tr align="center">
 				<td align="center"><a href="/CopingGame/" style="text-decoration: none">
 				<img src="{% static 'CopingGame/images/home1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
@@ -80,53 +80,90 @@
 				<div style="text-decoration: underline" align="center">CATEGORIES</div>
 					<ul id="catul">
 					<li id="catli"><button class="current" id="theme">Themes</button></li>
-					<li id="catli"><a href="/CopingGame/store_user_pictures/"><button class="other" id="up">User Pictures</button></a></li>
+					<li id="catli"><a href="/CopingGame/"><button class="other" id="up">User Pictures</button></a></li>
 				</ul>
 			</div>
 	
 			<!-- Main portion of the page that displays purchase options -->
 			<div id="main">
 				<div id="inner">
-					<h2 style="color:{{ player.fav_text }}">Click on the "Purchase" button to buy the theme to its left.</h2>
-					<h2 style="color:{{ player.fav_text }}">Click on the "Apply" button to use the theme you own to its left.</h2>
+					<h2 style="color:{{ player.fav_text }}">Click on the "Purchase" button to buy the item to its left.<h2>
 
 					<!-- Themes table -->
 					<table class="cattable" id="themes" align="center">
+		
 						<tr>
 							<td colspan="2" style="text-decoration:underline;color:{{ player.fav_text }}">Themes - 50 Tokens Each</td>
 						</tr>
 				
 						<!-- Make list of all themes -->
-						{% for theme in theme_list %}
-							<!-- Make a row for each theme -->
-							<tr>
-								<!-- Have a preview of the theme in the left column -->
-								<td bgcolor="{{ theme.itemFKey.value1 }}" style="color:{{ theme.itemFKey.value2 }}">PREVIEW</td>
-								
-								<!-- See if the player owns the theme -->
-								{% if theme.owned == True %}
-									<!-- Display apply button since they own the theme-->
-									<form action="" method="post">
-										{% csrf_token %}
-										<td><button type="submit" name="change" value="{{ theme.itemFKey.itemName }}">Apply</button></td>
-									</form>
-											
-								<!-- If this is reached, then they don't own the item -->
-								{% else %}
-									<!-- See if they have enough tokens for the item -->
-									{% if player.tokens >= 50 %}
-										<!-- Display purchase button -->
-										<form action="" method="post">
-											{% csrf_token %}
-											<td><button type="submit" name="buy" value="{{ theme.itemFKey.itemName }}">Purchase</button></td>
-										</form>
-								
-									<!-- If they don't have enough tokens, say they don't -->
-									{% else %}
-										<td style="color:{{ player.fav_text }}">Not enough tokens.</td>
+						{% for item in items_list %}
+							{% if item.category == "Themes" %}
+					
+								<!-- Make a row for each theme -->
+								<tr>
+									<!-- Have a preview of the theme in the left column -->
+									<td bgcolor="{{ item.value1 }}" style="color:{{ item.value2 }}">PREVIEW</td>
+									
+									<!-- TEST CODE PART 1 -->
+									{% if item.itemName in purchase_list %}
+										<td style="color:{{ player.fav_text }}">Found</td>
 									{% endif %}
-								{% endif %}
+									
+									{% if item in purchase_list %}
+										<td style="color:{{ player.fav_text }}">Found</td>
+									{% endif %}
+									
+									{% if item.itemName in theme_list.itemFKey__itemName %}
+										<td style="color:{{ player.fav_text }}">Found</td>
+									{% endif %}
+									
+									{% if item in theme_list %}
+										<td style="color:{{ player.fav_text }}">Found</td>
+									{% endif %}
+									
+									{% if item.itemName in theme_list %}
+										<td style="color:{{ player.fav_text }}">Found</td>
+									{% endif %}
+																		
+									{% if item.itemName in theme_names %}
+										<td style="color:{{ player.fav_text }}">Found</td>
+									{% endif %}
+									
+									<td style="color:{{ player.fav_text }}">{{ item }}</td>
+									<!-- END OF TEST CODE PART 1 -->
+									
+									<!-- Check the players purchases -->
+									{% for purchase in purchase_list %}
+										{% if purchase.itemFKey.category == "Themes" %}
+											<!-- See if they already own the item -->
+											{% if purchase.itemFKey.itemName == item.itemName %}
+												<td style="color:{{ player.fav_text }}">Already own.</td>
+												<!-- Display apply button -->
+												<form action="" method="post">
+													{% csrf_token %}
+													<td><button type="submit" name="change" value="{{ item.itemName }}">Apply</button></td>
+												</form>
+											{% endif %}
+										{% endif %}
+											
+										<!-- If this is reached, then they don't own the item -->
+										{% if forloop.last %}
+											<!-- See if they have enough tokens for the item -->
+											{% if player.tokens >= 50 %}
+												<!-- Display purchase button -->
+												<form action="" method="post">
+													{% csrf_token %}
+													<td><button type="submit" name="buy" value="{{ item.itemName }}">Purchase</button></td>
+												</form>
+											<!-- If they don't have enough tokens, say they don't -->
+											{% else %}
+												<td style="color:{{ player.fav_text }}">Not enough tokens.</td>
+											{% endif %}
+										{% endif %}
+									{% endfor %}
 								</tr>
+							{% endif %}
 						{% endfor %}
 					</table>			
 				</div>
@@ -140,6 +177,27 @@
 			</div>
 		</tr>
 	</table>
+						<!-- TEST CODE PART 2 -->
+						{% for item in theme_list %}
+							<div style = "color:{{ player.fav_text }}">{{ item.itemFKey.itemName }}</div></br>
+						{% endfor %}
+						</br>
+						{% for item in theme_list %}
+							<div style = "color:{{ player.fav_text }}">{{ item }}</div></br>
+						{% endfor %}
+						</br>
+						{% for item in theme_list %}
+							<div style = "color:{{ player.fav_text }}">{{ item.itemFKey }}</div></br>
+						{% endfor %}
+						</br>
+						{% for item in purchase_list %}
+							<div style = "color:{{ player.fav_text }}">{{ item.itemFKey.itemName }}</div></br>
+						{% endfor %}
+						</br>
+						{% for item in theme_names %}
+							<div style = "color:{{ player.fav_text }}">{{ item }}</div></br>
+						{% endfor %}
+						<!-- END OF TEST CODE PART 2 -->
 
 </body>
 </html>
