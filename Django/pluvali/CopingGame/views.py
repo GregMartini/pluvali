@@ -33,6 +33,7 @@ def scenario_index(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
 	scenario_list = Scenario.objects.filter(player_list=request.user).distinct()
 	player.stage = 0
+	player.temp_tokens = 0
 	player.save()
 	context = {'scenario_list': scenario_list, 'player':player}
 	return render(request, 'CopingGame/scenario_index.html', context)
@@ -72,7 +73,9 @@ def game(request, sceneID):
 	if(max_stage >= 5):
 		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4}
 	if request.method == 'POST':
-		player.tokens += random.randint(2,5)
+		tokens_earned = random.randint(2,5)
+		player.tokens += tokens_earned
+		player.temp_tokens += tokens_earned
 		player.stage += 1
 		player.save()
 		if(player.stage == max_stage):
