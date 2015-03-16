@@ -64,8 +64,10 @@ class Store(models.Model):
 class Purchases(models.Model):
 	player = models.ForeignKey(Player)
 	itemFKey = models.ForeignKey(Store)
+	owned = models.BooleanField(default=False)
 	def __str__(self):
-		return self.itemFKey.itemName
+		name = self.player.user.username+'-'+self.itemFKey.itemName
+		return name
 	verbose_name_plural = 'Purchases'
 		
 def upload_path_handler(self):

@@ -171,6 +171,16 @@ def register(request):
 			new_user = form.save()
 			new_player = Player.objects.create(user=User.objects.get(username=request.POST['username']), email=player_email)
 			new_user = authenticate(username=request.POST['username'], password=request.POST['password1'])
+			
+			store_list = list(Store.objects.all())
+			for item in store_list:
+				if item.itemName == 'DefaultBlack' or item.itemName == 'defaultPicture':
+					purchase = Purchases.objects.create(player=new_player, itemFKey=item, owned=True)
+					purchase.save()
+				else:
+					purchase = Purchases.objects.create(player=new_player, itemFKey=item, owned=False)
+					purchase.save()
+					
 			return HttpResponseRedirect("/CopingGame/")
 		else:
 			return render(request, 'registration/register.html', {'form': form,})
