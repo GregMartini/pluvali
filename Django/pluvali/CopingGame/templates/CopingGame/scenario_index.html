@@ -3,60 +3,88 @@
 <!-- Another prototype home page - Steve -->
 {% load staticfiles %}
 <html>
-<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
+<head>
+	<title>Help Page</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
+</head>
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
-<font size="6">
-	
-	<!-- Table that will have the user profile once logged in -->
-
-	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+<font size="{{ player.text_size }}">
+	<table id="page" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 		<tr>
-			<td rowspan="2" colspan="2"><img id="avatarPic" src="{{ player.avatarPic.url }}" width="120" height="90"></td>
-			<td>
-			{% if user.is_authenticated %}
-				<!-- user information -->
-				<li>{{ user.get_username }}</li>
-				<li>Tokens: {{ player.tokens }}</li>
-				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
-			{% else %}
-				Not currently logged in, please log in.
-			{% endif %}</td>
+			<!-- Table that will have the user profile once logged in -->
+			<table id="usertable" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+				<tr>
+					<td rowspan="2" colspan="2"><img id="avatarPic" src="{{ player.avatarPic.url }}" width="120" height="90"></td>
+					<td>
+						{% if user.is_authenticated %}
+							<!-- user information -->
+							<li>{{ user.get_username }}</li>
+							<li>Tokens: {{ player.tokens }}</li>
+							<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
+						{% else %}
+							Not currently logged in, please log in.
+						{% endif %}
+					</td>	
+				</tr>
+			</table>
+		</tr>
+		<br>
+		<tr>
+			<div id="links" align="center">
+			<table style="width:100%">
+				<col style="width:25%">
+				<col style="width:25%">
+				<col style="width:25%">
+				<col style="width:25%">
+				<!-- The button to return to the home page -->
+				<tr align="center">
+					<td align="center"><a href="/CopingGame/" style="text-decoration: none">
+						<img src="{% static 'CopingGame/images/home1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+					</a></td>
+					<td align="center"><a href="/CopingGame/store/" style="text-decoration: none">
+						<img src="{% static 'CopingGame/images/store4.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+					</a></td>
+					<td align="center"><a href="/CopingGame/profile/" style="text-decoration: none">
+						<img src="{% static 'CopingGame/images/profile2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+					</a></td>
+					<td align="center"><a href="/CopingGame/help/" style="text-decoration: none">
+						<img src="{% static 'CopingGame/images/help5.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+					</a></td>
+				</tr>
+				<tr>
+					<td align="center">Home Page</td>
+					<td align="center">Store Page</td>
+					<td align="center">Profile Page</td>
+					<td align="center">Help Page</td>
+				</tr>
+			</table>
+			</div>
 		</tr>
 		<tr>
-			<td></td>
+			<!-- The Header -->
+			<h1>Please choose the scenario you want to play!</h1>
+		</tr>
+		<center>
+		<tr align="center">
+			{% if scenario_list %}
+				<ul>
+				{% for scenario in scenario_list %}
+					<p><a href="/CopingGame/{{ scenario.sceneID }}/">
+					<img src="{% static 'CopingGame/images/play2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+					{{ scenario.title }}
+					</a></p>
+				{% endfor %}
+				</ul>
+			{% else %}
+				<p>No scenarios are available.</p>
+			{% endif %}
+		</tr>
+		<br>
+		</center>
+		<tr>
+			<!-- A picture of DDRC's logo -->
+			<img src="{% static 'CopingGame/images/logo2.png' %}" alt="ddrcco.com" width="225" height="106.5"></a>
 		</tr>
 	</table>
-	
-	<br>
-
-	<!-- The Header -->
-	<h1>Please choose the scenario you want to play!</h1>
-	
-	<center>
-	{% if scenario_list %}
-		<ul>
-		{% for scenario in scenario_list %}
-			<li><a href="/CopingGame/{{ scenario.sceneID }}/">
-				<img src="{% static 'CopingGame/images/play2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
-				{{ scenario.title }}
-			</a></li>
-		{% endfor %}
-		</ul>
-		{% else %}
-			<p>No scenarios are available.</p>
-		{% endif %}
-		<br>
-		
-	<!-- The button to return to the home page -->
-	<p>Press this button to go back to the Homepage.</p>
-	<a href="/CopingGame/">
-		<img src="{% static 'CopingGame/images/home1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
-	</a> 
-	<br>
-	</center>
-	
-	<!-- A picture of DDRC's logo -->
-	<img src="{% static 'CopingGame/images/logo2.png' %}" alt="ddrcco.com" width="225" height="106.5"></a>
 </body>
-
- </html>  
+</html>  

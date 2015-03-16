@@ -11,7 +11,7 @@ body {
 h1 {
     color: #ffc;
     background-color: #6d1d1c;
-    font-size: 40px;
+    /* font-size: 40px; */
     margin: 0;
     margin-bottom: 7px;
     padding: 4px;
@@ -23,7 +23,7 @@ h1 {
 /* Style of the "problem" bar */
 h2 {
 	text-align: center;
-	font-size: 32px;
+	/*font-size: 32px;*/
 	font-style: bold;
 }
 
@@ -43,18 +43,18 @@ h2 {
 /* Style of the table containing coping technique options */
 #coping {
 	text-align: center;
-	font-size: 24px;
+	/* font-size: 24px; */
 }
 
 /* Style of "How to handle this problem" row of the coping table */
 #handle {
 	height: 50px;
-	font-size: 32px;
+	/* font-size: 32px; */ 
 }
 
 /* Style of the coping technique options (text only) of the coping table */
 #techniques {
 	height: 40px;
-	font-size: 20px;
+	/* font-size: 20px; */
 	font-style: italic;
 }

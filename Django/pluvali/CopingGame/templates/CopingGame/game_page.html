@@ -5,153 +5,148 @@
 {% load staticfiles %}
 <html>
 <head>
-
 	<!-- Title the page and link the style sheet -->
 	<title>Game Page</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_game_page.css' %}" />
-	
+	<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_game_page.css' %}" />	
 </head>
-
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
-<font size="6">
-
-	<!-- Table that has the user avatar, user name, and their tokens -->
-	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+<font size="{{ player.text_size }}">
+	<table id="page" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 		<tr>
-			<td rowspan="2" colspan="2"><img id="avatarPic" src="{{ player.avatarPic.url }}" width="120" height="90"></td>
-			<td>
-			{% if user.is_authenticated %}
-				<!-- user information -->
-				<li>{{ user.get_username }}</li>
-				<li>Tokens: {{ player.tokens }}</li>
-				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
-			{% else %}
-				Not currently logged in, please log in.
-			{% endif %}</td>
+			<!-- Table that will have the user profile once logged in -->
+			<table id="usertable" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+				<tr>
+					<td rowspan="2" colspan="2"><img id="avatarPic" src="{{ player.avatarPic.url }}" width="120" height="90"></td>
+					<td>
+						{% if user.is_authenticated %}
+							<!-- user information -->
+							<li>{{ user.get_username }}</li>
+							<li>Tokens: {{ player.tokens }}</li>
+							<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
+						{% else %}
+							Not currently logged in, please log in.
+						{% endif %}
+					</td>	
+				</tr>
+			</table>
 		</tr>
-	</table>
-	
-	<br>
-
-	<!-- What is the current scenario and problem -->
-	<h1>Scenario - {{ scene.title }}</h1>
-	<h2>Problem - {% if player.stage == 0 %}{{ stage0 }}
+		<tr>
+			<!-- What is the current scenario and problem -->
+			<h1>Scenario - {{ scene.title }}</h1>
+		</tr>
+		<tr>
+			<h2>Problem - {% if player.stage == 0 %}{{ stage0 }}
 				  {% elif player.stage == 1 %}{{ stage1 }}
 				  {% elif player.stage == 2 %}{{ stage2 }}
 				  {% elif player.stage == 3 %}{{ stage3 }}
 				  {% elif player.stage == 4 %}{{ stage4 }}
-				  {% endif %}</h2>
-				  
-	<!-- Image representing the problem -->
-
-<!-- Problem's picture -->
-	{% if player.stage == 0 %}
-		<img id="problempic" src="{{stage0.pictureP.url}}" width="400" height="200"/>
-	{% elif player.stage == 1 %}
-		<img id="problempic" src="{{stage1.pictureP.url}}" width="400" height="200"/>
-	{% elif player.stage == 2 %}
-		<img id="problempic" src="{{stage2.pictureP.url}}" width="400" height="200"/>
-	{% elif player.stage == 3 %}
-		<img id="problempic" src="{{stage3.pictureP.url}}" width="400" height="200"/>
-	{% elif player.stage == 4 %}
-		<img id="problempic" src="{{stage4.pictureP.url}}" width="400" height="200"/>
-	{% endif %}
-
-	<br>
-	
-	<!-- Table containing the coping choices and their associated images -->
-	<table id="coping" align="center">
-		<!-- Width of the three columns -->
-		<col width="400"/>
-		<col width="400"/>
-		<col width="400"/>
-	
-		<tr id="handle">
-			<td colspan="3">How To Handle This Problem?</td>
+				  {% endif %}
+			</h2>
 		</tr>
-		
-		<tr id="techniques">
-		{% if player.stage == 0 %}
-			{% for sol in stage0.solutions.all %}
-				<td>{{sol.solution}}</td>
-			{% endfor %}
-		{% elif player.stage == 1 %}{{ stage1 }}
-			{% for sol in stage1.solutions.all %}
-				<td>{{sol.solution}}</td>
-			{% endfor %}
-		{% elif player.stage == 2 %}{{ stage2 }}
-			{% for sol in stage2.solutions.all %}
-				<td>{{sol.solution}}</td>
-			{% endfor %}
-		{% elif player.stage == 3 %}{{ stage3 }}
-			{% for sol in stage3.solutions.all %}
-				<td>{{sol.solution}}</td>
-			{% endfor %}
-		{% elif player.stage == 4 %}{{ stage4 }}
-			{% for sol in stage4.solutions.all %}
-				<td>{{sol.solution}}</td>
-			{% endfor %}
-	{% endif %}
-		
-		</tr>
-		
 		<tr>
-	<!-- Solution's picture -->		
-		{% if player.stage == 0 %}
-			{% for sol in stage0.solutions.all %}
-				<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
-			{% endfor %}
-		{% elif player.stage == 1 %}
-			{% for sol in stage1.solutions.all %}
-				<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
-			{% endfor %}
-		{% elif player.stage == 2 %}
-			{% for sol in stage2.solutions.all %}
-				<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
-			{% endfor %}
-		{% elif player.stage == 3 %}
-			{% for sol in stage3.solutions.all %}
-				<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
-			{% endfor %}
-		{% elif player.stage == 4 %}
-			{% for sol in stage4.solutions.all %}
-				<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
-			{% endfor %}
-		{% endif %}
-		
-		</tr>
-		
-		<tr>
-			<form action="" method="post">
-			{% csrf_token %}
+			<!-- Image representing the problem -->
 			{% if player.stage == 0 %}
-				{% for s in stage0.solutions.all %}
-					<td><button type="submit">Select</button></td>
-				{% endfor %}
+				<img id="problempic" src="{{stage0.pictureP.url}}" width="400" height="200"/>
 			{% elif player.stage == 1 %}
-				{% for s in stage1.solutions.all %}
-					<td><button type="submit">Select</button></td>
-				{% endfor %}
+				<img id="problempic" src="{{stage1.pictureP.url}}" width="400" height="200"/>
 			{% elif player.stage == 2 %}
-				{% for s in stage2.solutions.all %}
-					<td><button type="submit">Select</button></td>
-				{% endfor %}
+				<img id="problempic" src="{{stage2.pictureP.url}}" width="400" height="200"/>
 			{% elif player.stage == 3 %}
-				{% for s in stage3.solutions.all %}
-					<td><button type="submit">Select</button></td>
-				{% endfor %}
+				<img id="problempic" src="{{stage3.pictureP.url}}" width="400" height="200"/>
 			{% elif player.stage == 4 %}
-				{% for s in stage4.solutions.all %}
-					<td><button type="submit">Select</button></td>
-				{% endfor %}
+				<img id="problempic" src="{{stage4.pictureP.url}}" width="400" height="200"/>
 			{% endif %}
-			
-			</form>
+		</tr>
+		<br>
+		<tr>
+			<!-- Table containing the coping choices and their associated images -->
+			<table id="coping" align="center">
+				<!-- Width of the three columns -->
+				<col width="400"/>
+				<col width="400"/>
+				<col width="400"/>	
+				<tr id="handle">
+					<td colspan="3">How To Handle This Problem?</td>
+				</tr>
+				<tr id="techniques">
+					{% if player.stage == 0 %}
+						{% for sol in stage0.solutions.all %}
+							<td>{{sol.solution}}</td>
+						{% endfor %}
+					{% elif player.stage == 1 %}{{ stage1 }}
+						{% for sol in stage1.solutions.all %}
+							<td>{{sol.solution}}</td>
+						{% endfor %}
+					{% elif player.stage == 2 %}{{ stage2 }}
+						{% for sol in stage2.solutions.all %}
+							<td>{{sol.solution}}</td>
+						{% endfor %}
+					{% elif player.stage == 3 %}{{ stage3 }}
+						{% for sol in stage3.solutions.all %}
+							<td>{{sol.solution}}</td>
+						{% endfor %}
+					{% elif player.stage == 4 %}{{ stage4 }}
+						{% for sol in stage4.solutions.all %}
+							<td>{{sol.solution}}</td>
+						{% endfor %}
+					{% endif %}		
+				</tr>
+				<tr>
+					<!-- Solution's picture -->		
+					{% if player.stage == 0 %}
+						{% for sol in stage0.solutions.all %}
+							<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
+						{% endfor %}
+					{% elif player.stage == 1 %}
+						{% for sol in stage1.solutions.all %}
+							<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
+						{% endfor %}
+					{% elif player.stage == 2 %}
+						{% for sol in stage2.solutions.all %}
+							<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
+						{% endfor %}
+					{% elif player.stage == 3 %}
+						{% for sol in stage3.solutions.all %}
+							<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
+						{% endfor %}
+					{% elif player.stage == 4 %}
+						{% for sol in stage4.solutions.all %}
+							<td><img id="problempic" src="{{sol.pictureS.url}}" width="225" height="225"></td>
+						{% endfor %}
+					{% endif %}
+				</tr>
+				<tr>
+				<form action="" method="post">
+				{% csrf_token %}
+					{% if player.stage == 0 %}
+						{% for s in stage0.solutions.all %}
+							<td><button type="submit">Select</button></td>
+						{% endfor %}
+					{% elif player.stage == 1 %}
+						{% for s in stage1.solutions.all %}
+							<td><button type="submit">Select</button></td>
+						{% endfor %}
+					{% elif player.stage == 2 %}
+						{% for s in stage2.solutions.all %}
+							<td><button type="submit">Select</button></td>
+						{% endfor %}
+					{% elif player.stage == 3 %}
+						{% for s in stage3.solutions.all %}
+							<td><button type="submit">Select</button></td>
+						{% endfor %}
+					{% elif player.stage == 4 %}
+						{% for s in stage4.solutions.all %}
+							<td><button type="submit">Select</button></td>
+						{% endfor %}
+					{% endif %}
+				</form>
+				</tr>
+			</table>
+		</tr>
+		<tr>
+			<!-- A picture of DDRC's logo -->
+			<img src="{% static 'CopingGame/images/logo2.png' %}" alt="ddrcco.com" width="225" height="106.5"></a>
 		</tr>
 	</table>
-	
-	<!-- A picture of DDRC's logo -->
-	<img src="{% static 'CopingGame/images/logo2.png' %}" alt="ddrcco.com" width="225" height="106.5"></a>
-	
 </body>
 </html>
