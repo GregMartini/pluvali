@@ -192,16 +192,28 @@ def register(request):
 @login_required(login_url='/login')
 def profile(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
-	purchase_list = Purchases.objects.filter(player=player)
+	purchase_list = Purchases.objects.filter(player=player, owned=True)
 	context = {'player':player, 'purchase_list':purchase_list}
 	if request.method == 'POST':
-		if 'upload' in request.POST:
+		if 'smallFont' in request.POST:
+			player.text_size = 5
+			player.save()
+		elif 'mediumFont' in request.POST:
+			player.text_size = 6
+			player.save()
+		elif 'largeFont' in request.POST:
+			player.text_size = 7
+			player.save()
+		elif 'upload' in request.POST:
 			profileForm = PlayerProfileForm(request.POST, request.FILES)
 			if profileForm.is_valid():
-				picture=request.FILES['avatarPic']
-				player.avatarPic=picture
-				player.save()
-				return redirect('/')
+				try:
+					picture=request.FILES['avatarPic']
+					player.avatarPic=picture
+					player.save()
+					return redirect('CopingGame/profile.html')
+				except Exception as e:
+					return redirect('CopingGame/profile.html')
 		elif 'theme' in request.POST:
 			theme = Store.objects.get(itemName=request.POST.get("theme","")) #Get the specific theme
 			player.fav_bg = theme.value1 #Set background color to the themes background color

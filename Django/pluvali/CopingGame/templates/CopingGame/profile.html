@@ -3,114 +3,180 @@
 <!-- Quick page by Greg -->
 {% load staticfiles %}
 <html>
+<head>
+	<script>
+	{% if messages %}
+		{% for message in messages %}
+			alert(message);
+		{% endfor %}
+	{% endif %}
+	{% if profileForm.errors %}
+		{% for field in form %}
+			{% for error in field.errors %}
+				<div class="alert alert-error">
+					<strong>{{ error|escape }}</strong>
+				</div>
+			{% endfor %}
+		{% endfor %}
+		{% for error in form.non_field_errors %}
+			<div class="alert alert-error">
+				<strong>{{ error|escape }}</strong>
+			</div>
+		{% endfor %}
+	{% endif %}
+	</script>
+</head>
 <link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
-<font size="6">
-
-	<!-- Table that will have the user profile once logged in -->
-	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
-		<tr>
-			<td rowspan="2" colspan="2"><img id="avatarPic" src="{{ player.avatarPic.url }}" width="120" height="90"></td>
-			<td>
-			{% if user.is_authenticated %}
-				<!-- user information -->
-				<li>{{ user.get_username }}</li>
-				<li>Tokens: {{ player.tokens }}</li>
-				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
-			{% else %}
-				Not currently logged in, please log in.
-			{% endif %}</td>	
-		</tr>
-		<tr>
-			<td></td>
-		</tr>
-	</table>
-	<br>
-	
-	<!-- The Header -->
-	<h1>{{ user.get_username }}'s Profile</h1>
-	<br>
-	
-	<!-- UPLOAD PICTURE -->
-	Change your profile picture here:
-	<form id="profilePicture' action="/CopingGame/profile/" method="post" enctype="multipart/form-data">
-		{% csrf_token %}
-		
-		{{ profileForm.as_p }}
-		<input type="submit" value="Upload" name="upload"/>
-	</form>
-	<br>
-	<!-- PLAYER TOKENS -->
-	You've earned a total of {{ player.tokens }} tokens!
-	</br></br>
-	<!-- PLAYER PURCHASES -->
-	Here is a list of your total purchases:
-		
-	<form action="" method="post">
-	{% csrf_token %}
-	
-	{% if purchase_list %}
-		<table align="center">
-		
-		<!-- Themes the player owns -->
-		<tr>
-			<td colspan="2" align="left">Themes Owned:</td>
-		<tr>
-		{% for purchase in purchase_list %}
-			{% if purchase.itemFKey.category == "Themes" %}
-				{% if purchase.owned %}
-					<!-- Button to switch theme, and display a preview of the theme next to the button -->
-					<tr>
-						<td align="center"><button name="theme" type="submit" value="{{ purchase.itemFKey.itemName }}">Use Theme</button></td>
-						<td style="background-color:{{ purchase.itemFKey.value1 }}; color:{{ purchase.itemFKey.value2 }}">{{ purchase.itemFKey.itemDesc }}</td>
-					</tr>
-				{% endif %}
-			{% endif %}
-		{% endfor %}
-		
-		<!-- Blank row between themes and pictures -->
-		<tr height="30px">
-		</tr>
-		
-		<!-- Pictures the player owns -->
-		<tr>
-			<td colspan="2" align="left">Pictures Owned:</td>
-		</tr>
-		{% for purchase in purchase_list %}
-			{% if purchase.itemFKey.category == "Pictures" %}
-				<!-- Button to switch picture, and display the picture they own next to the button -->
+<font size="{{ player.text_size }}">
+	<table id="page" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+	<tr>
+			<!-- Table that has the user avatar, user name, and their tokens -->
+			<table id="usertable" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 				<tr>
-					<td align="center"><button name="picture" type="submit" value="{{ purchase.itemFKey.itemPicture.url }}">Use Picture</button></td>
-					<td><img src="{{ purchase.itemFKey.itemPicture.url }}" style="width:100px;height:100px;border:0"></td>
+					<td rowspan="2" colspan="2"><img id="avatarPic" src="{{ player.avatarPic.url }}" width="120" height="90"></td>
+					<td>
+					{% if user.is_authenticated %}
+						<!-- user information -->
+						{{ user.get_username }}
+						<br>
+						Tokens: {{ player.tokens }}
+						<br>
+						<a href="/logout/" style="color:{{ player.fav_text }}">Logout
+					{% else %}
+						Not currently logged in, please log in.
+					{% endif %}</td>
+				</tr>		
+				<tr>
+					<td></td>
 				</tr>
-			{% endif %}
-		{% endfor %}
-		</table>
-
+			</table>
+		</tr>
+		
 		<br>
-	<!-- Should never display since the player will have default background and default user picture from the start -->
-	{% else %}
-		<p>You haven't purchased any items yet.</p>
-	{% endif %}
-	
-	</br>
-	
-	</form>
-	<!-- The button to go to the store page -->
-		<a href="/CopingGame/store">
-		<img src="{% static 'CopingGame/images/store4.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
-		</a> 
-		<= Press this button to go to the store page.
-	<br>
-	<br>
-	<!-- The button to return to the home page -->
-	<a href="/CopingGame/">
-		<img src="{% static 'CopingGame/images/home1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
-	</a> 
-	<= Press this button to go back to the Homepage.
-	<br>
-	<!-- A picture of DDRC's logo -->
-	<img src="{% static 'CopingGame/images/logo2.png' %}" alt="ddrcco.com" width="225" height="106.5"></a>
-	
- </body>
+		<tr>
+			<div id="links" align="center">
+			<table style="width:100%">
+				<col style="width:33%">
+				<col style="width:33%">
+				<col style="width:33%">
+			<!-- The button to return to the home page -->
+			<tr align="center">
+				<td align="center"><a href="/CopingGame/" style="text-decoration: none">
+				<img src="{% static 'CopingGame/images/home1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+				</a></td>
+				<td align="center"><a href="/CopingGame/store/" style="text-decoration: none">
+				<img src="{% static 'CopingGame/images/store4.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+				</a></td>
+				<td align="center"><a href="/CopingGame/help/" style="text-decoration: none">
+				<img src="{% static 'CopingGame/images/help5.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+				</a></td>
+			</tr>
+			<tr>
+				<td align="center">Home Page</td>
+				<td align="center">Store Page</td>
+				<td align="center">Help Page</td>
+			</tr>
+			</table>
+			</div>
+		</tr>
+		<tr>
+			<!-- The Header -->
+			<h1>{{ user.get_username }}'s Profile</h1>
+		</tr>
+		<tr>
+			<!-- PLAYER TOKENS -->
+			<td align="center">You've earned a total of {{ player.tokens }} tokens!</td>
+		</tr>
+		<tr>
+			<td align="left"><!-- UPLOAD PICTURE -->
+				Change your profile picture here:
+				<form id="profilePicture" action="/CopingGame/profile/" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				
+				{{ profileForm.as_p }}
+				<input type="submit" value="Upload" name="upload"/>
+			</form>
+			</td>
+			<td align="right"><!-- Change Font Size -->
+				<tr>Change text size here:</tr>
+				<form id="textSizeOption" action="/CopingGame/profile/" method="post">
+				{% csrf_token %}
+				<tr>
+					<td><button name="smallFont" type="submit" value="{{ purchase.itemFKey.itemName }}">Small Font</button></td>
+					<td><font size="5">Preview</td>
+				</tr>
+				<tr>
+					<td><button name="mediumFont" type="submit" value="{{ purchase.itemFKey.itemName }}">Medium Font</button></td>
+					<td><font size="6">Preview</td>
+				</tr>
+				<tr>
+					<td><button name="largeFont" type="submit" value="{{ purchase.itemFKey.itemName }}">Large Font</button></td>
+					<td><font size="7">Preview</td>
+				</tr>
+				</form>
+				<font size="{{ player.text_size }}">
+			</td>
+		</tr>
+		<br>
+		<tr>
+			<!-- PLAYER PURCHASES -->
+			Here is a list of your total purchases:
+		</tr>
+		<tr>
+			<form action="" method="post">
+			{% csrf_token %}
+			
+			{% if purchase_list %}
+				<table align="center">
+				
+					<!-- Themes the player owns -->
+					<tr>
+						<td colspan="2" align="left">Themes Owned:</td>
+					</tr>	
+					{% for purchase in purchase_list %}
+						{% if purchase.itemFKey.category == "Themes" %}
+							<!-- Button to switch theme, and display a preview of the theme next to the button -->
+							<tr>
+								<td align="center"><button name="theme" type="submit" value="{{ purchase.itemFKey.itemName }}">Use Theme</button></td>
+								<td style="background-color:{{ purchase.itemFKey.value1 }}; color:{{ purchase.itemFKey.value2 }}">{{ purchase.itemFKey.itemDesc }}</td>
+							</tr>
+						{% endif %}
+					{% endfor %}
+		
+					<!-- Blank row between themes and pictures -->
+					<tr height="30px">
+					</tr>
+		
+					<!-- Pictures the player owns -->
+					<tr>
+						<td colspan="2" align="left">Pictures Owned:</td>
+					</tr>
+					{% for purchase in purchase_list %}
+						{% if purchase.itemFKey.category == "Pictures" %}
+							<!-- Button to switch picture, and display the picture they own next to the button -->
+							<tr>
+								<td align="center"><button name="picture" type="submit" value="{{ purchase.itemFKey.itemPicture.url }}">Use Picture</button></td>
+								<td><img src="{{ purchase.itemFKey.itemPicture.url }}" style="width:100px;height:100px;border:0"></td>
+							</tr>
+						{% endif %}
+					{% endfor %}
+				</table>
+			</tr>
+			<br>
+			<!-- Should never display since the player will have default background and default user picture from the start -->
+			{% else %}
+				<p>You haven't purchased any items yet.</p>
+			{% endif %}
+			
+			</br>
+			
+			</form>
+		</tr>
+		<tr>
+		<!-- A picture of DDRC's logo -->
+			<img src="{% static 'CopingGame/images/logo2.png' %}" alt="ddrcco.com" width="225" height="106.5"></a>
+		</tr>	
+	</table>
+</body>
  </html>  

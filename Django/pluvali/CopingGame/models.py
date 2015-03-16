@@ -15,6 +15,7 @@ class Player(models.Model):
 	avatarPic = models.ImageField(upload_to='userPic/', default='userPic/default-user.png')
 	fav_bg = models.CharField(max_length=30, default='#ededed')
 	fav_text = models.CharField(max_length=30, default='black')
+	text_size = models.IntegerField(default=6)
 	stage = models.IntegerField(default=0) #used for iterating through scenarios
 	def passw (self):
 		return self.user.password
