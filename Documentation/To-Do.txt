@@ -1,0 +1,38 @@
+Things to implement or fix:
+
+1) Back button problems (doesn't show tokens properly, errors if done while playing game)
+
+	2) Store page purchases (Tim)
+
+	5) Scenario editor (Alex)
+
+7) Pop-up videos that must be watched before selecting an answer
+
+8) Text-to-Speech (if easy)
+
+9) Format tables pages into tables for easier viewing.
+
+10) Store button color purchases
+
+12) Player groups so admins can easily link scenarios to players (default group should be able to handle this, might need additional setup)
+
+14) Make buttons highlighted when moused over.
+
+15) Store/profile page - coin button to buy, paint brush button to apply, give option to change font (profile page only)
+
+16) Game page - have a pop up after every one saying you earned a token
+
+17) Congratulations - have a "thumbs up" image (or something similar) on the page
+
+
+FINISHED:
+
+	3) Delete a USER also deletes a PLAYER
+
+	4) Uniform wording across pages (tokens/points, index/homepage)
+	
+	6) User profile page (edit picture)
+	
+	11) Button links, not text links (started not finished)
+	
+	13) Links/text centered vertically. Text by the "store" button should be default font. DDRC header to footer
