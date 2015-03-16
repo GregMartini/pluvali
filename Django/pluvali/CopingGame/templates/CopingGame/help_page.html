@@ -3,49 +3,87 @@
 <!-- Quick page by Greg -->
 {% load staticfiles %}
 <html>
-<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
+<head>
+	<title>Help Page</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
+</head>
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
-<font size="6">
-	
-	<!-- Table that will have the user profile once logged in -->
-	<table id="usertable" align="right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+<font size="{{ player.text_size }}">
+	<table id="page" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 		<tr>
-			<td rowspan="2" colspan="2"><img id="avatarPic" src="{{ player.avatarPic.url }}" width="120" height="90"></td>
-			<td>
-			{% if user.is_authenticated %}
-				<!-- user information -->
-				<li>{{ user.get_username }}</li>
-				<li>Tokens: {{ player.tokens }}</li>
-				<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
-			{% else %}
-				Not currently logged in, please log in.
-			{% endif %}</td>	
+			<!-- Table that will have the user profile once logged in -->
+			<table id="usertable" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
+				<tr>
+					<td rowspan="2" colspan="2"><img id="avatarPic" src="{{ player.avatarPic.url }}" width="120" height="90"></td>
+					<td>
+						{% if user.is_authenticated %}
+							<!-- user information -->
+							<li>{{ user.get_username }}</li>
+							<li>Tokens: {{ player.tokens }}</li>
+							<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
+						{% else %}
+							Not currently logged in, please log in.
+						{% endif %}
+					</td>	
+				</tr>
+			</table>
+		</tr>
+		<br>
+		<tr>
+			<div id="links" align="center">
+			<table style="width:100%">
+				<col style="width:25%">
+				<col style="width:25%">
+				<col style="width:25%">
+				<col style="width:25%">
+				<!-- The button to return to the home page -->
+				<tr align="center">
+					<td align="center"><a href="/CopingGame/scenarios/" style="text-decoration: none">
+						<img src="{% static 'CopingGame/images/play2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+					</a></td>
+					<td align="center"><a href="/CopingGame/" style="text-decoration: none">
+						<img src="{% static 'CopingGame/images/home1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+					</a></td>
+					<td align="center"><a href="/CopingGame/store/" style="text-decoration: none">
+						<img src="{% static 'CopingGame/images/store4.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+					</a></td>
+					<td align="center"><a href="/CopingGame/profile/" style="text-decoration: none">
+						<img src="{% static 'CopingGame/images/profile2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+					</a></td>
+				</tr>
+				<tr>
+					<td align="center">Play a Scenario</td>
+					<td align="center">Home Page</td>
+					<td align="center">Store Page</td>
+					<td align="center">Profile Page</td>
+				</tr>
+			</table>
+			</div>
 		</tr>
 		<tr>
-			<td></td>
+			<!-- The Header -->
+			<h1>How to play</h1>
+		</tr>
+		<tr>
+			<p>Once logged in, click the "Play a Scenario" to choose from the available scenarios.</p>
+		</tr>
+		<tr>
+			<p>Select the scenario you wish to play and then chose a solution to each problem.</p>
+		</tr>
+		<tr>	
+			<p>Solving each problem rewards a token, which you may use to redeem prizes!</p>
+		</tr>
+		<tr>
+			<p>From the homepage, you may also visit the store.</p>
+		</tr>
+		<tr>	
+			<p>Once inside, select from a category and then chose the item you want to buy it!</p>
+		</tr>
+		<br>
+		<tr>
+			<!-- A picture of DDRC's logo -->
+			<img src="{% static 'CopingGame/images/logo2.png' %}" alt="ddrcco.com" width="225" height="106.5"></a>
 		</tr>
 	</table>
-	<br>
-	
-	<!-- The Header -->
-	<h1>How to play</h1>
-	<br>
-	<li>Once logged in, click the "Play a Scenario" to choose from the available scenarios.</li>
-	<li>Select the scenario you wish to play and then chose a solution to each problem.</li>
-	<li>Solving each problem rewards a token, which you may use to redeem prizes!</li>
-	<li>From the homepage, you may also visit the store.</li>
-	<li>Once inside, select from a category and then chose the item you want to buy it!</li>
-	<br>
-		<br><br>
-	<!-- The button to return to the home page -->
-	<a href="/CopingGame/">
-		<img src="{% static 'CopingGame/images/home1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
-	</a> 
-	<= Press this button to go back to the Homepage.
-	<br>
-	
-	<!-- A picture of DDRC's logo -->
-	<img src="{% static 'CopingGame/images/logo2.png' %}" alt="ddrcco.com" width="225" height="106.5"></a>
-	
  </body>
  </html>  

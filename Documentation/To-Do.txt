@@ -10,7 +10,7 @@ Things to implement or fix:
 
 8) Text-to-Speech (if easy)
 
-9) Format tables pages into tables for easier viewing.
+	9) Format tables pages into tables for easier viewing. (formatted into tables, just missing percentages to keep formatted)
 
 10) Store button color purchases
 

@@ -17,6 +17,7 @@ class Player(models.Model):
 	fav_text = models.CharField(max_length=30, default='black')
 	text_size = models.IntegerField(default=6)
 	stage = models.IntegerField(default=0) #used for iterating through scenarios
+	temp_tokens = models.IntegerField(default=0) #used for tracking player's points in a scenario
 	def passw (self):
 		return self.user.password
 	def __str__(self):
