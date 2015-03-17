@@ -18,15 +18,19 @@
 				<tr>
 					<td rowspan="2" colspan="2"><img id="avatarPic" src="{{ player.avatarPic.url }}" width="120" height="90"></td>
 					<td>
-						{% if user.is_authenticated %}
-							<!-- user information -->
-							<li>{{ user.get_username }}</li>
-							<li>Tokens: {{ player.tokens }}</li>
-							<li><a href="/logout/" style="color:{{ player.fav_text }}">Logout</li>
-						{% else %}
-							Not currently logged in, please log in.
-						{% endif %}
-					</td>	
+					{% if user.is_authenticated %}
+						<!-- user information -->
+						{{ user.get_username }}
+						<br>
+						Tokens: {{ player.tokens }}
+						<br>
+						<a href="/logout/" style="color:{{ player.fav_text }}">Logout
+					{% else %}
+						Not currently logged in, please log in.
+					{% endif %}</td>
+				</tr>		
+				<tr>
+					<td></td>
 				</tr>
 			</table>
 		</tr>
