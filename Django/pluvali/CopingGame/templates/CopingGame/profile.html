@@ -41,7 +41,7 @@
 						<!-- user information -->
 						{{ user.get_username }}
 						<br>
-						Tokens: {{ player.tokens }}
+						<img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>: {{ player.tokens }}
 						<br>
 						<a href="/logout/" style="color:{{ player.fav_text }}">Logout
 					{% else %}
@@ -91,7 +91,7 @@
 		</tr>
 		<tr>
 			<!-- PLAYER TOKENS -->
-			<td align="center">You've earned a total of {{ player.tokens }} tokens!</td>
+			<td align="center">You've earned a total of {{ player.tokens }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>!</td>
 		</tr>
 		<br>
 		<tr>

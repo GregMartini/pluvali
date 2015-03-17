@@ -25,7 +25,7 @@
 						<!-- user information -->
 						{{ user.get_username }}
 						<br>
-						Tokens: {{ player.tokens }}
+						<img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>: {{ player.tokens }}
 						<br>
 						<a href="/logout/" style="color:{{ player.fav_text }}">Logout
 					{% else %}
@@ -49,11 +49,15 @@
 		<tr>
 			<div id="links" align="center">
 			<table style="width:100%">
-				<col style="width:33%">
-				<col style="width:33%">
-				<col style="width:33%">
+				<col style="width:25%">
+				<col style="width:25%">
+				<col style="width:25%">
+				<col style="width:25%">
 			<!-- The buttons go to the home page, profile page, or help page -->
 			<tr align="center">
+				<td align="center"><a href="/CopingGame/scenarios/" style="text-decoration: none">
+				<img src="{% static 'CopingGame/images/play2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+				</a></td>
 				<td align="center"><a href="/CopingGame/" style="text-decoration: none">
 				<img src="{% static 'CopingGame/images/home1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
 				</a></td>
@@ -65,6 +69,7 @@
 				</a></td>
 			</tr>
 			<tr>
+				<td align="center">Play a Scenario</td>
 				<td align="center">Home Page</td>
 				<td align="center">Profile Page</td>
 				<td align="center">Help Page</td>
@@ -93,7 +98,7 @@
 					<!-- Themes table -->
 					<table class="cattable" id="themes" align="center">
 						<tr>
-							<td colspan="2" style="text-decoration:underline;color:{{ player.fav_text }}">User Pictures - 50 Tokens Each</td>
+							<td colspan="2" style="text-decoration:underline;color:{{ player.fav_text }}">User Pictures - 50 <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/> Each</td>
 						</tr>
 				
 						<!-- Make list of all pictures -->
@@ -123,7 +128,7 @@
 								
 									<!-- If they don't have enough tokens, say they don't -->
 									{% else %}
-										<td style="color:{{ player.fav_text }}">Not enough tokens.</td>
+										<td style="color:{{ player.fav_text }}">Not enough <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>.</td>
 									{% endif %}
 								{% endif %}
 								</tr>

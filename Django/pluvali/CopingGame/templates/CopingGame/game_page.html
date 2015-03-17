@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 
-<!-- A prototype game page - Tim -->
-
 {% load staticfiles %}
 <html>
 <head>
@@ -22,7 +20,7 @@
 						<!-- user information -->
 						{{ user.get_username }}
 						<br>
-						Tokens: {{ player.tokens }}
+						<img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>: {{ player.tokens }}
 						<br>
 						<a href="/logout/" style="color:{{ player.fav_text }}">Logout
 					{% else %}

@@ -20,7 +20,7 @@
 						<!-- user information -->
 						{{ user.get_username }}
 						<br>
-						Tokens: {{ player.tokens }}
+						<img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>: {{ player.tokens }}
 						<br>
 						<a href="/logout/" style="color:{{ player.fav_text }}">Logout
 					{% else %}
@@ -69,13 +69,28 @@
 		<h1>CONGRATULATIONS!</h1>
 		</tr>
 		<tr>
-		<!-- CONGRATULATIONS Picture -->
-		<!-- <img src="{% static 'CopingGame/images/victory.png' %}" width="400" height="200"/> -->
+			<center>
+			<td align="center">
+				<!-- CONGRATULATIONS Picture -->
+				<img align="center" src="{% static 'CopingGame/images/Congratulations.png' %}" width="400" height="200"/>
+			</td>
 		</tr>
 		<br>
 		<tr>
-			<p>You completed the scenario and solved all the problems!</p>
-			<p>You've earned {{ player.temp_tokens }} tokens.</p>
+			<td align="center">
+				<p align="center">You completed the scenario and solved all the problems!</p>
+				<p align="center">You've earned {{ player.temp_tokens }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>.</p>
+			</td>
+		</tr>
+		<br>
+		<tr>
+			<td align="center"><a href="/CopingGame/scenarios/" style="text-decoration: none">
+			<img src="{% static 'CopingGame/images/play2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+			</a></td>
+		</tr>
+		<tr>
+			<td align="center">Play Another Scenario</td>
+			</center>
 		</tr>
 		<br>
 		<tr>
