@@ -2,7 +2,6 @@ Things to implement or fix:
 
 1) Back button problems (doesn't show tokens properly, errors if done while playing game)
 
-	2) Store page purchases (Tim)
 
 	5) Scenario editor (Alex)
 
@@ -18,14 +17,13 @@ Things to implement or fix:
 
 14) Make buttons highlighted when moused over.
 
-15) Store/profile page - coin button to buy, paint brush button to apply, give option to change font (profile page only)
+15b) Store/profile page - paint brush button to apply
 
 16) Game page - have a pop up after every one saying you earned a token
 
-17) Congratulations - have a "thumbs up" image (or something similar) on the page
-
 
 FINISHED:
+	2) Store page purchases
 
 	3) Delete a USER also deletes a PLAYER
 
@@ -33,6 +31,10 @@ FINISHED:
 	
 	6) User profile page (edit picture)
 	
-	11) Button links, not text links (started not finished)
+	11) Button links, not text links
 	
 	13) Links/text centered vertically. Text by the "store" button should be default font. DDRC header to footer
+
+	15a) Store/profile page - coin button to buy, give option to change font (profile page only)
+
+	17) Congratulations - have a "thumbs up" image (or something similar) on the page
