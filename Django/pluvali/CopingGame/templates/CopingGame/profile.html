@@ -27,7 +27,7 @@
 	{% endif %}
 	</script>
 </head>
-<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_home_page.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_profile_page.css' %}" />
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 <font size="{{ player.text_size }}">
 	<table id="page" align="center" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
@@ -91,43 +91,58 @@
 		</tr>
 		<tr>
 			<!-- PLAYER TOKENS -->
+			<center>
 			<td align="center">You've earned a total of {{ player.tokens }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>!</td>
+			</center>
 		</tr>
-		<br>
 		<tr>
-			<td align="left"><!-- UPLOAD PICTURE -->
+		<br>
+		</tr>
+		<tr>
+		<table id="contentTable" class="t1" style="float:center-right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}" border="1" rules="cols">
+		<thead>
+		<tr><th>Change Text Size</th><th>Upload a Player Picture</th>
+		</thead>
+		<tbody>
+		<col style="width:50%">
+		<col style="width:50%">
+			<tr>
+				<td><!-- Change Font Size -->
+					<!--<p>Change text size here:</p>-->
+					<form id="textSizeOption" action="/CopingGame/profile/" method="post">
+						{% csrf_token %}
+						<div>
+							<button name="smallFont" type="submit" value="{{ purchase.itemFKey.itemName }}"><img src="{% static 'CopingGame/images/paint1.png' %}" height="25px" width="30px" border="0" /></button>
+							<font size="5">Preview
+						</div>
+						<div>
+							<button name="mediumFont" type="submit" value="{{ purchase.itemFKey.itemName }}"><img src="{% static 'CopingGame/images/paint1.png' %}" height="25px" width="30px" border="0" /></button>
+							<font size="6">Preview
+						</div>
+						<div>
+							<button name="largeFont" type="submit" value="{{ purchase.itemFKey.itemName }}"><img src="{% static 'CopingGame/images/paint1.png' %}" height="25px" width="30px" border="0" /></button>
+							<font size="7">Preview
+						</div>
+					</form>
+					<font size="{{ player.text_size }}">
+				</td>
+				<td><!-- UPLOAD PICTURE -->
 				Change your profile picture here:
 				<form id="profilePicture" action="/CopingGame/profile/" method="post" enctype="multipart/form-data">
-				{% csrf_token %}
+					{% csrf_token %}
 				
-				{{ profileForm.as_p }}
-				<input type="submit" value="Upload" name="upload"/>
-			</form>
-			</td>
-			<td align="right"><!-- Change Font Size -->
-				<tr>Change text size here:</tr>
-				<form id="textSizeOption" action="/CopingGame/profile/" method="post">
-				{% csrf_token %}
-				<tr>
-					<td><button name="smallFont" type="submit" value="{{ purchase.itemFKey.itemName }}">Small Font</button></td>
-					<td><font size="5">Preview</td>
-				</tr>
-				<tr>
-					<td><button name="mediumFont" type="submit" value="{{ purchase.itemFKey.itemName }}">Medium Font</button></td>
-					<td><font size="6">Preview</td>
-				</tr>
-				<tr>
-					<td><button name="largeFont" type="submit" value="{{ purchase.itemFKey.itemName }}">Large Font</button></td>
-					<td><font size="7">Preview</td>
-				</tr>
+					{{ profileForm.as_p }}
+					<div><input type="submit" value="Upload" name="upload"/></div>
 				</form>
-				<font size="{{ player.text_size }}">
-			</td>
+				</td>
+			</tr>
+		</tbody>
+		</table>
 		</tr>
 		<br>
 		<tr>
 			<!-- PLAYER PURCHASES -->
-			Here is a list of your total purchases:
+			<h2 align="center">Here is a list of your total purchases:</h2>
 		</tr>
 		<tr>
 			<form action="" method="post">
@@ -144,8 +159,8 @@
 						{% if purchase.itemFKey.category == "Themes" %}
 							<!-- Button to switch theme, and display a preview of the theme next to the button -->
 							<tr>
-								<td align="center"><button name="theme" type="submit" value="{{ purchase.itemFKey.itemName }}">Use Theme</button></td>
-								<td style="background-color:{{ purchase.itemFKey.value1 }}; color:{{ purchase.itemFKey.value2 }}">{{ purchase.itemFKey.itemDesc }}</td>
+								<td align="center"><button name="theme" type="sumbit" value="{{ purchase.itemFKey.itemName }}"/><img src="{% static 'CopingGame/images/paint1.png' %}" height="25px" width="30px" border="0" /></button></td>
+								<td style="background-color:{{ purchase.itemFKey.value1 }}; color:{{ purchase.itemFKey.value2 }}">{{ purchase.itemFKey.itemDesc }}</a></td>
 							</tr>
 						{% endif %}
 					{% endfor %}
@@ -162,7 +177,7 @@
 						{% if purchase.itemFKey.category == "Pictures" %}
 							<!-- Button to switch picture, and display the picture they own next to the button -->
 							<tr>
-								<td align="center"><button name="picture" type="submit" value="{{ purchase.itemFKey.itemPicture.url }}">Use Picture</button></td>
+								<td align="center"><button name="picture" type="submit" value="{{ purchase.itemFKey.itemPicture.url }}"><img src="{% static 'CopingGame/images/paint1.png' %}" height="25px" width="30px" border="0" /></button></td>
 								<td><img src="{{ purchase.itemFKey.itemPicture.url }}" style="width:100px;height:100px;border:0"></td>
 							</tr>
 						{% endif %}

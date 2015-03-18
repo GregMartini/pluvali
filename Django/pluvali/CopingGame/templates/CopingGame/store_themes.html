@@ -113,7 +113,7 @@
 									<!-- Display apply button since they own the theme-->
 									<form action="" method="post">
 										{% csrf_token %}
-										<td><button type="submit" name="change" value="{{ theme.itemFKey.itemName }}">Apply</button></td>
+										<td><button type="submit" name="change" value="{{ theme.itemFKey.itemName }}"><img src="{% static 'CopingGame/images/paint1.png' %}" height="25px" width="30px" border="0" /></button></td>
 									</form>
 											
 								<!-- If this is reached, then they don't own the item -->
