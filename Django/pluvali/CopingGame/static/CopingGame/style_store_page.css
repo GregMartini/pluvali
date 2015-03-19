@@ -136,3 +136,11 @@ h3 {
 	color: #000000;
 }
 
+/* Add blue background when hover over */
+button:hover {
+	background:DeepSkyBlue;
+}
+
+a:hover {
+	background:DeepSkyBlue;
+ }

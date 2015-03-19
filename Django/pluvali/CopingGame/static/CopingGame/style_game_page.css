@@ -58,3 +58,12 @@ h2 {
 	/* font-size: 20px; */
 	font-style: italic;
 }
+
+/* Add blue background when hover over */
+button:hover {
+	background:DeepSkyBlue;
+}
+
+a:hover {
+	background:DeepSkyBlue;
+ }

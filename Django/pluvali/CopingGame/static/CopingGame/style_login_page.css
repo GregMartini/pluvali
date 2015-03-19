@@ -19,3 +19,12 @@ h1 {
     text-align: center;
     letter-spacing: 8px;
 }
+
+/* Add blue background when hover over */
+button:hover {
+	background:DeepSkyBlue;
+}
+
+a:hover {
+	background:DeepSkyBlue;
+ }

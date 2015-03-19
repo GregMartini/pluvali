@@ -14,8 +14,6 @@ Things to implement or fix:
 
 12) Player groups so admins can easily link scenarios to players (default group should be able to handle this, might need additional setup)
 
-14) Make buttons highlighted when moused over.
-
 16) Game page - have a pop up after every one saying you earned a token
 
 
@@ -31,6 +29,8 @@ FINISHED:
 	11) Button links, not text links
 	
 	13) Links/text centered vertically. Text by the "store" button should be default font. DDRC header to footer
+
+	14) Make buttons highlighted when moused over.	
 
 	15) Store/profile page - coin button to buy, paint brush button to apply, give option to change font
 
