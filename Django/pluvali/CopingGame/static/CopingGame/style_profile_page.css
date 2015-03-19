@@ -35,11 +35,6 @@ table.t1 {
 	padding: 0;
 } 
 
-
-/*
-button[type="submit"]{
-	background:url(http://thumbs.dreamstime.com/x/paint-brush-19698465.jpg);
-	width: 90px;
-	height: 90px;
-	border: 0;
-}*/
+button:hover{
+	background:yellow;
+}
