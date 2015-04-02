@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render, get_object_or_404
 from django.core.urlresolvers import reverse_lazy
 from django.core.context_processors import csrf
+from django.db.models import Q
 from django import forms
 from django.contrib.auth.forms import UserCreationForm 
 from CopingGame.forms import PlayerProfileForm
@@ -31,7 +32,7 @@ def help(request):
 @login_required(login_url='/login')
 def scenario_index(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
-	scenario_list = Scenario.objects.filter(player_list=request.user).distinct()
+	scenario_list = Scenario.objects.filter(Q(player_list=request.user) | Q(group_list=request.user)).distinct()
 	player.stage = 0
 	player.temp_tokens = 0
 	player.save()
@@ -78,10 +79,8 @@ def game(request, sceneID):
 		player.temp_tokens += tokens_earned
 		player.stage += 1
 		player.save()
-		#return redirect('CopingGame/game_page.html')
 		if (player.stage == max_stage):
-			return HttpResponseRedirect("/CopingGame/victory/")
-	
+			return HttpResponseRedirect("/CopingGame/victory/")	
 	return render(request, 'CopingGame/game_page.html', context)
 
 @login_required(login_url='/login')

@@ -12,10 +12,6 @@ Things to implement or fix:
 
 10) Store button color purchases
 
-12) Player groups so admins can easily link scenarios to players (default group should be able to handle this, might need additional setup)
-
-16) Game page - have a pop up after every one saying you earned a token
-
 
 FINISHED:
 	2) Store page purchases
@@ -27,11 +23,15 @@ FINISHED:
 	6) User profile page (edit picture)
 	
 	11) Button links, not text links
+
+	12) Player groups so admins can easily link scenarios to players
 	
 	13) Links/text centered vertically. Text by the "store" button should be default font. DDRC header to footer
 
 	14) Make buttons highlighted when moused over.	
 
 	15) Store/profile page - coin button to buy, paint brush button to apply, give option to change font
+
+	16) Game page - have a pop up after every one saying you earned a token
 
 	17) Congratulations - have a "thumbs up" image (or something similar) on the page

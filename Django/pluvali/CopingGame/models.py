@@ -23,7 +23,14 @@ class Player(models.Model):
 	def __str__(self):
 		return self.user.username
 	pass
-		
+
+class PlayerGroup(models.Model):
+	groupName = models.CharField(max_length=35, default="Admin's Group")
+	player = models.ManyToManyField(Player)
+	def __str__(self):
+		return self.groupName
+	pass
+	
 class Solutions(models.Model):
 	pictureS = models.ImageField(upload_to='solutions/', blank=True, null=True)
 	solution = models.CharField(max_length=300, default="Solution")
@@ -47,7 +54,8 @@ class Scenario(models.Model):
 	title = models.CharField(max_length=35, default="Scenario Title")
 	description = models.CharField(max_length=250, default="Scenatio Decription")
 	problems = models.ManyToManyField(Problems)
-	player_list = models.ManyToManyField(Player)
+	player_list = models.ManyToManyField(Player, blank=True)
+	group_list = models.ManyToManyField(PlayerGroup, blank=True)
 	def __str__(self):
 		return self.title
 
