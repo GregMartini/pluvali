@@ -51,6 +51,7 @@ def game(request, sceneID):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
 	scene = get_object_or_404(Scenario, pk = sceneID)
 	max_stage = scene.problems.count()
+	tokens_earned = random.randint(2,5)
 	stage0 = scene.problems.all()[0]
 	if(max_stage >= 2):
 		stage1 = scene.problems.all()[1]
@@ -63,22 +64,22 @@ def game(request, sceneID):
 	if(player.stage > max_stage):
 		player.stage = 0
 	if(max_stage >= 1):
-		context = {'scene':scene, 'player':player, 'stage0':stage0}
+		context = {'scene':scene, 'player':player, 'tokens_earned':tokens_earned, 'stage0':stage0}
 	if(max_stage >= 2):
-		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1}
+		context = {'scene':scene, 'player':player, 'tokens_earned':tokens_earned, 'stage0':stage0,'stage1':stage1}
 	if(max_stage >= 3):
-		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2}
+		context = {'scene':scene, 'player':player, 'tokens_earned':tokens_earned, 'stage0':stage0,'stage1':stage1,'stage2':stage2}
 	if(max_stage >= 4):
-		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3}
+		context = {'scene':scene, 'player':player, 'tokens_earned':tokens_earned, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3}
 	if(max_stage >= 5):
-		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4}
+		context = {'scene':scene, 'player':player, 'tokens_earned':tokens_earned, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4}
 	if request.method == 'POST':
-		tokens_earned = random.randint(2,5)
 		player.tokens += tokens_earned
 		player.temp_tokens += tokens_earned
 		player.stage += 1
 		player.save()
-		if(player.stage == max_stage):
+		#return redirect('CopingGame/game_page.html')
+		if (player.stage == max_stage):
 			return HttpResponseRedirect("/CopingGame/victory/")
 	
 	return render(request, 'CopingGame/game_page.html', context)

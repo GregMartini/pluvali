@@ -70,24 +70,26 @@
 				<tr id="handle">
 					<td colspan="3">How To Handle This Problem?</td>
 				</tr>
+				
+				
 				<tr id="techniques">
 					{% if player.stage == 0 %}
 						{% for sol in stage0.solutions.all %}
 							<td>{{sol.solution}}</td>
 						{% endfor %}
-					{% elif player.stage == 1 %}{{ stage1 }}
+					{% elif player.stage == 1 %}
 						{% for sol in stage1.solutions.all %}
 							<td>{{sol.solution}}</td>
 						{% endfor %}
-					{% elif player.stage == 2 %}{{ stage2 }}
+					{% elif player.stage == 2 %}
 						{% for sol in stage2.solutions.all %}
 							<td>{{sol.solution}}</td>
 						{% endfor %}
-					{% elif player.stage == 3 %}{{ stage3 }}
+					{% elif player.stage == 3 %}
 						{% for sol in stage3.solutions.all %}
 							<td>{{sol.solution}}</td>
 						{% endfor %}
-					{% elif player.stage == 4 %}{{ stage4 }}
+					{% elif player.stage == 4 %}
 						{% for sol in stage4.solutions.all %}
 							<td>{{sol.solution}}</td>
 						{% endfor %}
@@ -122,23 +124,88 @@
 				{% csrf_token %}
 					{% if player.stage == 0 %}
 						{% for s in stage0.solutions.all %}
-							<td><button type="submit">Select</button></td>
+							<td><!--<button type="submit">Select</button>-->
+								<div class="box">
+							<a class="button" name ="openPopup" href="#popup1">Choose Me!</a>
+							</div>
+
+							<div id="popup1" class="overlay">
+								<div class="popup">
+									<h2>Great Job!</h2>
+									<input class="close" name="closePopup" type="submit" value="&times;"></input>
+									<div class="content">
+										Way to go! You earned {{ tokens_earned }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>.
+									</div>
+								</div>
+							</div></td>
 						{% endfor %}
 					{% elif player.stage == 1 %}
 						{% for s in stage1.solutions.all %}
-							<td><button type="submit">Select</button></td>
+							<td><!--<button type="submit">Select</button>-->
+								<div class="box">
+							<a class="button" name ="openPopup" href="#popup1">Choose Me!</a>
+							</div>
+
+							<div id="popup1" class="overlay">
+								<div class="popup">
+									<h2>Great Job!</h2>
+									<input class="close" name="closePopup" type="submit" >&times;</input>
+									<div class="content">
+										Way to go! You earned {{ tokens_earned }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>.
+									</div>
+								</div>
+							</div></td>>
 						{% endfor %}
 					{% elif player.stage == 2 %}
 						{% for s in stage2.solutions.all %}
-							<td><button type="submit">Select</button></td>
+							<td><!--<button type="submit">Select</button>-->
+								<div class="box">
+							<a class="button" name ="openPopup" href="#popup1">Choose Me!</a>
+							</div>
+
+							<div id="popup1" class="overlay">
+								<div class="popup">
+									<h2>Great Job!</h2>
+									<input class="close" name="closePopup" type="submit" >&times;</input>
+									<div class="content">
+										Way to go! You earned {{ tokens_earned }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>.
+									</div>
+								</div>
+							</div></td>
 						{% endfor %}
 					{% elif player.stage == 3 %}
 						{% for s in stage3.solutions.all %}
-							<td><button type="submit">Select</button></td>
+							<td><!--<button type="submit">Select</button>-->
+								<div class="box">
+							<a class="button" name ="openPopup" href="#popup1">Choose Me!</a>
+							</div>
+
+							<div id="popup1" class="overlay">
+								<div class="popup">
+									<h2>Great Job!</h2>
+									<input class="close" name="closePopup" type="submit" >&times;</input>
+									<div class="content">
+										Way to go! You earned {{ tokens_earned }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>.
+									</div>
+								</div>
+							</div></td>
 						{% endfor %}
 					{% elif player.stage == 4 %}
 						{% for s in stage4.solutions.all %}
-							<td><button type="submit">Select</button></td>
+							<td><!--<button type="submit">Select</button>-->
+								<div class="box">
+							<a class="button" name ="openPopup" href="#popup1">Choose Me!</a>
+							</div>
+
+							<div id="popup1" class="overlay">
+								<div class="popup">
+									<h2>Great Job!</h2>
+									<input class="close" name="closePopup" type="submit" >&times;</input>
+									<div class="content">
+										Way to go! You earned {{ tokens_earned }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>.
+									</div>
+								</div>
+							</div></td>
 						{% endfor %}
 					{% endif %}
 				</form>
