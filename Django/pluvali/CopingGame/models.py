@@ -1,7 +1,6 @@
 import os
 from django.db import models
 from django.contrib.auth.models import User
-import global_defs as defs
 from django.core.files.storage import FileSystemStorage
 
 #NOTE ImageField requires Pillow

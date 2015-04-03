@@ -32,6 +32,7 @@ def help(request):
 @login_required(login_url='/login')
 def scenario_index(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
+	#scenario_list = Scenario.objects.filter(player_list=request.user).distinct()
 	scenario_list = Scenario.objects.filter(Q(player_list=request.user) | Q(group_list=request.user)).distinct()
 	player.stage = 0
 	player.temp_tokens = 0
@@ -149,13 +150,23 @@ def register(request):
 			
 			store_list = list(Store.objects.all())
 			for item in store_list:
-				if item.itemName == 'DefaultBlack' or item.itemName == 'defaultPicture':
+				if item.itemName == 'DefaultBlack':
 					purchase = Purchases.objects.create(player=new_player, itemFKey=item, owned=True)
 					purchase.save()
+					new_player.fav_bg = item.value1
+					new_player.fav_text = item.value2
+					new_player.save()
+				elif item.itemName == 'DefaultPicture':
+					purchase = Purchases.objects.create(player=new_player, itemFKey=item, owned=True)
+					purchase.save()
+					new_player.avatarPic = item.itemPicture
+					new_player.save()
 				else:
 					purchase = Purchases.objects.create(player=new_player, itemFKey=item, owned=False)
 					purchase.save()
-					
+			
+			defaultScenario = Scenario.objects.get(pk=1)
+			defaultScenario.player_list.add(new_player)
 			return HttpResponseRedirect("/CopingGame/")
 		else:
 			return render(request, 'registration/register.html', {'form': form,})

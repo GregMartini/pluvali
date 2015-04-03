@@ -15,11 +15,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Player',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
                 ('email', models.CharField(max_length=30)),
-                ('points', models.IntegerField(default=0)),
-                ('fav_bg', models.IntegerField(default=90)),
-                ('fav_text', models.IntegerField(default=1)),
+                ('tokens', models.IntegerField(default=0)),
+                ('avatarPic', models.ImageField(upload_to='userPic/', default='userPic/default-user.png')),
+                ('fav_bg', models.CharField(default='#ededed', max_length=30)),
+                ('fav_text', models.CharField(default='black', max_length=30)),
+                ('text_size', models.IntegerField(default=6)),
+                ('stage', models.IntegerField(default=0)),
+                ('temp_tokens', models.IntegerField(default=0)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -29,8 +33,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Problems',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
-                ('problem', models.CharField(max_length=225, default='The Problem.')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('pictureP', models.ImageField(upload_to='problems/', null=True)),
+                ('problem', models.CharField(default='The Problem.', max_length=225)),
             ],
             options={
             },
@@ -39,7 +44,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Purchases',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('owned', models.BooleanField(default=False)),
             ],
             options={
             },
@@ -49,8 +55,9 @@ class Migration(migrations.Migration):
             name='Scenario',
             fields=[
                 ('sceneID', models.AutoField(primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=15, default='Scenario Title')),
-                ('description', models.CharField(max_length=250, default='Scenatio Decription')),
+                ('title', models.CharField(default='Scenario Title', max_length=35)),
+                ('description', models.CharField(default='Scenatio Decription', max_length=250)),
+                ('player_list', models.ManyToManyField(to='CopingGame.Player', blank=True)),
                 ('problems', models.ManyToManyField(to='CopingGame.Problems')),
             ],
             options={
@@ -60,8 +67,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Solutions',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
-                ('solution', models.CharField(max_length=300, default='Solution')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('pictureS', models.ImageField(upload_to='solutions/', null=True, blank=True)),
+                ('solution', models.CharField(default='Solution', max_length=300)),
             ],
             options={
             },
@@ -71,9 +79,12 @@ class Migration(migrations.Migration):
             name='Store',
             fields=[
                 ('itemKey', models.AutoField(primary_key=True, serialize=False)),
-                ('category', models.CharField(max_length=20, default='Themes')),
-                ('itemName', models.CharField(max_length=15, default='ItemName')),
-                ('itemDesc', models.CharField(max_length=50, default='Item Description')),
+                ('category', models.CharField(default='Themes', max_length=20)),
+                ('itemName', models.CharField(default='ItemName', max_length=15)),
+                ('itemDesc', models.CharField(default='Item Description', max_length=50)),
+                ('itemPicture', models.ImageField(upload_to='store/', null=True, blank=True)),
+                ('value1', models.CharField(blank=True, max_length=10)),
+                ('value2', models.CharField(blank=True, max_length=10)),
             ],
             options={
             },

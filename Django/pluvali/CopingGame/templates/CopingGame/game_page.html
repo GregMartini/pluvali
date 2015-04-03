@@ -70,8 +70,7 @@
 				<tr id="handle">
 					<td colspan="3">How To Handle This Problem?</td>
 				</tr>
-				
-				
+	
 				<tr id="techniques">
 					{% if player.stage == 0 %}
 						{% for sol in stage0.solutions.all %}
@@ -149,12 +148,12 @@
 							<div id="popup1" class="overlay">
 								<div class="popup">
 									<h2>Great Job!</h2>
-									<input class="close" name="closePopup" type="submit" >&times;</input>
+									<input class="close" name="closePopup" type="submit" value="&times;"></input>
 									<div class="content">
 										Way to go! You earned {{ tokens_earned }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>.
 									</div>
 								</div>
-							</div></td>>
+							</div></td>
 						{% endfor %}
 					{% elif player.stage == 2 %}
 						{% for s in stage2.solutions.all %}
@@ -166,7 +165,7 @@
 							<div id="popup1" class="overlay">
 								<div class="popup">
 									<h2>Great Job!</h2>
-									<input class="close" name="closePopup" type="submit" >&times;</input>
+									<input class="close" name="closePopup" type="submit" value="&times;"></input>
 									<div class="content">
 										Way to go! You earned {{ tokens_earned }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>.
 									</div>
@@ -183,7 +182,7 @@
 							<div id="popup1" class="overlay">
 								<div class="popup">
 									<h2>Great Job!</h2>
-									<input class="close" name="closePopup" type="submit" >&times;</input>
+									<input class="close" name="closePopup" type="submit" value="&times;"></input>
 									<div class="content">
 										Way to go! You earned {{ tokens_earned }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>.
 									</div>
@@ -200,7 +199,7 @@
 							<div id="popup1" class="overlay">
 								<div class="popup">
 									<h2>Great Job!</h2>
-									<input class="close" name="closePopup" type="submit" >&times;</input>
+									<input class="close" name="closePopup" type="submit" value="&times;"></input>
 									<div class="content">
 										Way to go! You earned {{ tokens_earned }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>.
 									</div>
