@@ -140,7 +140,17 @@ h3 {
 .tabbut:hover {
 	background:DeepSkyBlue;
 }
-
-a:hover {
-	background:DeepSkyBlue;
- }
+ 
+.link { 
+	width: 150px; 
+	border: 1px solid #9325BC; 
+	padding: 10px; 
+}
+ 
+.link:hover { 
+	-moz-box-shadow: 0 0 10px DeepSkyBlue; 
+	-webkit-box-shadow: 0 0 10px DeepSkyBlue; 
+	box-shadow: 0 0 10px DeepSkyBlue; 
+	background: DeepSkyBlue;
+}
+ 
