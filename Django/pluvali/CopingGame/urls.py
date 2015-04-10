@@ -12,4 +12,5 @@ urlpatterns = [
 	url(r'^store_user_pictures/', views.store_user_pictures, name='store_user_pictures'), #store user pictures page
 	url(r'^admin_page/', views.admin_page, name='admin_page/'),
 	url(r'^profile/', views.profile, name='profile'),
+	url(r'^tokens_earned/', views.tokens, name='tokens'),
 ]

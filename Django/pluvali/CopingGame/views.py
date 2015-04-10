@@ -32,7 +32,9 @@ def help(request):
 @login_required(login_url='/login')
 def scenario_index(request):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
+	#Pull scenario list by associated to the PLAYER by Player_List or Player_Group_List
 	scenario_list = Scenario.objects.filter(Q(player_list=player) | Q(group_list__player=player)).distinct()
+	#set stage to 0 in case viewing different scenario than previously.
 	player.stage = 0
 	player.temp_tokens = 0
 	player.save()
@@ -46,54 +48,45 @@ def admin_page(request):
 	context = {'player_list':player_list}
 	return render(request, 'CopingGame/admin_page.html', context)
 
+@login_required(login_url='login')
+def tokens(request):
+	player = Player.objects.get(user=User.objects.get(username=request.user))
+	context = { 'player': player }
+	return render(request, 'CopingGame/tokens.html', context)
+	
 #link for game page
 @login_required(login_url='/login')
 def game(request, sceneID):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
 	scene = get_object_or_404(Scenario, pk = sceneID)
+	#Get max number of stages in scenario and set tokens for each stage.
 	max_stage = scene.problems.count()
 	stage0 = scene.problems.all()[0]
-	tokens_earned0 = random.randint(2,5)
 	if(max_stage >= 2):
 		stage1 = scene.problems.all()[1]
-		tokens_earned1 = random.randint(2,5)
 	if(max_stage >= 3):
 		stage2 = scene.problems.all()[2]
-		tokens_earned2 = random.randint(2,5)
 	if(max_stage >= 4):
 		stage3 = scene.problems.all()[3]
-		tokens_earned3 = random.randint(2,5)
 	if(max_stage >= 5):
 		stage4 = scene.problems.all()[4]
-		tokens_earned4 = random.randint(2,5)
 	if(player.stage > max_stage):
 		player.stage = 0
 	if(max_stage == 1):
-		context = {'scene':scene, 'player':player, 'tokens_earned0':tokens_earned0, 'stage0':stage0}
+		context = {'scene':scene, 'player':player, 'stage0':stage0}
 	if(max_stage == 2):
-		context = {'scene':scene, 'player':player, 'tokens_earned0':tokens_earned0, 'tokens_earned1':tokens_earned1, 'stage0':stage0,'stage1':stage1}
+		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1}
 	if(max_stage == 3):
-		context = {'scene':scene, 'player':player, 'tokens_earned0':tokens_earned0, 'tokens_earned1':tokens_earned1, 'tokens_earned2':tokens_earned2, 'stage0':stage0,'stage1':stage1,'stage2':stage2}
+		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2}
 	if(max_stage == 4):
-		context = {'scene':scene, 'player':player, 'tokens_earned0':tokens_earned0, 'tokens_earned1':tokens_earned1, 'tokens_earned2':tokens_earned2, 'tokens_earned3':tokens_earned3, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3}
+		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3}
 	if(max_stage == 5):
-		context = {'scene':scene, 'player':player, 'tokens_earned0':tokens_earned0, 'tokens_earned1':tokens_earned1, 'tokens_earned2':tokens_earned2, 'tokens_earned3':tokens_earned3, 'tokens_earned4':tokens_earned4, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4}
+		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4}
 	if request.method == 'POST':
-		if(player.stage == 0):
-			player.tokens += tokens_earned0
-			player.temp_tokens += tokens_earned0
-		elif(player.stage == 1):
-			player.tokens += tokens_earned1
-			player.temp_tokens += tokens_earned1
-		elif(player.stage == 2):
-			player.tokens += tokens_earned2
-			player.temp_tokens += tokens_earned2
-		elif(player.stage == 3):
-			player.tokens += tokens_earned3
-			player.temp_tokens += tokens_earned3
-		elif(player.stage == 4):
-			player.tokens += tokens_earned4
-			player.temp_tokens += tokens_earned4
+		#add tokens when an answer is selected
+		player.temp_tokens += random.randint(2,5)
+		player.tokens += player.temp_tokens
+		player.save()
 		player.stage += 1
 		player.save()
 		if (player.stage == max_stage):
@@ -160,12 +153,15 @@ def register(request):
 		form = UserCreationForm(request.POST)
 		player_email = request.POST['email']
 		if form.is_valid():
+			#create new USER from form
 			new_user = form.save()
+			#create new PLAYER from form
 			new_player = Player.objects.create(user=User.objects.get(username=request.POST['username']), email=player_email)
 			new_user = authenticate(username=request.POST['username'], password=request.POST['password1'])
-			
+			#add all store items to account
 			store_list = list(Store.objects.all())
 			for item in store_list:
+				#set default purchases to owned
 				if item.itemName == 'DefaultBlack':
 					purchase = Purchases.objects.create(player=new_player, itemFKey=item, owned=True)
 					purchase.save()
@@ -177,12 +173,14 @@ def register(request):
 					purchase.save()
 					new_player.avatarPic = item.itemPicture
 					new_player.save()
+				#set other purchases to not owned	
 				else:
 					purchase = Purchases.objects.create(player=new_player, itemFKey=item, owned=False)
 					purchase.save()
-			
+			#give access to default scenario
 			defaultScenario = Scenario.objects.get(pk=1)
 			defaultScenario.player_list.add(new_player)
+			defaultScenario.save()
 			return HttpResponseRedirect("/CopingGame/")
 		else:
 			return render(request, 'registration/register.html', {'form': form,})
