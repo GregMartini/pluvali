@@ -137,7 +137,7 @@ h3 {
 }
 
 /* Add blue background when hover over */
-button:hover {
+.tabbut:hover {
 	background:DeepSkyBlue;
 }
 

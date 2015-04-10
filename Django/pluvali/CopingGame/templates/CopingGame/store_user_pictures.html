@@ -40,11 +40,6 @@
 		
 		</br>
 		
-		<!-- Page banner -->
-		<tr>
-			<h1>Welcome to the Store</h1>
-		</tr>
-		
 		<!-- Links to Home, Help, and Profile pages -->
 		<tr>
 			<div id="links" align="center">
@@ -76,6 +71,11 @@
 			</tr>
 			</table>
 			</div>
+		</tr>
+		
+		<!-- Page banner -->
+		<tr>
+			<h1>Welcome to the Store</h1>
 		</tr>
 		
 		<!-- Categories and Purchase areas -->
@@ -113,7 +113,7 @@
 									<!-- Display apply button since they own the picture-->
 									<form action="" method="post">
 										{% csrf_token %}
-										<td><button type="submit" name="change" value="{{ picture.itemFKey.itemName }}"><img src="{% static 'CopingGame/images/paint1.png' %}" height="25px" width="30px" border="0" /></button></td>
+										<td><button class="tabbut" type="submit" name="change" value="{{ picture.itemFKey.itemName }}"><img src="{% static 'CopingGame/images/paint1.png' %}" height="25px" width="30px" border="0" /></button></td>
 									</form>
 											
 								<!-- If this is reached, then they don't own the item -->
@@ -123,7 +123,7 @@
 										<!-- Display purchase button -->
 										<form action="" method="post">
 											{% csrf_token %}
-											<td><button type="submit" name="buy" value="{{ picture.itemFKey.itemName }}">Purchase</button></td>
+											<td><button class="tabbut" type="submit" name="buy" value="{{ picture.itemFKey.itemName }}">Purchase</button></td>
 										</form>
 								
 									<!-- If they don't have enough tokens, say they don't -->

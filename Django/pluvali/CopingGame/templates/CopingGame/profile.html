@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<!-- Quick page by Greg -->
+<!-- Profile page by Greg and Tim -->
 {% load staticfiles %}
 <html>
 <head>
@@ -53,7 +53,9 @@
 				</tr>
 			</table>
 		</tr>
+		
 		<br>
+		
 		<tr>
 			<div id="links" align="center">
 			<table style="width:100%">
@@ -85,10 +87,12 @@
 			</table>
 			</div>
 		</tr>
+		
 		<tr>
 			<!-- The Header -->
 			<h1>{{ user.get_username }}'s Profile</h1>
 		</tr>
+		
 		<tr>
 			<!-- PLAYER TOKENS -->
 			<center>
@@ -101,7 +105,7 @@
 		<tr>
 		<table id="contentTable" class="t1" style="float:center-right" style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 		<thead>
-		<tr><th>Change Text Size</th><th>Upload a Player Picture</th>
+		<tr><th align="left" style="text-decoration:underline">Change Text Size</th><th align="left" style="text-decoration:underline">Upload a Player Picture</th>
 		</thead>
 		<tbody>
 		<col style="width:50%">
@@ -142,7 +146,7 @@
 		<br>
 		<tr>
 			<!-- PLAYER PURCHASES -->
-			<h2 align="center">Here is a list of your total purchases:</h2>
+			<p align="center" style="text-decoration:underline"><b>Here is a list of your total purchases</b><p>
 		</tr>
 		<tr>
 			<form action="" method="post">
@@ -153,7 +157,7 @@
 				
 					<!-- Themes the player owns -->
 					<tr>
-						<td colspan="2" align="left">Themes Owned:</td>
+						<td colspan="2" align="left"><b>Themes Owned:</b></td>
 					</tr>	
 					{% for purchase in purchase_list %}
 						{% if purchase.itemFKey.category == "Themes" %}
@@ -171,7 +175,7 @@
 		
 					<!-- Pictures the player owns -->
 					<tr>
-						<td colspan="2" align="left">Pictures Owned:</td>
+						<td colspan="2" align="left"><b>Pictures Owned:</b></td>
 					</tr>
 					{% for purchase in purchase_list %}
 						{% if purchase.itemFKey.category == "Pictures" %}
