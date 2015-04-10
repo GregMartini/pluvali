@@ -58,6 +58,20 @@ button:hover {
 	background: DeepSkyBlue;
 }
 
+
+.scenario{ 
+	width: 75px;
+	border: 1px solid;
+	padding: 10px;
+} 
+
+.scenario:hover { 
+	-moz-box-shadow: 0 0 10px #00CC00; 
+	-webkit-box-shadow: 0 0 10px #00CC00; 
+	box-shadow: 0 0 10px #00CC00; 
+	background: #00CC00;
+}
+
 /*a:hover {
 	background:DeepSkyBlue;
 }*/
