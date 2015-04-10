@@ -50,11 +50,11 @@
 				<col style="width:25%">
 			<!-- The buttons go to the home page, profile page, or help page -->
 			<tr align="center">
-				<td align="center"><a href="/CopingGame/scenarios/" style="text-decoration: none">
-				<img src="{% static 'CopingGame/images/play2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
-				</a></td>
 				<td align="center"><a href="/CopingGame/" style="text-decoration: none">
 				<img src="{% static 'CopingGame/images/home1.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
+				</a></td>
+				<td align="center"><a href="/CopingGame/scenarios/" style="text-decoration: none">
+				<img src="{% static 'CopingGame/images/play2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
 				</a></td>
 				<td align="center"><a href="/CopingGame/profile/" style="text-decoration: none">
 				<img src="{% static 'CopingGame/images/profile2.png' %}" style="width:100px;height:100px;border:0" style="color:{{ player.fav_text }}">
@@ -64,8 +64,8 @@
 				</a></td>
 			</tr>
 			<tr>
-				<td align="center">Play a Scenario</td>
 				<td align="center">Home Page</td>
+				<td align="center">Play a Scenario</td>
 				<td align="center">Profile Page</td>
 				<td align="center">Help Page</td>
 			</tr>
@@ -140,7 +140,7 @@
 		
 		<tr>
 			<!-- A picture of DDRC's logo -->
-			<div align="center">
+			<div align="left">
 			<img src="{% static 'CopingGame/images/logo2.png' %}" alt="ddrcco.com" width="225" height="106.5">
 			</div>
 		</tr>
