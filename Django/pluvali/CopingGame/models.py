@@ -16,7 +16,8 @@ class Player(models.Model):
 	fav_text = models.CharField(max_length=30, default='black')
 	text_size = models.IntegerField(default=6)
 	stage = models.IntegerField(default=0) #used for iterating through scenarios
-	temp_tokens = models.IntegerField(default=0) #used for tracking player's points in a scenario
+	temp_tokens = models.IntegerField(default=0) #used for tracking player's tokens in a scenario
+	scenario_tokens = models.IntegerField(default=0) #used for tracking player's tokens in a scenario
 	def passw (self):
 		return self.user.password
 	def __str__(self):
@@ -33,7 +34,7 @@ class PlayerGroup(models.Model):
 class Solutions(models.Model):
 	pictureS = models.ImageField(upload_to='solutions/', blank=True, null=True)
 	solution = models.CharField(max_length=300, default="Solution")
-	videoId = models.CharField(max_length=50, default="q_g7s2oBzCw") #Clorox commercial, change this
+	sVideoId = models.CharField(max_length=50, default="q_g7s2oBzCw") #Clorox commercial, change this
 	verbose_name_plural = 'Solutions'
 	def __str__(self):
 		return self.solution
@@ -44,7 +45,7 @@ class Problems(models.Model):
 	pictureP = models.ImageField(upload_to='problems/', null=True)
 	problem = models.CharField(max_length=225, default="The Problem.")
 	solutions = models.ManyToManyField(Solutions)
-	videoId = models.CharField(max_length=50, default="q_g7s2oBzCw") #Clorox commercial, change this
+	pVideoId = models.CharField(max_length=50, default="q_g7s2oBzCw") #Clorox commercial, change this
 	def __str__(self):
 		return self.problem
 	verbose_name_plural = 'Problems'

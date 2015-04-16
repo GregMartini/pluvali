@@ -21,19 +21,19 @@
 				height: '390',
 				width: '640',
 				//Initial problem video
-				videoId: '{{stage0.videoId}}',
+				videoId: '{{stage0.pVideoId}}',
 				playerVars :{ 
 					//Pull playlist from database
 					{% if player.stage == 0 %}
-						'playlist': ['{% for sol in stage0.solutions.all %}{{ sol.videoId }}, {% endfor %}']
+						'playlist': ['{% for sol in stage0.solutions.all %}{{ sol.sVideoId }}, {% endfor %}']
 					{% elif player.stage == 1 %}
-						'playlist': ['{% for sol in stage1.solutions.all %}{{ sol.videoId }}, {% endfor %}']
+						'playlist': ['{% for sol in stage1.solutions.all %}{{ sol.sVideoId }}, {% endfor %}']
 					{% elif player.stage == 2 %}
-						'playlist': ['{% for sol in stage2.solutions.all %}{{ sol.videoId }}, {% endfor %}']
+						'playlist': ['{% for sol in stage2.solutions.all %}{{ sol.sVideoId }}, {% endfor %}']
 					{% elif player.stage == 3 %}
-						'playlist': ['{% for sol in stage3.solutions.all %}{{ sol.videoId }}, {% endfor %}']
+						'playlist': ['{% for sol in stage3.solutions.all %}{{ sol.sVideoId }}, {% endfor %}']
 					{% elif player.stage == 4 %}
-						'playlist': ['{% for sol in stage4.solutions.all %}{{ sol.videoId }}, {% endfor %}']
+						'playlist': ['{% for sol in stage4.solutions.all %}{{ sol.sVideoId }}, {% endfor %}']
 					{% endif %}
 				},
 				events: {
@@ -57,6 +57,12 @@
 		
 		//Focus on the video player
 		window.location.hash = '#Video1Div';
+		
+		//Show tokens div
+		/*
+		function showTokensEarned() {
+			document.getElementById(
+		}*/
 	</script>
 </head>
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
