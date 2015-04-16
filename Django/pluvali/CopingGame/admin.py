@@ -19,9 +19,10 @@ class Group_listInline(admin.TabularInline):
 class ScenarioAdmin(admin.ModelAdmin):
 	inlines = [ProblemsInline,Player_listInline,Group_listInline]
 	exclude = ('problems','player_list','group_list')
+class PlayerAdmin(admin.ModelAdmin):
+	exclude = ('stage','temp_tokens','scenario_tokens')
 
-
-admin.site.register(Player)
+admin.site.register(Player, PlayerAdmin)
 admin.site.register(PlayerGroup)
 
 admin.site.register(Solutions)
