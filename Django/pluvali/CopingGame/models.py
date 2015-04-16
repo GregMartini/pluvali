@@ -33,6 +33,7 @@ class PlayerGroup(models.Model):
 class Solutions(models.Model):
 	pictureS = models.ImageField(upload_to='solutions/', blank=True, null=True)
 	solution = models.CharField(max_length=300, default="Solution")
+	videoId = models.CharField(max_length=50, default="q_g7s2oBzCw") #Clorox commercial, change this
 	verbose_name_plural = 'Solutions'
 	def __str__(self):
 		return self.solution
@@ -43,6 +44,7 @@ class Problems(models.Model):
 	pictureP = models.ImageField(upload_to='problems/', null=True)
 	problem = models.CharField(max_length=225, default="The Problem.")
 	solutions = models.ManyToManyField(Solutions)
+	videoId = models.CharField(max_length=50, default="q_g7s2oBzCw") #Clorox commercial, change this
 	def __str__(self):
 		return self.problem
 	verbose_name_plural = 'Problems'

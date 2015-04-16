@@ -6,6 +6,58 @@
 	<!-- Title the page and link the style sheet -->
 	<title>Game Page</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'CopingGame/style_game_page.css' %}" />	
+	<script type="text/javascript">
+		//Install iframe API
+		var tag = document.createElement('script');
+		tag.src = "https://www.youtube.com/iframe_api";
+		var firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+		
+		var problemPlayer;
+		
+		//Load and start iframe video
+		function onYouTubeIframeAPIReady() {
+			problemPlayer = new YT.Player('problemPlayer', {
+				height: '390',
+				width: '640',
+				//Initial problem video
+				videoId: '{{stage0.videoId}}',
+				playerVars :{ 
+					//Pull playlist from database
+					{% if player.stage == 0 %}
+						'playlist': ['{% for sol in stage0.solutions.all %}{{ sol.videoId }}, {% endfor %}']
+					{% elif player.stage == 1 %}
+						'playlist': ['{% for sol in stage1.solutions.all %}{{ sol.videoId }}, {% endfor %}']
+					{% elif player.stage == 2 %}
+						'playlist': ['{% for sol in stage2.solutions.all %}{{ sol.videoId }}, {% endfor %}']
+					{% elif player.stage == 3 %}
+						'playlist': ['{% for sol in stage3.solutions.all %}{{ sol.videoId }}, {% endfor %}']
+					{% elif player.stage == 4 %}
+						'playlist': ['{% for sol in stage4.solutions.all %}{{ sol.videoId }}, {% endfor %}']
+					{% endif %}
+				},
+				events: {
+					'onReady': onPlayerReady,
+					'onStateChange': onPlayerStateChange
+				}
+			});
+		}
+		
+		//Play video when loaded
+		function onPlayerReady(event) {
+			event.target.playVideo();
+		}
+		
+		//Hide div when last solution video has finished
+		function onPlayerStateChange(event) {
+			if (event.data == YT.PlayerState.ENDED && !player.nextVideo()) {
+				document.getElementById("Video1Div").style.display = 'none';
+			}
+		}
+		
+		//Focus on the video player
+		window.location.hash = '#Video1Div';
+	</script>
 </head>
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
 <font size="{{ player.text_size }}">
@@ -38,6 +90,12 @@
 			<h1>Scenario - {{ scene.title }}</h1>
 		</tr>
 		<tr>
+			<div id="Video1Div" align="center">
+				<div id="problemPlayer" align="center">
+				</div>
+			</div>
+		</tr>
+		<tr>
 			<h2>Problem - {% if player.stage == 0 %}{{ stage0 }}
 				  {% elif player.stage == 1 %}{{ stage1 }}
 				  {% elif player.stage == 2 %}{{ stage2 }}
@@ -47,8 +105,9 @@
 			</h2>
 		</tr>
 		<tr>
-			<!-- Image representing the problem -->
+			
 			{% if player.stage == 0 %}
+				<!-- Image representing the problem -->
 				<img id="problempic" src="{{stage0.pictureP.url}}" width="400" height="200"/>
 			{% elif player.stage == 1 %}
 				<img id="problempic" src="{{stage1.pictureP.url}}" width="400" height="200"/>
