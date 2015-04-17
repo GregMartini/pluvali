@@ -36,7 +36,8 @@ def scenario_index(request):
 	scenario_list = Scenario.objects.filter(Q(player_list=player) | Q(group_list__player=player)).distinct()
 	#set stage to 0 in case viewing different scenario than previously.
 	player.stage = 0
-	player.temp_tokens = 0
+	player.scenario_tokens = 0
+	player.tokens_earned = str("0,0,0,0,0")
 	player.save()
 	context = {'scenario_list': scenario_list, 'player':player}
 	return render(request, 'CopingGame/scenario_index.html', context)
@@ -47,20 +48,25 @@ def admin_page(request):
 	player_list = Player.objects.order_by('user').distinct()
 	context = {'player_list':player_list}
 	return render(request, 'CopingGame/admin_page.html', context)
-
-@login_required(login_url='login')
-def tokens(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
-	context = { 'player': player }
-	return render(request, 'CopingGame/tokens.html', context)
 	
 #link for game page
 @login_required(login_url='/login')
 def game(request, sceneID):
 	player = Player.objects.get(user=User.objects.get(username=request.user))
 	scene = get_object_or_404(Scenario, pk = sceneID)
-	#Get max number of stages in scenario and set tokens for each stage.
+	#In case user navigates  by typing scenario in url
 	max_stage = scene.problems.count()
+	if(player.stage > max_stage):
+		player.stage = 0
+		player.save()
+	#Check if player is on first stage and tokens_earned hasn't been populated
+	if(player.stage == 0 and player.tokens_earned == str("0,0,0,0,0")):
+		#populate tokens earned for this scenario
+		player.tokens_earned = random.randint(2,5),random.randint(2,5),random.randint(2,5),random.randint(2,5),random.randint(2,5)
+		player.save()
+	#Parse into list
+	tokens_list = str(player.tokens_earned).lstrip('(').rstrip(')').split(',')
+	#Get max number of stages in scenario
 	stage0 = scene.problems.all()[0]
 	if(max_stage >= 2):
 		stage1 = scene.problems.all()[1]
@@ -70,26 +76,38 @@ def game(request, sceneID):
 		stage3 = scene.problems.all()[3]
 	if(max_stage >= 5):
 		stage4 = scene.problems.all()[4]
-	if(player.stage > max_stage):
-		player.stage = 0
+	#Fill context
 	if(max_stage == 1):
-		context = {'scene':scene, 'player':player, 'stage0':stage0}
+		context = {'scene':scene, 'player':player, 'stage0':stage0, 'tokens0':tokens_list[0] }
 	if(max_stage == 2):
-		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1}
+		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1, 'tokens0':tokens_list[0], 'tokens1':tokens_list[1]}
 	if(max_stage == 3):
-		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2}
+		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2, 'tokens0':tokens_list[0], 'tokens1':tokens_list[1], 'tokens2':tokens_list[2]}
 	if(max_stage == 4):
-		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3}
+		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3, 'tokens0':tokens_list[0], 'tokens1':tokens_list[1], 'tokens2':tokens_list[2], 'tokens3':tokens_list[3]}
 	if(max_stage == 5):
-		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4}
+		context = {'scene':scene, 'player':player, 'stage0':stage0,'stage1':stage1,'stage2':stage2,'stage3':stage3,'stage4':stage4, 'tokens0':tokens_list[0], 'tokens1':tokens_list[1], 'tokens2':tokens_list[2], 'tokens3':tokens_list[3], 'tokens4':tokens_list[4]}
+	#When player selects an answer, award tokens and move to next stage
 	if request.method == 'POST':
-		#add tokens when an answer is selected
-		player.temp_tokens += random.randint(2,5)
-		player.tokens += player.temp_tokens
-		player.save()
+		if(player.stage == 0):
+			player.scenario_tokens = int(tokens_list[0])
+			player.tokens += int(tokens_list[0])
+		if(player.stage == 1):
+			player.scenario_tokens += int(tokens_list[1])
+			player.tokens += int(tokens_list[1])
+		if(player.stage == 2):
+			player.scenario_tokens += int(tokens_list[2])
+			player.tokens += int(tokens_list[2])
+		if(player.stage == 3):
+			player.scenario_tokens += int(tokens_list[3])
+			player.tokens += int(tokens_list[3])
+		if(player.stage == 4):
+			player.scenario_tokens += int(tokens_list[4])
+			player.tokens += int(tokens_list[4])
+		#Move player to next stage in scenario
 		player.stage += 1
 		player.save()
-		if (player.stage == max_stage):
+		if(player.stage == max_stage):
 			return HttpResponseRedirect("/CopingGame/victory/")	
 	return render(request, 'CopingGame/game_page.html', context)
 
