@@ -163,11 +163,12 @@ def store_user_pictures(request):
 			player.avatarPic = picture.itemFKey.itemPicture.url #Change the users picture to the purchased one
 			player.save() #Save the player settings
 	return render(request, 'CopingGame/store_user_pictures.html', context)
-	
+
+from CopingGame.forms import MyRegistrationForm
 #Player registration
 def register(request):
 	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
+		form = MyRegistrationForm(request.POST)
 		player_email = request.POST['email']
 		if form.is_valid():
 			#create new PLAYER from form
