@@ -32,10 +32,10 @@ class Solutions(models.Model):
 	pictureS = models.ImageField(upload_to='solutions/', blank=True, null=True)
 	solution = models.CharField(max_length=300, default="Solution")
 	sVideoId = models.CharField(max_length=50, default="q_g7s2oBzCw") #Clorox commercial, change this
-	verbose_name_plural = 'Solutions'
 	def __str__(self):
 		return self.solution
-	
+	class Meta:
+		verbose_name_plural = 'Solutions'
 	pass
 	
 class Problems(models.Model):
@@ -45,7 +45,8 @@ class Problems(models.Model):
 	pVideoId = models.CharField(max_length=50, default="q_g7s2oBzCw") #Clorox commercial, change this
 	def __str__(self):
 		return self.problem
-	verbose_name_plural = 'Problems'
+	class Meta:
+		verbose_name_plural = 'Problems'
 	pass
 	
 class Scenario(models.Model):
