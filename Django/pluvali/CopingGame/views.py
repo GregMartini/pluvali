@@ -11,27 +11,26 @@ from CopingGame.forms import PlayerProfileForm
 import random
 
 from CopingGame.models import Player, Scenario, Problems, Solutions, Store, Purchases
-from django.contrib.auth.models import User
 
 #login page uses default Django sessions
 
 #link for homepage, requires login
 @login_required(login_url='/login')
 def index(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
+	player = Player.objects.get(username=request.user)
 	context = {'player':player}
 	return render(request, 'CopingGame/index.html', context)
 
 #link for help page
 def help(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
+	player = Player.objects.get(username=request.user)
 	context = {'player':player}
 	return render(request, 'CopingGame/help_page.html', context)
 
 #link for scenario index
 @login_required(login_url='/login')
 def scenario_index(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
+	player = Player.objects.get(username=request.user)
 	#Pull scenario list by associated to the PLAYER by Player_List or Player_Group_List
 	scenario_list = Scenario.objects.filter(Q(player_list=player) | Q(group_list__player=player)).distinct()
 	#set stage to 0 in case viewing different scenario than previously.
@@ -45,16 +44,16 @@ def scenario_index(request):
 #link for admin page
 @login_required(login_url='/login')
 def admin_page(request):
-	player_list = Player.objects.order_by('user').distinct()
+	player_list = Player.objects.order_by('username').distinct()
 	context = {'player_list':player_list}
 	return render(request, 'CopingGame/admin_page.html', context)
 	
 #link for game page
 @login_required(login_url='/login')
 def game(request, sceneID):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
+	player = Player.objects.get(username=request.user)
 	scene = get_object_or_404(Scenario, pk = sceneID)
-	#In case user navigates  by typing scenario in url
+	#In case Player navigates  by typing scenario in url
 	max_stage = scene.problems.count()
 	if(player.stage > max_stage):
 		player.stage = 0
@@ -113,7 +112,7 @@ def game(request, sceneID):
 
 @login_required(login_url='/login')
 def victory(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
+	player = Player.objects.get(username=request.user)
 	player.stage = 0
 	player.save()
 	context = {'player':player}
@@ -122,7 +121,7 @@ def victory(request):
 #Store themes section
 @login_required(login_url='/login')
 def store_themes(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
+	player = Player.objects.get(username=request.user)
 	purchase_list = Purchases.objects.filter(player=player)
 	theme_list = purchase_list.filter(itemFKey__category='Themes')
 	theme_names = theme_list.values('itemFKey__itemName').distinct()
@@ -130,23 +129,23 @@ def store_themes(request):
 	if request.method == 'POST':
 		if 'change' in request.POST:
 			theme = Store.objects.get(itemName=request.POST.get("change","")) #Get the specific theme from store items
-			player.fav_bg = theme.value1 #Set background color to the themes background color
-			player.fav_text = theme.value2 #Set the text color to the themes text color
+			player.fav_bg = theme.bg #Set background color to the themes background color
+			player.fav_text = theme.text #Set the text color to the themes text color
 			player.save() #Save the player settings
 		if 'buy' in request.POST:
 			player.tokens -= 50 #Deduct the players token total
 			theme = purchase_list.get(itemFKey__itemName=request.POST.get("buy","")) #Get the specific theme the user wishes to buy
 			theme.owned = True #Say that the player now owns the theme
 			theme.save() #Save the theme purchase
-			player.fav_bg = theme.itemFKey.value1 #Set background color to the themes background color
-			player.fav_text = theme.itemFKey.value2 #Set the text color to the themes text color
+			player.fav_bg = theme.itemFKey.bg #Set background color to the themes background color
+			player.fav_text = theme.itemFKey.text #Set the text color to the themes text color
 			player.save() #Save the player settings
 	return render(request, 'CopingGame/store_themes.html', context)
 
 #Store user pictures section
 @login_required(login_url='/login')
 def store_user_pictures(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
+	player = Player.objects.get(username=request.user)
 	purchase_list = Purchases.objects.filter(player=player)
 	picture_list = purchase_list.filter(itemFKey__category='Pictures')
 	picture_names = picture_list.values('itemFKey__itemName').distinct()
@@ -165,17 +164,15 @@ def store_user_pictures(request):
 			player.save() #Save the player settings
 	return render(request, 'CopingGame/store_user_pictures.html', context)
 	
-#User registration
+#Player registration
 def register(request):
 	if request.method == 'POST':
 		form = UserCreationForm(request.POST)
 		player_email = request.POST['email']
 		if form.is_valid():
-			#create new USER from form
-			new_user = form.save()
 			#create new PLAYER from form
-			new_player = Player.objects.create(user=User.objects.get(username=request.POST['username']), email=player_email)
-			new_user = authenticate(username=request.POST['username'], password=request.POST['password1'])
+			new_player = form.save()
+			new_player = authenticate(username=request.POST['username'], password=request.POST['password1'])
 			#add all store items to account
 			store_list = list(Store.objects.all())
 			for item in store_list:
@@ -183,8 +180,8 @@ def register(request):
 				if item.itemName == 'DefaultBlack':
 					purchase = Purchases.objects.create(player=new_player, itemFKey=item, owned=True)
 					purchase.save()
-					new_player.fav_bg = item.value1
-					new_player.fav_text = item.value2
+					new_player.fav_bg = item.bg
+					new_player.fav_text = item.text
 					new_player.save()
 				elif item.itemName == 'DefaultPicture':
 					purchase = Purchases.objects.create(player=new_player, itemFKey=item, owned=True)
@@ -206,10 +203,10 @@ def register(request):
 		form = UserCreationForm()
 		return render(request, "registration/register.html", {'form': form,})
 
-#User profile
+#Player profile
 @login_required(login_url='/login')
 def profile(request):
-	player = Player.objects.get(user=User.objects.get(username=request.user))
+	player = Player.objects.get(username=request.user)
 	purchase_list = Purchases.objects.filter(player=player, owned=True)
 	context = {'player':player, 'purchase_list':purchase_list}
 	if request.method == 'POST':
@@ -234,8 +231,8 @@ def profile(request):
 					return redirect('CopingGame/profile.html')
 		elif 'theme' in request.POST:
 			theme = Store.objects.get(itemName=request.POST.get("theme","")) #Get the specific theme
-			player.fav_bg = theme.value1 #Set background color to the themes background color
-			player.fav_text = theme.value2 #Set the text color to the themes text color
+			player.fav_bg = theme.bg #Set background color to the themes background color
+			player.fav_text = theme.text #Set the text color to the themes text color
 			player.save()
 		elif 'picture' in request.POST:
 			player.avatarPic = request.POST.get("picture", "") #Change user picture to the selected one

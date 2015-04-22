@@ -48,21 +48,40 @@
 			event.target.playVideo();
 		}
 		
-		//Hide div when last solution video has finished
+		
+		//When video ends on last of playlist, show solutions div
 		function onPlayerStateChange(event) {
-			if (event.data == YT.PlayerState.ENDED && !player.nextVideo()) {
-				document.getElementById("Video1Div").style.display = 'none';
+			if (event.data == YT.PlayerState.ENDED /*&& end of playlist*/) {
+				var divsToShow = document.getElementsByClassName("button");
+				for(var i = 0; i < divsToHide.length; i++)
+				{
+					divsToShow[i].style.visibility="visible";
+				}
 			}
 		}
 		
+		//Function to show divs after all videos have played
+		function showSolutions() {
+			var divsToShow = document.getElementsByClassName("button");
+			for(var i = 0; i < divsToHide.length; i++)
+			{
+				divsToShow[i].style.visibility="visible";
+			}
+		}
+		
+		//Hide answer divs to force Player to watch videos
+		//function hideSolutions() {
+			//var divsToHide = document.getElementsByClassName("button");
+			//for(var i = 0; i < divsToHide.length; i++)
+			//{
+				//divsToHide[i].style.visibility="hidden";
+			//}
+		//}
+		//setTimeout("hideSolutions()", 0); //UNCOMMENT
+		
+		
 		//Focus on the video player
 		window.location.hash = '#Video1Div';
-		
-		//Show tokens div
-		/*
-		function showTokensEarned() {
-			document.getElementById(
-		}*/
 	</script>
 </head>
 <body style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">
@@ -189,12 +208,13 @@
 				
 				<!--Show how many tokens the player has earned-->	
 				<tr>
+				<div>
 				<form action="" method="post">
 				{% csrf_token %}
 					{% if player.stage == 0 %}
 						{% for s in stage0.solutions.all %}
 							<td>
-								<div>
+								<div id="answerDiv">
 									<!-- Button to open pop-up -->
 									<a class="button" href="#openModal" style="text-decoration:none">Choose me!</a>
 								

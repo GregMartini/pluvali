@@ -1,15 +1,12 @@
-import os
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.core.files.storage import FileSystemStorage
 
 #NOTE ImageField requires Pillow
 # run from pluvali dir to install>> pip install pillow  
 
 	
-class Player(models.Model):
-	user = models.OneToOneField(User)
-	email = models.CharField(max_length=30)
+class Player(AbstractUser):#Extended from User class
 	tokens = models.IntegerField(default=0)
 	avatarPic = models.ImageField(upload_to='userPic/', default='userPic/default-user.png')
 	fav_bg = models.CharField(max_length=30, default='#ededed')
@@ -19,9 +16,9 @@ class Player(models.Model):
 	scenario_tokens = models.IntegerField(default=0) #used for tracking player's tokens in a scenario
 	tokens_earned = models.CharField(max_length=9, default="0,0,0,0,0") #Used to randomly generate tokens earned in a scenario
 	def passw (self):
-		return self.user.password
+		return self.password
 	def __str__(self):
-		return self.user.username
+		return self.username
 	pass
 
 class PlayerGroup(models.Model):
@@ -67,8 +64,8 @@ class Store(models.Model):
 	itemName = models.CharField(max_length=15, default="ItemName")
 	itemDesc = models.CharField(max_length=50, default="Item Description")
 	itemPicture = models.ImageField(upload_to='store/', blank=True, null=True)
-	value1 = models.CharField(max_length=10, blank=True)
-	value2 = models.CharField(max_length=10, blank=True)
+	bg = models.CharField(max_length=10, blank=True)
+	text = models.CharField(max_length=10, blank=True)
 	def __str__(self):
 		return self.itemName
 	verbose_name_plural = 'StoreItems'
@@ -78,7 +75,7 @@ class Purchases(models.Model):
 	itemFKey = models.ForeignKey(Store)
 	owned = models.BooleanField(default=False)
 	def __str__(self):
-		name = self.player.user.username+'-'+self.itemFKey.itemName
+		name = self.player.username+'-'+self.itemFKey.itemName
 		return name
 	verbose_name_plural = 'Purchases'
 		

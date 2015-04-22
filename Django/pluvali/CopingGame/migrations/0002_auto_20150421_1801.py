@@ -7,18 +7,18 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('CopingGame', '0003_auto_20150416_0051'),
+        ('CopingGame', '0001_initial'),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='problems',
-            old_name='videoId',
-            new_name='pVideoId',
+            model_name='store',
+            old_name='value1',
+            new_name='bg',
         ),
         migrations.RenameField(
-            model_name='solutions',
-            old_name='videoId',
-            new_name='sVideoId',
+            model_name='store',
+            old_name='value2',
+            new_name='text',
         ),
     ]

@@ -81,6 +81,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'CopingGame.Player'
+
 # Static files (CSS, JavaScript, Images)
 STATIC_PATH = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
