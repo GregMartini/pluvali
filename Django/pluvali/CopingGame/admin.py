@@ -58,4 +58,4 @@ admin.site.register(Problems,ProblemAdmin)
 admin.site.register(Solutions)
 
 admin.site.register(Store)
-admin.site.register(Purchases)
+admin.site.register(Purchase)

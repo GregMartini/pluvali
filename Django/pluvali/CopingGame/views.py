@@ -10,7 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 from CopingGame.forms import PlayerProfileForm
 import random
 
-from CopingGame.models import Player, Scenario, Problems, Solutions, Store, Purchases
+from CopingGame.models import Player, Scenario, Problems, Solutions, Store, Purchase
 
 #login page uses default Django sessions
 
@@ -122,7 +122,7 @@ def victory(request):
 @login_required(login_url='/login')
 def store_themes(request):
 	player = Player.objects.get(username=request.user)
-	purchase_list = Purchases.objects.filter(player=player)
+	purchase_list = Purchase.objects.filter(player=player)
 	theme_list = purchase_list.filter(itemFKey__category='Themes')
 	theme_names = theme_list.values('itemFKey__itemName').distinct()
 	context = {'player':player, 'purchase_list':purchase_list, 'theme_list':theme_list, 'theme_names':theme_names}
@@ -146,7 +146,7 @@ def store_themes(request):
 @login_required(login_url='/login')
 def store_user_pictures(request):
 	player = Player.objects.get(username=request.user)
-	purchase_list = Purchases.objects.filter(player=player)
+	purchase_list = Purchase.objects.filter(player=player)
 	picture_list = purchase_list.filter(itemFKey__category='Pictures')
 	picture_names = picture_list.values('itemFKey__itemName').distinct()
 	context = {'player':player, 'purchase_list':purchase_list, 'picture_list':picture_list, 'picture_names':picture_names}
@@ -179,19 +179,19 @@ def register(request):
 			for item in store_list:
 				#set default purchases to owned
 				if item.itemName == 'DefaultBlack':
-					purchase = Purchases.objects.create(player=new_player, itemFKey=item, owned=True)
+					purchase = Purchase.objects.create(player=new_player, itemFKey=item, owned=True)
 					purchase.save()
 					new_player.fav_bg = item.bg
 					new_player.fav_text = item.text
 					new_player.save()
 				elif item.itemName == 'DefaultPicture':
-					purchase = Purchases.objects.create(player=new_player, itemFKey=item, owned=True)
+					purchase = Purchase.objects.create(player=new_player, itemFKey=item, owned=True)
 					purchase.save()
 					new_player.avatarPic = item.itemPicture
 					new_player.save()
 				#set other purchases to not owned	
 				else:
-					purchase = Purchases.objects.create(player=new_player, itemFKey=item, owned=False)
+					purchase = Purchase.objects.create(player=new_player, itemFKey=item, owned=False)
 					purchase.save()
 			#give access to default scenario
 			defaultScenario = Scenario.objects.get(pk=1)
@@ -208,7 +208,7 @@ def register(request):
 @login_required(login_url='/login')
 def profile(request):
 	player = Player.objects.get(username=request.user)
-	purchase_list = Purchases.objects.filter(player=player, owned=True)
+	purchase_list = Purchase.objects.filter(player=player, owned=True)
 	context = {'player':player, 'purchase_list':purchase_list}
 	if request.method == 'POST':
 		if 'smallFont' in request.POST:

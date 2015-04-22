@@ -68,16 +68,18 @@ class Store(models.Model):
 	text = models.CharField(max_length=10, blank=True)
 	def __str__(self):
 		return self.itemName
-	verbose_name_plural = 'StoreItems'
+	class Meta:
+		verbose_name_plural = 'StoreItems'
 
-class Purchases(models.Model):
+class Purchase(models.Model):
 	player = models.ForeignKey(Player)
 	itemFKey = models.ForeignKey(Store)
 	owned = models.BooleanField(default=False)
 	def __str__(self):
 		name = self.player.username+'-'+self.itemFKey.itemName
 		return name
-	verbose_name_plural = 'Purchases'
 		
 def upload_path_handler(self):
 	return
+
+from CopingGame.signals import *
