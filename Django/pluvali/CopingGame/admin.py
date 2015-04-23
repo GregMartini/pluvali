@@ -1,8 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.models import Group
 from CopingGame.models import *
 from django import forms
+
 
 class SolutionsInline(admin.TabularInline):
 	model = Problems.solutions.through
@@ -50,12 +52,13 @@ class PlayerAdmin(UserAdmin):
 	fieldsets = UserAdmin.fieldsets + (
 		(None, {'fields': ('tokens', 'avatarPic', 'fav_bg','fav_text', 'text_size',)}),
 	)
-
+	
+admin.site.unregister(Group)
 admin.site.register(Player, PlayerAdmin)
 admin.site.register(PlayerGroup)
 admin.site.register(Scenario, ScenarioAdmin)
 admin.site.register(Problems,ProblemAdmin)
 admin.site.register(Solutions)
-
 admin.site.register(Store)
 admin.site.register(Purchase)
+

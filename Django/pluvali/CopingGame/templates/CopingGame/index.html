@@ -27,6 +27,9 @@
 					{% else %}
 						Not currently logged in, please log in.
 					{% endif %}</td>
+					{% if user.is_superuser %}
+						<a href="/admin/" style="color:{{ player.fav_text }}">Admin Page</a>
+					{% endif %}
 				</tr>		
 				<tr>
 					<td></td>

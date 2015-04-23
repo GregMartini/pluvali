@@ -10,3 +10,7 @@ def model_post_save(sender, instance, created, **kwargs):
 		for p in players_list:
 			purchase = Purchase.objects.create(player=p, itemFKey=instance, owned=False)
 			purchase.save()
+			
+#@receiver(pre_save, sender=Player)
+#def upload_picture_pre_save(sender, instance, created, **kwargs):
+#	if created:
