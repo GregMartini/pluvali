@@ -92,8 +92,8 @@
 			<!-- Main portion of the page that displays purchase options -->
 			<div id="main">
 				<div id="inner">
-					<h2 style="color:{{ player.fav_text }}">Click on the "Purchase" button to buy the picture to its left.</h2>
-					<h2 style="color:{{ player.fav_text }}">Click on the "Apply" button to use the picture you own to its left.</h2>
+					<h2 style="color:{{ player.fav_text }}">Click on the <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/> button to buy the picture to its left.</h2>
+					<h2 style="color:{{ player.fav_text }}">Click on the <img align="center" src="{% static 'CopingGame/images/paint1.png' %}" width="50" height="50"/> button to use the picture you own to its left.</h2>
 
 					<!-- Themes table -->
 					<table class="cattable" id="themes" align="center">
@@ -123,7 +123,7 @@
 										<!-- Display purchase button -->
 										<form action="" method="post">
 											{% csrf_token %}
-											<td><button class="tabbut" type="submit" name="buy" value="{{ picture.itemFKey.itemName }}">Purchase</button></td>
+											<td><button class="tabbut" type="submit" name="buy" value="{{ picture.itemFKey.itemName }}"><img src="{% static 'CopingGame/images/thumb-token-sm.png' %}" height="25px" width="30px" border="0"/></button></td>
 										</form>
 								
 									<!-- If they don't have enough tokens, say they don't -->

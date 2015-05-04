@@ -220,9 +220,9 @@
 								
 									<!-- Tokens pop-up -->
 									<div id="openModal" class="modalDialog">
-										<div>
-											<h2 style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">Great Choice!</h2>
-											<p>You earned {{ tokens0 }}!</p>
+										<div style="background:{{player.fav_bg}}; background: -moz-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }}); background: -webkit-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }}); background: -o-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }});">
+											<h2 style="color:{{ player.fav_text }}">Great Choice!</h2>
+											<p>You earned {{ tokens0 }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>!</p>
 											<input type="submit" href="#close" title="Close" class="close" value="X"></input>
 										</div>
 									</div>
@@ -238,9 +238,9 @@
 								
 									<!-- Tokens pop-up -->
 									<div id="openModal1" class="modalDialog">
-										<div>
-											<h2 style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">Great Choice!</h2>
-											<p>You earned {{ tokens1 }}!</p>
+										<div style="background:{{player.fav_bg}}; background: -moz-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }}); background: -webkit-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }}); background: -o-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }});">
+											<h2 style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">Perfect!</h2>
+											<p>You earned {{ tokens1 }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>!</p>
 											<input type="submit" href="#close" title="Close" class="close" value="X"></input>
 										</div>
 									</div>
@@ -256,9 +256,9 @@
 								
 									<!-- Tokens pop-up -->
 									<div id="openModal2" class="modalDialog">
-										<div>
-											<h2 style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">Great Choice!</h2>
-											<p>You earned {{ tokens2 }}!</p>
+										<div style="background:{{player.fav_bg}}; background: -moz-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }}); background: -webkit-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }}); background: -o-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }});">
+											<h2 style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">Awesome!</h2>
+											<p>You earned {{ tokens2 }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>!</p>
 											<input type="submit" href="#close" title="Close" class="close" value="X"></input>
 										</div>
 									</div>
@@ -269,12 +269,14 @@
 						{% for s in stage3.solutions.all %}
 							<td>
 							<div>
+								<!-- Button to open pop-up -->
 								<a class="button" href="#openModal3" style="text-decoration:none">Choose me!</a>
-								<!--<input type="submit"><a href="#openModal" style="text-decoration:none"></a></input>-->
 								
+								<!-- Tokens pop-up -->
 								<div id="openModal3" class="modalDialog">
-									<div>
-										<h2 style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">Great Choice!</h2>
+									<div style="background:{{player.fav_bg}}; background: -moz-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }}); background: -webkit-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }}); background: -o-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }});">
+										<h2 style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">Good Answer!</h2>
+										<p>You earned {{ tokens3 }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>!</p>
 										<input type="submit" href="#close" title="Close" class="close" value="X"></input>
 									</div>
 								</div>
@@ -286,12 +288,14 @@
 						{% for s in stage4.solutions.all %}
 							<td>
 							<div>
+								<!-- Button to open pop-up -->
 								<a class="button" href="#openModal4" style="text-decoration:none">Choose me!</a>
-								<!--<input type="submit"><a href="#openModal" style="text-decoration:none"></a></input>-->
 								
+								<!-- Tokens pop-up -->
 								<div id="openModal4" class="modalDialog">
-									<div>
-										<h2 style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">Great Choice!</h2>
+									<div style="background:{{player.fav_bg}}; background: -moz-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }}); background: -webkit-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }}); background: -o-linear-gradient({{player.fav_bg}} 80%, {{ player.fav_text }});">
+										<h2 style="background-color:{{ player.fav_bg }}; color:{{ player.fav_text }}">Well Done!</h2>
+										<p>You earned {{ tokens4 }} <img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>!</p>
 										<input type="submit" href="#close" title="Close" class="close" value="X"></input>
 									</div>
 								</div>

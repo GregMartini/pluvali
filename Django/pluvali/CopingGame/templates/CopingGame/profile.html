@@ -164,7 +164,7 @@
 							<!-- Button to switch theme, and display a preview of the theme next to the button -->
 							<tr>
 								<td align="center"><button name="theme" type="sumbit" value="{{ purchase.itemFKey.itemName }}"/><img src="{% static 'CopingGame/images/paint1.png' %}" height="25px" width="30px" border="0" /></button></td>
-								<td style="background-color:{{ purchase.itemFKey.value1 }}; color:{{ purchase.itemFKey.value2 }}">{{ purchase.itemFKey.itemDesc }}</a></td>
+								<td style="background-color:{{ purchase.itemFKey.bg }}; color:{{ purchase.itemFKey.text }}">{{ purchase.itemFKey.itemDesc }}</a></td>
 							</tr>
 						{% endif %}
 					{% endfor %}
