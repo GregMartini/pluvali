@@ -15,6 +15,9 @@ class Player(AbstractUser):#Extended from User class
 	stage = models.IntegerField(default=0) #used for iterating through scenarios
 	scenario_tokens = models.IntegerField(default=0) #used for tracking player's tokens in a scenario
 	tokens_earned = models.CharField(max_length=9, default="0,0,0,0,0") #Used to randomly generate tokens earned in a scenario
+	class Meta:
+		verbose_name = 'Player'
+		verbose_name_plural = 'Players'
 	def passw (self):
 		return self.password
 	def __str__(self):
@@ -52,7 +55,6 @@ class Problems(models.Model):
 class Scenario(models.Model):
 	sceneID = models.AutoField(primary_key=True)
 	title = models.CharField(max_length=35, default="Scenario Title")
-	description = models.CharField(max_length=250, default="Scenatio Decription")
 	problems = models.ManyToManyField(Problems)
 	player_list = models.ManyToManyField(Player, blank=True)
 	group_list = models.ManyToManyField(PlayerGroup, blank=True)

@@ -39,7 +39,7 @@ class PlayerCreationForm(UserCreationForm):
 		model = Player
 	
 	def clean_username(self):
-		username = self.cleaned_daya['username']
+		username = self.cleaned_data['username']
 		try:
 			Player.objects.get(username=username)
 		except Player.DoesNotExist:
