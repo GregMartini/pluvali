@@ -21,7 +21,18 @@
 				height: '390',
 				width: '640',
 				//Initial problem video
-				videoId: '{{stage0.pVideoId}}',
+				videoId: 
+					{% if player.stage == 0 %}
+						'{{stage0.pVideoId}}',
+					{% elif player.stage == 1 %}
+						'{{stage1.pVideoId}}',
+					{% elif player.stage == 2 %}
+						'{{stage2.pVideoId}}',
+					{% elif player.stage == 3 %}
+						'{{stage3.pVideoId}}',
+					{% elif player.stage == 4 %}
+						'{{stage4.pVideoId}}',
+					{% endif %}
 				playerVars :{ 
 					//Pull playlist from database
 					{% if player.stage == 0 %}
