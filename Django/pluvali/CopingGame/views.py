@@ -174,29 +174,7 @@ def register(request):
 			#create new PLAYER from form
 			new_player = form.save()
 			new_player = authenticate(username=request.POST['username'], password=request.POST['password1'])
-			#add all store items to account
-			store_list = list(Store.objects.all())
-			for item in store_list:
-				#set default purchases to owned
-				if item.itemName == 'DefaultBlack':
-					purchase = Purchase.objects.create(player=new_player, itemFKey=item, owned=True)
-					purchase.save()
-					new_player.fav_bg = item.bg
-					new_player.fav_text = item.text
-					new_player.save()
-				elif item.itemName == 'DefaultPicture':
-					purchase = Purchase.objects.create(player=new_player, itemFKey=item, owned=True)
-					purchase.save()
-					new_player.avatarPic = item.itemPicture
-					new_player.save()
-				#set other purchases to not owned	
-				else:
-					purchase = Purchase.objects.create(player=new_player, itemFKey=item, owned=False)
-					purchase.save()
-			#give access to default scenario
-			defaultScenario = Scenario.objects.get(pk=1)
-			defaultScenario.player_list.add(new_player)
-			defaultScenario.save()
+			
 			return HttpResponseRedirect("/CopingGame/")
 		else:
 			return render(request, 'registration/register.html', {'form': form,})

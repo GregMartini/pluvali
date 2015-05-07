@@ -26,11 +26,16 @@
 						{{ user.get_username }}
 						<br>
 						<img align="center" src="{% static 'CopingGame/images/thumb-token-sm.png' %}" width="50" height="50"/>: {{ player.tokens }}
+						{% if user.is_superuser %}
+							<br>
+							<a href="/admin/" style="color:{{ player.fav_text }}">Admin Page</a>
+						{% endif %}
 						<br>
-						<a href="/logout/" style="color:{{ player.fav_text }}">Logout
+						<a href="/logout/" style="color:{{ player.fav_text }}">Logout</a>
 					{% else %}
 						Not currently logged in, please log in.
-					{% endif %}</td>
+					{% endif %}
+					</td>
 				</tr>		
 				<tr>
 					<td></td>
